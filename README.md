@@ -18,8 +18,8 @@ It is under development
 
 documentation of services: https://www.rijkswaterstaat.nl/rws/opendata/DistributielaagWebservices-SUM-2v7.pdf
 
-rws_metadata - gets catalogue of all locations, depths, parameters 
-rws_observations - gets observation data
+* rws_metadata - gets catalogue of all locations, depths, parameters    
+* rws_observations - gets observation data
 
 3.  OpenEarth waterbase copy
 
