@@ -23,6 +23,8 @@ rws_metadata <- function(
   path = "/METADATASERVICES_DBO/OphalenCatalogus/",
   filterList = list(Eenheden=T,Grootheden=T,Hoedanigheden=T)
   ) {
+  library(httr)
+  library(jsonlite)
   ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
   path = path
   url <- modify_url(ua$options$useragent, path = path)
@@ -91,7 +93,8 @@ rws_metadata <- function(
 rws_observations <- function(bodylist) {
   path = "/ONLINEWAARNEMINGENSERVICES_DBO/OphalenWaarnemingen/"
   url <- modify_url("https://waterwebservices.rijkswaterstaat.nl", path = path)
-
+  library(httr)
+  library(jsonlite)
   ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
   resp <- POST(url = url,
                ua,
