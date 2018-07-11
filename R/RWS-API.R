@@ -89,7 +89,6 @@ rws_metadata <- function(
 #' parsed <- jsonlite::fromJSON(content(observation$response, "text"), simplifyVector = T )
 #' parsed$WaarnemingenLijst$MetingenLijst[[1]] %>% View()
 #'
-
 rws_observations <- function(bodylist) {
   path = "/ONLINEWAARNEMINGENSERVICES_DBO/OphalenWaarnemingen/"
   url <- modify_url("https://waterwebservices.rijkswaterstaat.nl", path = path)
@@ -131,13 +130,31 @@ rws_observations <- function(bodylist) {
 }
 
 
-
+#' Collects quantities and parameters observed at a number of stations
+#'
+#' @param parsedMetaData parsed list of metadata generated from rws_metadata()
+#' @param locationlist character vector of selected stations
+#' @return dataframe containing observed quantities and parameters
+#' @examples
+#' metadata <- rws_metadata()
+#' # parse content of response
+#' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
+#' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
 DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
   data("parametermap")
-  parsedMetaData$LocatieLijst %>% filter(Naam %in% locationlist) %>%
+  parsedMetaData$LocatieLijst %>%
+    # filter(Naam %in% locationlist) %>%
     left_join(parsedMetaData$AquoMetadataLocatieLijst) %>%
     left_join(jsonlite::flatten(parsedMetaData$AquoMetadataLijst, recursive = T), by = c(AquoMetaData_MessageID = "AquoMetadata_MessageID")) %>%
-    group_by(Naam, Grootheid.Code, Hoedanigheid.Code, Parameter_Wat_Omschrijving) %>%
+    group_by(Code,
+             X,
+             Y,
+             Naam,
+             Grootheid.Code,
+             Hoedanigheid.Code,
+             Parameter_Wat_Omschrijving,
+             Eenheid.Code,
+             ) %>%
     summarise(n = n()) %>%
     left_join(parametermap, by = c(Parameter_Wat_Omschrijving = "parameter"))
 }
