@@ -143,19 +143,18 @@ rws_observations <- function(bodylist) {
 DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
   data("parametermap")
   parsedMetaData$LocatieLijst %>%
-    filter(Naam %in% locationlist) %>%
+    filter(Code %in% locationlist) %>%
     left_join(parsedMetaData$AquoMetadataLocatieLijst) %>%
     left_join(jsonlite::flatten(parsedMetaData$AquoMetadataLijst, recursive = T), by = c(AquoMetaData_MessageID = "AquoMetadata_MessageID")) %>%
-    group_by(Code,
+    dplyr::select(Code,
              X,
              Y,
              Naam,
              Grootheid.Code,
              Hoedanigheid.Code,
              Parameter_Wat_Omschrijving,
-             Eenheid.Code,
+             Eenheid.Code
              ) %>%
-    summarise(n = n()) %>%
     left_join(parametermap, by = c(Parameter_Wat_Omschrijving = "parameter"))
 }
 
