@@ -142,7 +142,6 @@ rws_observations <- function(bodylist) {
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
 require(tidyverse)
 DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
-  data("enrichedMetadata")
   parsedMetaData$LocatieLijst %>%
     filter(Code %in% locationlist) %>%
     left_join(parsedMetaData$AquoMetadataLocatieLijst) %>%
@@ -154,7 +153,7 @@ DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
              Grootheid.Code,
              Hoedanigheid.Code,
              Parameter.Code,
-             Parameter.omschrijving,
+             Parameter.Omschrijving,
              Parameter_Wat_Omschrijving,
              Eenheid.Code
              ) %>%
