@@ -140,6 +140,7 @@ rws_observations <- function(bodylist) {
 #' # parse content of response
 #' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
+require(tidyverse)
 DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
   data("enrichedMetadata")
   parsedMetaData$LocatieLijst %>%
