@@ -141,7 +141,7 @@ rws_observations <- function(bodylist) {
 #' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
 DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
-  data("parametermap")
+  data("enrichedMetadata")
   parsedMetaData$LocatieLijst %>%
     filter(Code %in% locationlist) %>%
     left_join(parsedMetaData$AquoMetadataLocatieLijst) %>%
@@ -155,6 +155,6 @@ DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
              Parameter_Wat_Omschrijving,
              Eenheid.Code
              ) %>%
-    left_join(parametermap, by = c(Parameter_Wat_Omschrijving = "parameter"))
+    left_join(enrichedMetadata, by = c(Parameter_Wat_Omschrijving = "parameter"))
 }
 
