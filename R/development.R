@@ -29,5 +29,7 @@ load("D:/GitHub_working_copies/rwsapi/R/sysdata.rda")
 
 enrichedMetadata <- read_delim("d:/REPOS-CHECK-OUTS/digitaleWaterSysteemRapportage/grevelingen_website/metadataDDL.csv", delim = ";")
 names(enrichedMetadata)[names(enrichedMetadata)=="Klasse"] <- "parametergroep"
-save(list = c("enrichedMetadata", "donarlocations"), file = 'R/sysdata.rda')
+
+devtools::use_data(enrichedMetadata, donarlocations,
+                   internal = TRUE, overwrite = TRUE)
 
