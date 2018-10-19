@@ -21,7 +21,7 @@ library(jsonlite)
 
 rws_metadata <- function(
   path = "/METADATASERVICES_DBO/OphalenCatalogus/",
-  filterList = list(Eenheden=T,Grootheden=T,Hoedanigheden=T)
+  filterList = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T)
   ) {
   library(httr)
   library(jsonlite)
