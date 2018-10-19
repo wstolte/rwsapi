@@ -153,6 +153,8 @@ DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
              Naam,
              Grootheid.Code,
              Hoedanigheid.Code,
+             Parameter.Code,
+             Parameter.omschrijving,
              Parameter_Wat_Omschrijving,
              Eenheid.Code
              ) %>%
