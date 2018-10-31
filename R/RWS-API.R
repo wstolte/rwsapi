@@ -124,8 +124,8 @@ rws_observations <- function(bodylist) {
       content = parsed,
       path = path,
       response = resp
-    ),
-    class = "rws_api"
+    )#,
+    # class = "rws_api"
   )
 }
 
@@ -140,12 +140,19 @@ rws_observations <- function(bodylist) {
 #' # parse content of response
 #' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
-require(tidyverse)
-DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
-  parsedMetaData$LocatieLijst %>%
-    filter(Code %in% locationlist) %>%
-    left_join(parsedMetaData$AquoMetadataLocatieLijst) %>%
-    left_join(jsonlite::flatten(parsedMetaData$AquoMetadataLijst, recursive = T), by = c(AquoMetaData_MessageID = "AquoMetadata_MessageID")) %>%
+DDLgetParametersForLocations <- function(myMetadata, locationlist) {
+  require(tidyverse)
+
+  temp <- myMetadata$content$LocatieLijst %>%
+    filter(Code %in% locationlist)
+
+  if(nrow(temp)==0){
+    temp <- myMetadata$content$LocatieLijst %>%
+      filter(Naam %in% locationlist)
+  }
+
+temp %>% left_join(myMetadata$content$AquoMetadataLocatieLijst) %>%
+    left_join(jsonlite::flatten(myMetadata$content$AquoMetadataLijst, recursive = T), by = c(AquoMetaData_MessageID = "AquoMetadata_MessageID")) %>%
     dplyr::select(Code,
              X,
              Y,
@@ -157,6 +164,44 @@ DDLgetParametersForLocations <- function(parsedMetaData, locationlist) {
              Parameter_Wat_Omschrijving,
              Eenheid.Code
              ) %>%
-    left_join(enrichedMetadata, by = c(Parameter_Wat_Omschrijving = "parameter"))
+    left_join(enrichedMetadata, by = c(Parameter_Wat_Omschrijving = "Parameter_Wat_Omschrijving"))
+}
+
+
+#' makes list for requesting observation data from rws api
+#'
+#' @param mijnCatalogus catalogue created using rws_metadata
+#' @param locationlist character vector of selected stations code or name
+#' @return dataframe containing observed quantities and parameters
+#' @examples
+#' metadata <- rws_metadata()
+#' # parse content of response
+#' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
+#' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
+makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCompartiment = NULL){
+  result <- list()
+  for(ii in seq(1:length(mijnCatalogus[,1]))){
+    #messageID meegeven waanneer op parameter_wat_omschrijving gezocht wordt.
+    if(ii==1)  ll <- list()
+    l <- list(
+      AquoPlusWaarnemingMetadata= list(
+        AquoMetadata = list(
+          # Compartiment = list(Code = mijnCompartiment),
+          Parameter = list(Code = mijnCatalogus$Parameter.Code.x[ii]),
+          # Eenheid = list(Code = mijnEenheid),
+          # MeetApparaat = mijnMeetapparaat,
+          Grootheid = list(Code = mijnCatalogus$Grootheid.Code.x[ii])
+        )
+      ),
+      Locatie = list(
+        X = as.character(mijnCatalogus["X"][ii,]),
+        Y = as.character(mijnCatalogus["Y"][ii,]),
+        Code = as.character(mijnCatalogus["Code"][ii,])),
+      Periode = list(Begindatumtijd = beginDatumTijd,
+                     Einddatumtijd = eindDatumTijd)
+    )
+    ll[[ii]] <- l
+  }
+  return(ll)
 }
 
