@@ -142,7 +142,7 @@ rws_observations <- function(bodylist) {
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
 DDLgetParametersForLocations <- function(myMetadata, locationlist) {
   require(tidyverse)
-
+  data(rwsapidata)
   temp <- myMetadata$content$LocatieLijst %>%
     filter(Code %in% locationlist)
 
