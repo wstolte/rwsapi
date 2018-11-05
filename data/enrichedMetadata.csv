@@ -1,0 +1,448 @@
+AquoMetadata_MessageID;Parameter_Wat_Omschrijving;Eenheid.Code;Eenheid.Omschrijving;Grootheid.Code;Grootheid.Omschrijving;Hoedanigheid.Code;Hoedanigheid.Omschrijving;Parameter.Code;Parameter.Omschrijving;parametergroep
+102;Aantal per volume Escherichia coli in Oppervlaktewater n/l;n/l;exemplaren per liter;AANTPVLME;Aantal per volume;NVT;Niet van toepassing;E_COLI;Escherichia coli;bacteria
+101;Aantal per volume Faecale Streptococcen D in Oppervlaktewater n/l;n/l;exemplaren per liter;AANTPVLME;Aantal per volume;NVT;Niet van toepassing;FAECLSTCCND;Faecale Streptococcen D;bacteria
+332;Aantal per volume Intestinale enterococcen in Oppervlaktewater n/l;n/l;exemplaren per liter;AANTPVLME;Aantal per volume;NVT;Niet van toepassing;INTTNLETRCCN;Intestinale enterococcen;bacteria
+397;Aantal per volume Thermotolerante Coli's (incubatie bij 44 C) in Oppervlaktewater n/l;n/l;exemplaren per liter;AANTPVLME;Aantal per volume;NVT;Niet van toepassing;THERMTLRTCLS;Thermotolerante Coli's (incubatie bij 44 C);bacteria
+206;Aantal per volume Totaal Coli's (incubatie bij 37 C) in Oppervlaktewater n/l;n/l;exemplaren per liter;AANTPVLME;Aantal per volume;NVT;Niet van toepassing;TOTCLS;Totaal Coli's (incubatie bij 37 C);bacteria
+148;Aantal golven in 20 minuten periode Oppervlaktewater ;NVT;Waarde is niet van toepassing;AG;Aantal golven in 20 minuten periode;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+446;Aantal vrijheidsgraden bij het variantiedichtheidspectrum Oppervlaktewater ;DIMSLS;dimensieloos;AV10_H;Aantal vrijheidsgraden bij het variantiedichtheidspectrum;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+385;Aantal vrijheidsgraden behorend bij het golfrichtingspectrum Oppervlaktewater ;DIMSLS;dimensieloos;AV10_R;Aantal vrijheidsgraden behorend bij het golfrichtingspectrum;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+229;(massa)Concentratie 1,1,1-trichloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;111TClC2a;1,1,1-trichloorethaan;contaminants
+67;(massa)Concentratie 1,1,2,2-tetrachloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;1122T4ClC2a;1,1,2,2-tetrachloorethaan;contaminants
+303;(massa)Concentratie 1,1,2-trichloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;112TClC2a;1,1,2-trichloorethaan;contaminants
+28;(massa)Concentratie 1,1-dichloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;11DClC2a;1,1-dichloorethaan;contaminants
+427;(massa)Concentratie 1,1-dichlooretheen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;11DClC2e;1,1-dichlooretheen;contaminants
+226;(massa)Concentratie 1,2,3-trichloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;123TClBen;1,2,3-trichloorbenzeen;contaminants
+364;(massa)Concentratie 1,2,4,5-tetrachloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;1245T4ClBen;1,2,4,5-tetrachloorbenzeen;contaminants
+416;(massa)Concentratie 1,2,4-trichloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;124TClBen;1,2,4-trichloorbenzeen;contaminants
+125;(massa)Concentratie 1,2-dichloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;12DClBen;1,2-dichloorbenzeen;contaminants
+24;(massa)Concentratie 1,2-dichloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;12DClC2a;1,2-dichloorethaan;contaminants
+365;(massa)Concentratie 1,2-dichloorpropaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;12DClC3a;1,2-dichloorpropaan;contaminants
+395;(massa)Concentratie 1,2-xyleen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;12xyln;1,2-xyleen;contaminants
+396;(massa)Concentratie 1,3,5-trichloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;135TClBen;1,3,5-trichloorbenzeen;contaminants
+12;(massa)Concentratie 1,3-dichloor-2-propanol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;13DCl2C3ol;1,3-dichloor-2-propanol;contaminants
+119;(massa)Concentratie 1,3-dichloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;13DClBen;1,3-dichloorbenzeen;contaminants
+14;(massa)Concentratie 1,4-dichloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;14DClBen;1,4-dichloorbenzeen;contaminants
+295;(massa)Concentratie 1-chloor-2-nitrobenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;1Cl2NO2Ben;1-chloor-2-nitrobenzeen;contaminants
+70;(massa)Concentratie 1-chloornaftaleen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;1ClNaf;1-chloornaftaleen;contaminants
+353;(massa)Concentratie 2,3-dichloornitrobenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;23DClNO2Ben;2,3-dichloornitrobenzeen;contaminants
+205;(massa)Concentratie 2,4,5-trichloorfenoxyazijnzuur in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;245T;2,4,5-trichloorfenoxyazijnzuur;contaminants
+286;(massa)Concentratie 2,4,5-trichloorfenol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;245TClFol;2,4,5-trichloorfenol;contaminants
+15;(massa)Concentratie 2,4,6-trichloorfenol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;246TClFol;2,4,6-trichloorfenol;contaminants
+4;(massa)Concentratie 2,4-dichloorfenoxyazijnzuur in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;24D;2,4-dichloorfenoxyazijnzuur;contaminants
+121;(massa)Concentratie 2,4'-dichloordifenyltrichloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;24DDT;2,4'-dichloordifenyltrichloorethaan;contaminants
+59;(massa)Concentratie 2,4-dichloorfenoxypropionzuur in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;24DP;2,4-dichloorfenoxypropionzuur;contaminants
+77;(massa)Concentratie 2-chlooraniline in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;2ClAn;2-chlooraniline;contaminants
+69;(massa)Concentratie 2-chloorethanol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;2ClC2ol;2-chloorethanol;contaminants
+103;(massa)Concentratie 2-chloorfenol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;2ClFol;2-chloorfenol;contaminants
+287;(massa)Concentratie 2-chloortolueen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;2ClTol;2-chloortolueen;contaminants
+371;(massa)Concentratie 3,4-dichloornitrobenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;34DClNO2Ben;3,4-dichloornitrobenzeen;contaminants
+110;(massa)Concentratie 3-chloor-4-methylaniline in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;3Cl4C1yAn;3-chloor-4-methylaniline;contaminants
+354;(massa)Concentratie 3-chlooraniline in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;3ClAn;3-chlooraniline;contaminants
+405;(massa)Concentratie 3-chloorpropeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;3ClC3e;3-chloorpropeen;contaminants
+104;(massa)Concentratie 3-chloorfenol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;3ClFol;3-chloorfenol;contaminants
+350;(massa)Concentratie 3-chloortolueen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;3ClTol;3-chloortolueen;contaminants
+169;(massa)Concentratie 4,4'-dichloordifenyldichloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;44DDD;4,4'-dichloordifenyldichloorethaan;contaminants
+288;(massa)Concentratie 4,4'-dichloordifenyldichlooretheen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;44DDE;4,4'-dichloordifenyldichlooretheen;contaminants
+355;(massa)Concentratie 4,4'-dichloordifenyltrichloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;44DDT;4,4'-dichloordifenyltrichloorethaan;contaminants
+348;(massa)Concentratie 4-chloor-3-methylfenol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;4Cl3C1yFol;4-chloor-3-methylfenol;contaminants
+221;(massa)Concentratie 4-chlooraniline in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;4ClAn;4-chlooraniline;contaminants
+334;(massa)Concentratie 4-chloorfenol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;4ClFol;4-chloorfenol;contaminants
+115;(massa)Concentratie 4-tertiair-octylfenol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;4ttC8yFol;4-tertiair-octylfenol;contaminants
+243;(massa)Concentratie abamectine in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;abmtne;abamectine;contaminants
+413;(massa)Concentratie alfa-endosulfan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;aedsfn;alfa-endosulfan;contaminants
+89;(massa)Concentratie zilver in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Ag;zilver;metals
+220;(massa)Concentratie zilver in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Ag;zilver;metals
+376;(massa)Concentratie alfa-hexachloorcyclohexaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;aHCH;alfa-hexachloorcyclohexaan;contaminants
+384;(massa)Concentratie aluminium in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Al;aluminium;metals
+64;(massa)Concentratie alachloor in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;alCl;alachloor;contaminants
+16;(massa)Concentratie aldrin in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;aldn;aldrin;contaminants
+414;(massa)Concentratie antraceen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Ant;antraceen;contaminants
+222;(massa)Concentratie arseen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;As;arseen;metals
+223;(massa)Concentratie arseen in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);As;arseen;metals
+166;(massa)Concentratie atrazine in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;atzne;atrazine;contaminants
+122;(massa)Concentratie boor in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);B;boor;metals
+289;(massa)Concentratie boor in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;B;boor;metals
+78;(massa)Concentratie barium in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Ba;barium;metals
+123;(massa)Concentratie barium in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Ba;barium;metals
+170;(massa)Concentratie benzo(a)antraceen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;BaA;benzo(a)antraceen;contaminants
+79;(massa)Concentratie benzo(a)pyreen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;BaP;benzo(a)pyreen;contaminants
+290;(massa)Concentratie benzo(b)fluorantheen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;BbF;benzo(b)fluorantheen;contaminants
+357;(massa)Concentratie beryllium in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Be;beryllium;metals
+415;(massa)Concentratie beryllium in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Be;beryllium;metals
+291;(massa)Concentratie beta-endosulfan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;bedsfn;beta-endosulfan;contaminants
+17;(massa)Concentratie benzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Ben;benzeen;NA
+65;(massa)Concentratie bentazon in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;bentzn;bentazon;NA
+358;(massa)Concentratie benzo(ghi)peryleen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;BghiPe;benzo(ghi)peryleen;NA
+434;(massa)Concentratie beta-hexachloorcyclohexaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;bHCH;beta-hexachloorcyclohexaan;NA
+404;(massa)Concentratie bifenyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;biFy;bifenyl;NA
+359;(massa)Concentratie benzo(k)fluorantheen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;BkF;benzo(k)fluorantheen;NA
+435;(massa)Concentratie Biochemisch zuurstofverbruik met allylthioureum in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;BZV5a;Biochemisch zuurstofverbruik met allylthioureum;eutrophication
+341;(massa)Concentratie methylazinfos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C1yazfs;methylazinfos;NA
+264;(massa)Concentratie methyl-metsulfuron in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C1ymsfrn;methyl-metsulfuron;NA
+280;(massa)Concentratie methyloxydemeton in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C1yOxdmtn;methyloxydemeton;NA
+242;(massa)Concentratie methylpirimifos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C1yprmfs;methylpirimifos;NA
+401;(massa)Concentratie methylparathion in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C1yprton;methylparathion;NA
+342;(massa)Concentratie ethylazinfos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C2yazfs;ethylazinfos;NA
+234;(massa)Concentratie ethylbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C2yBen;ethylbenzeen;NA
+272;(massa)Concentratie ethylchloorpyrifos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C2yClprfs;ethylchloorpyrifos;NA
+8;(massa)Concentratie ethylparathion in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;C2yprton;ethylparathion;NA
+163;(massa)Concentratie captan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;captn;captan;NA
+46;(massa)Concentratie carbendazim in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;carbdzm;carbendazim;NA
+292;(massa)Concentratie cadmium in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Cd;cadmium;metals
+421;(massa)Concentratie cadmium in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Cd;cadmium;metals
+134;(massa)Concentratie gamma-hexachloorcyclohexaan (lindaan) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;cHCH;gamma-hexachloorcyclohexaan (lindaan);NA
+298;(massa)Concentratie chlorofyl-a in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;CHLFa;chlorofyl-a;eutrophication
+305;(massa)Concentratie cis-heptachloorepoxide in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;cHpClepO;cis-heptachloorepoxide;NA
+299;(massa)Concentratie chryseen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Chr;chryseen;NA
+137;(massa)Concentratie chloride in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Cl;chloride;saliniteit
+297;(massa)Concentratie chloride in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Cl;chloride;saliniteit
+129;(massa)Concentratie chloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;ClBen;chloorbenzeen;NA
+406;(massa)Concentratie chlooretheen (vinylchloride) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;ClC2e;chlooretheen (vinylchloride);NA
+13;(massa)Concentratie chloordaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Cldn;chloordaan;NA
+393;(massa)Concentratie chloorfenvinfos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Clfvfs;chloorfenvinfos;NA
+249;(massa)Concentratie chloorazijnzuur in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;ClHAc;chloorazijnzuur;NA
+7;(massa)Concentratie chloridazon in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Clidzn;chloridazon;NA
+240;(massa)Concentratie chloorprofam in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Clpfm;chloorprofam;NA
+112;(massa)Concentratie chloortoluron in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Cltlrn;chloortoluron;NA
+178;(massa)Concentratie cyanide in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;CN;cyanide;NA
+366;(massa)Concentratie kobalt in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Co;kobalt;NA
+422;(massa)Concentratie kobalt in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Co;kobalt;NA
+375;(massa)Concentratie koolstof organisch in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Corg;koolstof organisch;eutrophication
+300;(massa)Concentratie chroom in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Cr;chroom;metals
+367;(massa)Concentratie chroom in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Cr;chroom;metals
+301;(massa)Concentratie koper in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Cu;koper;metals
+423;(massa)Concentratie koper in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Cu;koper;metals
+211;(massa)Concentratie cumafos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;cumfs;cumafos;NA
+18;(massa)Concentratie cumeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;cumn;cumeen;NA
+85;(massa)Concentratie Chemisch zuurstofverbruik in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;CZV;Chemisch zuurstofverbruik;eutrophication
+126;(massa)Concentratie Chemisch zuurstofverbruik in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);CZV;Chemisch zuurstofverbruik;eutrophication
+63;(massa)Concentratie diazinon in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Daznn;diazinon;NA
+127;(massa)Concentratie dibenzo(a,h)antraceen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;DBahAnt;dibenzo(a,h)antraceen;NA
+10;(massa)Concentratie dimethylamine in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;DC1yAe;dimethylamine;NA
+71;(massa)Concentratie diethylamine in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;DC2yAe;diethylamine;NA
+218;(massa)Concentratie dibutyltin (kation) in Oppervlaktewater uitgedrukt in Tin in ng/l;ng/l;nanogram per liter;CONCTTE;(massa)Concentratie;Sn;uitgedrukt in Tin;DC4ySn;dibutyltin (kation);NA
+424;(massa)Concentratie dibutyltin (kation) in Oppervlaktewater ng/l;ng/l;nanogram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;DC4ySn;dibutyltin (kation);NA
+19;(massa)Concentratie dichloormethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;DClC1a;dichloormethaan;NA
+108;(massa)Concentratie dichloorvos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;DClvs;dichloorvos;NA
+349;(massa)Concentratie bis(2-ethylhexyl)ftalaat (DEHP) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;DEHP;bis(2-ethylhexyl)ftalaat (DEHP);NA
+433;(massa)Concentratie demeton-O in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;demtnO;demeton-O;NA
+160;(massa)Concentratie delta-hexachloorcyclohexaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;dHCH;delta-hexachloorcyclohexaan;NA
+128;(massa)Concentratie dieldrin in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;dieldn;dieldrin;NA
+400;(massa)Concentratie dimethoaat in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Dmtat;dimethoaat;NA
+330;(massa)Concentratie deltamethrin in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;dmtn;deltamethrin;NA
+5;(massa)Concentratie dimethenamid-P in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;DmtnmdP;dimethenamid-P;NA
+343;(massa)Concentratie disulfoton in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Dsftn;disulfoton;NA
+204;(massa)Concentratie dithianon in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Dtann;dithianon;NA
+212;(massa)Concentratie diuron in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Durn;diuron;NA
+302;(massa)Concentratie endrin in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;endn;endrin;NA
+2;(massa)Concentratie esfenvaleraat in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;esfvlrt;esfenvaleraat;NA
+235;(massa)Concentratie fluoride in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;F;fluoride;NA
+27;(massa)Concentratie ijzer in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Fe;ijzer;NA
+179;(massa)Concentratie ijzer in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Fe;ijzer;NA
+426;(massa)Concentratie fenantreen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Fen;fenantreen;NA
+430;(massa)Concentratie fenamifos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;fenamfs;fenamifos;NA
+344;(massa)Concentratie fenitrothion in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;feNO2ton;fenitrothion;NA
+369;(massa)Concentratie fenoxycarb in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;fenOxcb;fenoxycarb;NA
+162;(massa)Concentratie fenthion in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;fenton;fenthion;NA
+231;(massa)Concentratie fluorantheen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Flu;fluorantheen;NA
+428;(massa)Concentratie hexachloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;HCB;hexachloorbenzeen;NA
+345;(massa)Concentratie heptenofos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;heptnfs;heptenofos;NA
+237;(massa)Concentratie kwik in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Hg;kwik;NA
+238;(massa)Concentratie kwik in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Hg;kwik;NA
+236;(massa)Concentratie heptachloor in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;HpCl;heptachloor;NA
+304;(massa)Concentratie hexachloorbutadieen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;HxClbtDen;hexachloorbutadieen;NA
+362;(massa)Concentratie hexachloorethaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;HxClC2a;hexachloorethaan;NA
+157;(massa)Concentratie isodrin in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;idn;isodrin;NA
+370;(massa)Concentratie imidacloprid in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;imdcpd;imidacloprid;NA
+429;(massa)Concentratie indeno(1,2,3-cd)pyreen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;InP;indeno(1,2,3-cd)pyreen;NA
+275;(massa)Concentratie isoproturon in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;iptrn;isoproturon;NA
+100;(massa)Concentratie lambda-cyhalothrin in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;lcyhltn;lambda-cyhalothrin;NA
+113;(massa)Concentratie linuron in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;linrn;linuron;NA
+66;(massa)Concentratie malathion in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;malton;malathion;NA
+207;(massa)Concentratie 2-methyl-4-chloorfenoxyazijnzuur in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;MCPA;2-methyl-4-chloorfenoxyazijnzuur;NA
+335;(massa)Concentratie mecoprop in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;MCPP;mecoprop;NA
+213;(massa)Concentratie metabenzthiazuron in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;metbtazrn;metabenzthiazuron;NA
+164;(massa)Concentratie metolachloor in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;metlCl;metolachloor;NA
+114;(massa)Concentratie mevinfos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;mevfs;mevinfos;NA
+368;(massa)Concentratie magnesium in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Mg;magnesium;NA
+346;(massa)Concentratie monolinuron in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Mlnrn;monolinuron;NA
+29;(massa)Concentratie mangaan in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Mn;mangaan;NA
+239;(massa)Concentratie mangaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Mn;mangaan;NA
+32;(massa)Concentratie molybdeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Mo;molybdeen;NA
+47;(massa)Concentratie molybdeen in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Mo;molybdeen;NA
+279;(massa)Concentratie methamidofos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;mtmdfs;methamidofos;NA
+277;(massa)Concentratie metazachloor in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;mzCl;metazachloor;NA
+181;(massa)Concentratie natrium in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Na;natrium;metal
+431;(massa)Concentratie naftaleen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Naf;naftaleen;NA
+41;(massa)Concentratie ammonium in Oppervlaktewater uitgedrukt in stikstof / opgeloste fractie in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;Nnf;uitgedrukt in stikstof / opgeloste fractie;NH4;ammonium;eutrophication
+30;(massa)Concentratie nikkel in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Ni;nikkel;metals
+306;(massa)Concentratie nikkel in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Ni;nikkel;metals
+180;(massa)Concentratie stikstof Kjeldahl in Oppervlaktewater uitgedrukt in Stikstof in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;N;uitgedrukt in Stikstof;NKj;stikstof Kjeldahl;eutrophication
+92;(massa)Concentratie nitriet in Oppervlaktewater uitgedrukt in stikstof / opgeloste fractie in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;Nnf;uitgedrukt in stikstof / opgeloste fractie;NO2;nitriet;eutrophication
+246;(massa)Concentratie nitraat in Oppervlaktewater uitgedrukt in stikstof / opgeloste fractie in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;Nnf;uitgedrukt in stikstof / opgeloste fractie;NO3;nitraat;eutrophication
+86;(massa)Concentratie stikstof totaal in Oppervlaktewater uitgedrukt in stikstof / opgeloste fractie in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;Nnf;uitgedrukt in stikstof / opgeloste fractie;Ntot;stikstof totaal;eutrophication
+189;(massa)Concentratie stikstof totaal in Oppervlaktewater uitgedrukt in Stikstof particulair gebonden in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;Npg;uitgedrukt in Stikstof particulair gebonden;Ntot;stikstof totaal;eutrophication
+241;(massa)Concentratie stikstof totaal in Oppervlaktewater uitgedrukt in Stikstof in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;N;uitgedrukt in Stikstof;Ntot;stikstof totaal;eutrophication
+31;(massa)Concentratie zuurstof in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;O2;zuurstof;eutrophication
+439;(massa)Concentratie octamethyltetrasiloxaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;OcC1yT4slxn;octamethyltetrasiloxaan;NA
+83;(massa)Concentratie lood in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Pb;lood;metals
+230;(massa)Concentratie lood in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Pb;lood;metals
+215;(massa)Concentratie 2,2',4,4',6-pentabroomdifenylether in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PBDE100;2,2',4,4',6-pentabroomdifenylether;NA
+403;(massa)Concentratie 2,2',4,4',5,5'-hexabroomdifenylether in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PBDE153;2,2',4,4',5,5'-hexabroomdifenylether;NA
+11;(massa)Concentratie 2,2',4,4',5,6'-hexabroomdifenylether in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PBDE154;2,2',4,4',5,6'-hexabroomdifenylether;NA
+338;(massa)Concentratie 2,4,4'-tribroomdifenylether in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PBDE28;2,4,4'-tribroomdifenylether;NA
+68;(massa)Concentratie 2,2',4,4'-tetrabroomdifenylether in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PBDE47;2,2',4,4'-tetrabroomdifenylether;NA
+116;(massa)Concentratie 2,2',4,4',5-pentabroomdifenylether in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PBDE99;2,2',4,4',5-pentabroomdifenylether;NA
+25;(massa)Concentratie 2,2',4,5,5'-pentachloorbifenyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PCB101;2,2',4,5,5'-pentachloorbifenyl;NA
+174;(massa)Concentratie 2,3',4,4',5-pentachloorbifenyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PCB118;2,3',4,4',5-pentachloorbifenyl;NA
+175;(massa)Concentratie 2,2',3,4,4',5'-hexachloorbifenyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PCB138;2,2',3,4,4',5'-hexachloorbifenyl;NA
+84;(massa)Concentratie 2,2',4,4',5,5'-hexachloorbifenyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PCB153;2,2',4,4',5,5'-hexachloorbifenyl;NA
+340;(massa)Concentratie 2,2',3,4,4',5,5'-heptachloorbifenyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PCB180;2,2',3,4,4',5,5'-heptachloorbifenyl;NA
+293;(massa)Concentratie 2,4,4'-trichloorbifenyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PCB28;2,4,4'-trichloorbifenyl;NA
+224;(massa)Concentratie 2,2',5,5'-tetrachloorbifenyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PCB52;2,2',5,5'-tetrachloorbifenyl;NA
+270;(massa)Concentratie pentachloorbenzeen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PeClBen;pentachloorbenzeen;NA
+360;(massa)Concentratie pentachloorfenol in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;PeClFol;pentachloorfenol;NA
+165;(massa)Concentratie pirimicarb in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;pirmcb;pirimicarb;NA
+361;(massa)Concentratie fosfaat in Oppervlaktewater uitgedrukt in fosfor / opgeloste fractie in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;Pnf;uitgedrukt in fosfor / opgeloste fractie;PO4;fosfaat;eutrophication
+402;(massa)Concentratie propoxur in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;propxr;propoxur;NA
+87;(massa)Concentratie fosfor totaal in Oppervlaktewater uitgedrukt in Fosfor in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;P;uitgedrukt in Fosfor;Ptot;fosfor totaal;eutrophication
+138;(massa)Concentratie fosfor totaal in Oppervlaktewater particulair gebonden in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;pg;particulair gebonden;Ptot;fosfor totaal;eutrophication
+173;(massa)Concentratie fosfor totaal in Oppervlaktewater uitgedrukt in fosfor / opgeloste fractie in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;Pnf;uitgedrukt in fosfor / opgeloste fractie;Ptot;fosfor totaal;eutrophication
+72;(massa)Concentratie pyreen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Pyr;pyreen;NA
+105;(massa)Concentratie pyridaben in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;pyrdbn;pyridaben;NA
+268;(massa)Concentratie pyriproxyfen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;pyrpxfn;pyriproxyfen;NA
+57;(massa)Concentratie som 4-nonylfenol-isomeren (vertakt) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;s4C9yFol;som 4-nonylfenol-isomeren (vertakt);NA
+80;(massa)Concentratie antimoon in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Sb;antimoon;metal
+171;(massa)Concentratie antimoon in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Sb;antimoon;metal
+409;(massa)Concentratie som C10-C13-chlooralkanen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;sC10C13Clakn;som C10-C13-chlooralkanen;NA
+176;(massa)Concentratie som cholinesteraseremmers in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;sChER;som cholinesteraseremmers;NA
+245;(massa)Concentratie seleen in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Se;seleen;metal
+373;(massa)Concentratie seleen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Se;seleen;NA
+233;(massa)Concentratie som extraheerbare organische halogeenverbindingen in Oppervlaktewater uitgedrukt in Chloor in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;Cl;uitgedrukt in Chloor;sEOX;som extraheerbare organische halogeenverbindingen;NA
+216;(massa)Concentratie som fenolen waterdampvluchtig in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;sFolwv;som fenolen waterdampvluchtig;NA
+374;(massa)Concentratie simazine in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;simzne;simazine;NA
+214;(massa)Concentratie som methyleenblauwactieve stoffen anionactief in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;sMBAS;som methyleenblauwactieve stoffen anionactief;NA
+141;(massa)Concentratie tin in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Sn;tin;metal
+208;(massa)Concentratie tin in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Sn;tin;metal
+419;(massa)Concentratie som nitraat en nitriet in Oppervlaktewater uitgedrukt in stikstof / opgeloste fractie in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;Nnf;uitgedrukt in stikstof / opgeloste fractie;sNO3NO2;som nitraat en nitriet;eutrophication
+91;(massa)Concentratie sulfaat in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;SO4;sulfaat;NA
+339;(massa)Concentratie sulfaat in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);SO4;sulfaat;NA
+296;(massa)Concentratie styreen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;styrn;styreen;NA
+76;(massa)Concentratie tetrabutyltin in Oppervlaktewater ng/l;ng/l;nanogram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;T4C4ySn;tetrabutyltin;NA
+351;(massa)Concentratie tetrabutyltin in Oppervlaktewater uitgedrukt in Tin in ng/l;ng/l;nanogram per liter;CONCTTE;(massa)Concentratie;Sn;uitgedrukt in Tin;T4C4ySn;tetrabutyltin;NA
+186;(massa)Concentratie tetrachloormethaan (tetra) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;T4ClC1a;tetrachloormethaan (tetra);NA
+185;(massa)Concentratie tetrachlooretheen (per) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;T4ClC2e;tetrachlooretheen (per);NA
+274;(massa)Concentratie triazofos in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Tazfs;triazofos;NA
+36;(massa)Concentratie tributylfosfaat in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;TC4yPO4;tributylfosfaat;NA
+74;(massa)Concentratie tributyltin (kation) in Oppervlaktewater ng/l;ng/l;nanogram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;TC4ySn;tributyltin (kation);NA
+75;(massa)Concentratie tributyltin (kation) in Oppervlaktewater uitgedrukt in Tin in ng/l;ng/l;nanogram per liter;CONCTTE;(massa)Concentratie;Sn;uitgedrukt in Tin;TC4ySn;tributyltin (kation);NA
+187;(massa)Concentratie trichloormethaan (chloroform) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;TClC1a;trichloormethaan (chloroform);NA
+133;(massa)Concentratie trichlooretheen (tri) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;TClC2e;trichlooretheen (tri);NA
+117;(massa)Concentratie trichloorfon in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;TClfn;trichloorfon;NA
+107;(massa)Concentratie tellurium in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Te;tellurium;NA
+248;(massa)Concentratie tellurium in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Te;tellurium;NA
+3;(massa)Concentratie teflubenzuron in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;tefbzrn;teflubenzuron;NA
+347;(massa)Concentratie terbutrin in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;terbtn;terbutrin;NA
+273;(massa)Concentratie terbutylazine in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;terC4yazne;terbutylazine;NA
+9;(massa)Concentratie trifluraline in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Tfrlne;trifluraline;NA
+227;(massa)Concentratie trifenyltin (kation) in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;TFySn;trifenyltin (kation);NA
+282;(massa)Concentratie trifenyltin (kation) in Oppervlaktewater uitgedrukt in Tin in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;Sn;uitgedrukt in Tin;TFySn;trifenyltin (kation);NA
+90;(massa)Concentratie titaan in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Ti;titaan;NA
+271;(massa)Concentratie titaan in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Ti;titaan;NA
+60;(massa)Concentratie thallium in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Tl;thallium;NA
+336;(massa)Concentratie thallium in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Tl;thallium;NA
+188;(massa)Concentratie tolueen in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Tol;tolueen;NA
+276;(massa)Concentratie tolclofos-methyl in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;tolcfsC1y;tolclofos-methyl;NA
+109;(massa)Concentratie uranium in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);U;uranium;NA
+308;(massa)Concentratie uranium in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;U;uranium;NA
+37;(massa)Concentratie vanadium in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;V;vanadium;NA
+407;(massa)Concentratie vanadium in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);V;vanadium;NA
+38;(massa)Concentratie zink in Oppervlaktewater opgeloste fractie (bijv. na filtratie) in ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;nf;opgeloste fractie (bijv. na filtratie);Zn;zink;NA
+172;(massa)Concentratie zink in Oppervlaktewater ug/l;ug/l;microgram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;Zn;zink;NA
+39;(massa)Concentratie Zwevende stof in Oppervlaktewater mg/l;mg/l;milligram per liter;CONCTTE;(massa)Concentratie;NVT;Niet van toepassing;ZS;Zwevende stof;light
+51;Golffrequentie bij maximum v.h. variantiedichtheidspectrum Oppervlaktewater golffrequentie tussen 30 en 1000 mHz in mHz;mHz;millihertz;Fp;Golffrequentie bij maximum v.h. variantiedichtheidspectrum;F003-100;golffrequentie tussen 30 en 1000 mHz;NVT;Waarde is niet van toepassing;physics
+266;Golffrequentie bij maximum v.h. variantiedichtheidspectrum Oppervlaktewater Hz;Hz;hertz;Fp;Golffrequentie bij maximum v.h. variantiedichtheidspectrum;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+443;Golffrequentie bij maximum v.h. variantiedichtheidspectrum Oppervlaktewater golffrequentie tussen 30 en 500 mHz in mHz;mHz;millihertz;Fp;Golffrequentie bij maximum v.h. variantiedichtheidspectrum;F003-050;golffrequentie tussen 30 en 500 mHz;NVT;Waarde is niet van toepassing;physics
+168;Geleidendheid Oppervlaktewater t.o.v. 20 graden Celsius in mS/m;mS/m;millisiemens per meter;GELDHD;Geleidendheid;20oC;t.o.v. 20 graden Celsius;NVT;Waarde is niet van toepassing;saliniteit
+195;Geleidendheid Oppervlaktewater S/m;S/m;siemens per meter;GELDHD;Geleidendheid;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;saliniteit
+313;Geleidendheid Oppervlaktewater mS/m;mS/m;millisiemens per meter;GELDHD;Geleidendheid;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;saliniteit
+265;Geurverdunningsfactor Oppervlaktewater ;DIMSLS;dimensieloos;GEURVDNFTR;Geurverdunningsfactor;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+255;Gemiddelde golfhoogte in het tijdsdomein Oppervlaktewater cm;cm;centimeter;GGH;Gemiddelde golfhoogte in het tijdsdomein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+256;Gemiddelde golfperiode in het tijdsdomein Oppervlaktewater s;s;seconde;GGT;Gemiddelde golfperiode in het tijdsdomein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+48;Gem. hoogte van hoogste 1/10 deel v.d. golven (tijdsdomein) Oppervlaktewater cm;cm;centimeter;H1/10;Gem. hoogte van hoogste 1/10 deel v.d. golven (tijdsdomein);NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+391;Gem. hoogte van hoogste 1/3 deel v.d. golven (tijdsdomein) Oppervlaktewater cm;cm;centimeter;H1/3;Gem. hoogte van hoogste 1/3 deel v.d. golven (tijdsdomein);NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+150;Gem. hoogte van hoogste 1/3 deel v.d. golven (tijdsdomein) verwacht Oppervlaktewater cm;cm;centimeter;H1/3V;Gem. hoogte van hoogste 1/3 deel v.d. golven (tijdsdomein) verwacht;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+440;Gem. hoogte van hoogste 1/50 deel v.d. golven (tijdsdomein) Oppervlaktewater cm;cm;centimeter;H1/50;Gem. hoogte van hoogste 1/50 deel v.d. golven (tijdsdomein);NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+154;Hefhoogte t.o.v. Normaal Amsterdams Peil in cm;cm;centimeter;HEFHTE;Hefhoogte;NAP;t.o.v. Normaal Amsterdams Peil;NVT;Waarde is niet van toepassing;NA
+56;Hardheid Oppervlaktewater uitgedrukt in Calciumcarbonaat in mg/l;mg/l;milligram per liter;HH;Hardheid;CaCO3;uitgedrukt in Calciumcarbonaat;NVT;Waarde is niet van toepassing;NA
+194;Significante golfhoogte in het spectrale domein Oppervlaktewater golffrequentie tussen 30 en 1000 mHz in cm;cm;centimeter;Hm0;Significante golfhoogte in het spectrale domein;F003-100;golffrequentie tussen 30 en 1000 mHz;NVT;Waarde is niet van toepassing;physics
+312;Significante golfhoogte in het spectrale domein Oppervlaktewater golffrequentie tussen 30 en 500 mHz in cm;cm;centimeter;Hm0;Significante golfhoogte in het spectrale domein;F003-050;golffrequentie tussen 30 en 500 mHz;NVT;Waarde is niet van toepassing;physics
+394;Significante golfhoogte in het spectrale domein Oppervlaktewater cm;cm;centimeter;Hm0;Significante golfhoogte in het spectrale domein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+55;Significante golfhoogte in het spectrale domein verwacht Oppervlaktewater golffrequentie tussen 30 en 500 mHz in cm;cm;centimeter;Hm0V;Significante golfhoogte in het spectrale domein verwacht;F003-050;golffrequentie tussen 30 en 500 mHz;NVT;Waarde is niet van toepassing;physics
+155;Significante golfhoogte in het spectrale domein verwacht Oppervlaktewater cm;cm;centimeter;Hm0V;Significante golfhoogte in het spectrale domein verwacht;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+147;Maximale golfhoogte in het tijdsdomein Oppervlaktewater cm;cm;centimeter;Hmax;Maximale golfhoogte in het tijdsdomein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+98;Significante deiningshoogte in het spectrale domein Oppervlaktewater golffrequentie tussen 30 en 100 mHz in cm;cm;centimeter;HTE3;Significante deiningshoogte in het spectrale domein;F003-010;golffrequentie tussen 30 en 100 mHz;NVT;Waarde is niet van toepassing;physics
+321;Significante deiningshoogte in het spectrale domein Oppervlaktewater cm;cm;centimeter;HTE3;Significante deiningshoogte in het spectrale domein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;physics
+260;Significante deiningshoogte in het spectrale domein verwacht Oppervlaktewater golffrequentie tussen 30 en 100 mHz in cm;cm;centimeter;HTE3V;Significante deiningshoogte in het spectrale domein verwacht;F003-010;golffrequentie tussen 30 en 100 mHz;NVT;Waarde is niet van toepassing;physics
+58;Korrelgroottefractie Zwevende stof diameter kleiner dan 16 um / drooggewicht in %;%;procent;KGF;Korrelgroottefractie;Dk0016dg;diameter kleiner dan 16 um / drooggewicht;NVT;Waarde is niet van toepassing;light
+328;Korrelgroottefractie Zwevende stof diameter kleiner dan 2 um / drooggewicht in %;%;procent;KGF;Korrelgroottefractie;Dk0002dg;diameter kleiner dan 2 um / drooggewicht;NVT;Waarde is niet van toepassing;light
+40;Luchtdruk Lucht hPa;hPa;hectopascal;LUCHTDK;Luchtdruk;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+417;Massafractie 1,2,3,4-tetrachloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;1234T4ClBen;1,2,3,4-tetrachloorbenzeen;NA
+20;Massafractie 1,2,3-trichloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;123TClBen;1,2,3-trichloorbenzeen;NA
+167;Massafractie 1,2,4,5-tetrachloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;1245T4ClBen;1,2,4,5-tetrachloorbenzeen;NA
+21;Massafractie 1,2,4-trichloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;124TClBen;1,2,4-trichloorbenzeen;NA
+408;Massafractie 1,2-dichloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;12DClBen;1,2-dichloorbenzeen;NA
+267;Massafractie 1,3,5-trichloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;135TClBen;1,3,5-trichloorbenzeen;NA
+118;Massafractie 1,3-dichloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;13DClBen;1,3-dichloorbenzeen;NA
+281;Massafractie 1,4-dichloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;14DClBen;1,4-dichloorbenzeen;NA
+217;Massafractie 1-chloor-3-nitrobenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;1Cl3NO2Ben;1-chloor-3-nitrobenzeen;NA
+410;Massafractie 2,3-dichloornitrobenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;23DClNO2Ben;2,3-dichloornitrobenzeen;NA
+159;Massafractie 2,4-dichloornitrobenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;24DClNO2Ben;2,4-dichloornitrobenzeen;NA
+284;Massafractie 2,4'-dichloordifenyltrichloorethaan in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;24DDT;2,4'-dichloordifenyltrichloorethaan;NA
+331;Massafractie 2,5-dichloornitrobenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;25DClNO2Ben;2,5-dichloornitrobenzeen;NA
+333;Massafractie 3,4-dichloornitrobenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;34DClNO2Ben;3,4-dichloornitrobenzeen;NA
+352;Massafractie 4,4'-dichloordifenyldichloorethaan in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;44DDD;4,4'-dichloordifenyldichloorethaan;NA
+219;Massafractie 4,4'-dichloordifenyldichlooretheen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;44DDE;4,4'-dichloordifenyldichlooretheen;NA
+411;Massafractie 4,4'-dichloordifenyltrichloorethaan in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;44DDT;4,4'-dichloordifenyltrichloorethaan;NA
+412;Massafractie alfa-endosulfan in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;aedsfn;alfa-endosulfan;NA
+42;Massafractie zilver in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Ag;zilver;metal
+285;Massafractie alfa-hexachloorcyclohexaan in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;aHCH;alfa-hexachloorcyclohexaan;NA
+158;Massafractie aluminium in Zwevende stof mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;NVT;Niet van toepassing;Al;aluminium;metal
+61;Massafractie aldrin in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;aldn;aldrin;NA
+247;Massafractie antraceen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Ant;antraceen;NA
+316;Massafractie arseen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;As;arseen;NA
+380;Massafractie boor in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;B;boor;NA
+294;Massafractie barium in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Ba;barium;NA
+250;Massafractie benzo(a)antraceen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;BaA;benzo(a)antraceen;NA
+191;Massafractie benzo(a)pyreen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;BaP;benzo(a)pyreen;NA
+45;Massafractie benzo(b)fluorantheen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;BbF;benzo(b)fluorantheen;NA
+156;Massafractie beryllium in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Be;beryllium;metal
+438;Massafractie benzo(ghi)peryleen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;BghiPe;benzo(ghi)peryleen;NA
+62;Massafractie beta-hexachloorcyclohexaan in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;bHCH;beta-hexachloorcyclohexaan;NA
+140;Massafractie benzo(k)fluorantheen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;BkF;benzo(k)fluorantheen;NA
+93;Massafractie cadmium in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Cd;cadmium;metal
+203;Massafractie gamma-hexachloorcyclohexaan (lindaan) in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;cHCH;gamma-hexachloorcyclohexaan (lindaan);NA
+99;Massafractie cis-heptachloorepoxide in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;cHpClepO;cis-heptachloorepoxide;NA
+182;Massafractie chryseen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Chr;chryseen;metal
+22;Massafractie kobalt in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Co;kobalt;metal
+379;Massafractie koolstof organisch in Zwevende stof uitgedrukt in Koolstof / drooggewicht in %;%;procent;MASSFTE;Massafractie;Cdg;uitgedrukt in Koolstof / drooggewicht;Corg;koolstof organisch;eutrophication
+183;Massafractie chroom in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Cr;chroom;metal
+307;Massafractie koper in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Cu;koper;metal
+130;Massafractie dibenzo(a,h)antraceen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;DBahAnt;dibenzo(a,h)antraceen;NA
+26;Massafractie dibutyltin (kation) in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;DC4ySn;dibutyltin (kation);NA
+120;Massafractie dibutyltin (kation) in Zwevende stof uitgedrukt in Tin / drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;Sndg;uitgedrukt in Tin / drooggewicht;DC4ySn;dibutyltin (kation);NA
+111;Massafractie dieldrin in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;dieldn;dieldrin;NA
+399;Massafractie endrin in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;endn;endrin;NA
+209;Massafractie ijzer in Zwevende stof t.o.v. drooggewicht in g/kg;g/kg;gram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Fe;ijzer;metal
+432;Massafractie fenantreen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Fen;fenantreen;NA
+33;Massafractie fluorantheen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Flu;fluorantheen;NA
+23;Massafractie Gloeirest in Oppervlaktewater %;%;procent;MASSFTE;Massafractie;NVT;Niet van toepassing;GR;Gloeirest;light
+309;Massafractie hexachloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;HCB;hexachloorbenzeen;NA
+34;Massafractie kwik in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Hg;kwik;metal
+201;Massafractie heptachloor in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;HpCl;heptachloor;NA
+210;Massafractie hexachloorbutadieen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;HxClbtDen;hexachloorbutadieen;NA
+263;Massafractie isodrin in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;idn;isodrin;NA
+310;Massafractie indeno(1,2,3-cd)pyreen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;InP;indeno(1,2,3-cd)pyreen;NA
+327;Massafractie minerale olie in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;minrlole;minerale olie;NA
+262;Massafractie mangaan in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Mn;mangaan;metal
+124;Massafractie molybdeen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Mo;molybdeen;metal
+81;Massafractie natrium in Zwevende stof t.o.v. drooggewicht in g/kg;g/kg;gram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Na;natrium;metal
+326;Massafractie naftaleen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Naf;naftaleen;NA
+131;Massafractie nikkel in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Ni;nikkel;metal
+202;Massafractie stikstof Kjeldahl in Zwevende stof uitgedrukt in Stikstof / drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;Ndg;uitgedrukt in Stikstof / drooggewicht;NKj;stikstof Kjeldahl;eutrophication
+311;Massafractie lood in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Pb;lood;metal
+44;Massafractie 2,2',4,4',6-pentabroomdifenylether in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PBDE100;2,2',4,4',6-pentabroomdifenylether;NA
+315;Massafractie 2,2',4,4',5,5'-hexabroomdifenylether in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PBDE153;2,2',4,4',5,5'-hexabroomdifenylether;NA
+314;Massafractie 2,2',4,4',5,6'-hexabroomdifenylether in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PBDE154;2,2',4,4',5,6'-hexabroomdifenylether;NA
+337;Massafractie 2,4,4'-tribroomdifenylether in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PBDE28;2,4,4'-tribroomdifenylether;NA
+381;Massafractie 2,2',4,4'-tetrabroomdifenylether in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PBDE47;2,2',4,4'-tetrabroomdifenylether;NA
+437;Massafractie 2,2',4,4',5-pentabroomdifenylether in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PBDE99;2,2',4,4',5-pentabroomdifenylether;NA
+88;Massafractie 2,2',4,5,5'-pentachloorbifenyl in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PCB101;2,2',4,5,5'-pentachloorbifenyl;NA
+132;Massafractie 2,3',4,4',5-pentachloorbifenyl in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PCB118;2,3',4,4',5-pentachloorbifenyl;NA
+372;Massafractie 2,2',3,4,4',5'-hexachloorbifenyl in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PCB138;2,2',3,4,4',5'-hexachloorbifenyl;NA
+244;Massafractie 2,2',4,4',5,5'-hexachloorbifenyl in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PCB153;2,2',4,4',5,5'-hexachloorbifenyl;NA
+184;Massafractie 2,2',3,4,4',5,5'-heptachloorbifenyl in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PCB180;2,2',3,4,4',5,5'-heptachloorbifenyl;NA
+35;Massafractie 2,4,4'-trichloorbifenyl in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PCB28;2,4,4'-trichloorbifenyl;NA
+378;Massafractie 2,2',5,5'-tetrachloorbifenyl in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PCB52;2,2',5,5'-tetrachloorbifenyl;NA
+398;Massafractie pentachloorbenzeen in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;PeClBen;pentachloorbenzeen;NA
+1;Massafractie fosfor totaal in Zwevende stof t.o.v. drooggewicht in mg/g;mg/g;milligram per gram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Ptot;fosfor totaal;eutrophication
+43;Massafractie pyreen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Pyr;pyreen;NA
+82;Massafractie antimoon in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Sb;antimoon;metal
+283;Massafractie seleen in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Se;seleen;metal
+418;Massafractie tin in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Sn;tin;metal
+269;Massafractie tetrabutyltin in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;T4C4ySn;tetrabutyltin;NA
+356;Massafractie tetrabutyltin in Zwevende stof uitgedrukt in Tin / drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;Sndg;uitgedrukt in Tin / drooggewicht;T4C4ySn;tetrabutyltin;NA
+161;Massafractie tributyltin (kation) in Zwevende stof uitgedrukt in Tin / drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;Sndg;uitgedrukt in Tin / drooggewicht;TC4ySn;tributyltin (kation);NA
+232;Massafractie tributyltin (kation) in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;TC4ySn;tributyltin (kation);NA
+106;Massafractie tellurium in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Te;tellurium;NA
+177;Massafractie trifenyltin (kation) in Zwevende stof t.o.v. drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;TFySn;trifenyltin (kation);NA
+420;Massafractie trifenyltin (kation) in Zwevende stof uitgedrukt in Tin / drooggewicht in ug/kg;ug/kg;microgram per kilogram;MASSFTE;Massafractie;Sndg;uitgedrukt in Tin / drooggewicht;TFySn;trifenyltin (kation);NA
+436;Massafractie titaan in Zwevende stof t.o.v. drooggewicht in g/kg;g/kg;gram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Ti;titaan;metal
+6;Massafractie thallium in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Tl;thallium;metal
+139;Massafractie uranium in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;U;uranium;metal
+425;Massafractie vanadium in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;V;vanadium;metal
+190;Massafractie zink in Zwevende stof t.o.v. drooggewicht in mg/kg;mg/kg;milligram per kilogram;MASSFTE;Massafractie;dg;t.o.v. drooggewicht;Zn;zink;metal
+228;Chlorofyl-a in Oppervlaktewater %;%;procent;NVT;Waarde is niet van toepassing;NVT;Niet van toepassing;CHLFa;chlorofyl-a;eutrophication
+225;Zuurgraad Oppervlaktewater ;DIMSLS;dimensieloos;pH;Zuurgraad;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;eutrophication
+193;Gemiddelde Debiet Oppervlaktewater m3/s;m3/s;kubieke meter per seconde;Q;Debiet;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+388;Debiet verwacht Oppervlaktewater m3/s;m3/s;kubieke meter per seconde;QVERWACHT;Debiet verwacht;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+53;Gemiddelde golfrichtingspreiding in het spectrale domein Oppervlaktewater golffrequentie tussen 30 en 500 mHz in graad;graad;graad;S0BH;Gemiddelde golfrichtingspreiding in het spectrale domein;F003-050;golffrequentie tussen 30 en 500 mHz;NVT;Waarde is niet van toepassing;NA
+73;Saliniteit Oppervlaktewater ;DIMSLS;dimensieloos;SALNTT;Saliniteit;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;saliniteit
+95;Standaardafwijking van de golfhoogte in het tijdsdomein Oppervlaktewater cm;cm;centimeter;SPGH;Standaardafwijking van de golfhoogte in het tijdsdomein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+149;Standaardafwijking van de golfperiode in het tijdsdomein Oppervlaktewater s;s;seconde;SPGT;Standaardafwijking van de golfperiode in het tijdsdomein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+144;Stroomrichting laag 1 Oppervlaktewater t.o.v. ware Noorden in graad;graad;graad;SRV10w1;Stroomrichting laag 1;WARNDN;t.o.v. ware Noorden;NVT;Waarde is niet van toepassing;NA
+143;Stroomrichting laag 2 Oppervlaktewater t.o.v. ware Noorden in graad;graad;graad;SRV10w2;Stroomrichting laag 2;WARNDN;t.o.v. ware Noorden;NVT;Waarde is niet van toepassing;NA
+382;Stroomrichting laag 3 Oppervlaktewater t.o.v. ware Noorden in graad;graad;graad;SRV10w3;Stroomrichting laag 3;WARNDN;t.o.v. ware Noorden;NVT;Waarde is niet van toepassing;NA
+444;Stroomsnelheid laag 1 Oppervlaktewater m/s;m/s;meter per seconde;SSV10w1;Stroomsnelheid laag 1;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+49;Stroomsnelheid loodrecht laag 1 Oppervlaktewater m/s;m/s;meter per seconde;SSV10w1G;Stroomsnelheid loodrecht laag 1;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+383;Stroomsnelheid laag 2 Oppervlaktewater m/s;m/s;meter per seconde;SSV10w2;Stroomsnelheid laag 2;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+445;Stroomsnelheid loodrecht laag 2 Oppervlaktewater m/s;m/s;meter per seconde;SSV10w2G;Stroomsnelheid loodrecht laag 2;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+251;Stroomsnelheid laag 3 Oppervlaktewater m/s;m/s;meter per seconde;SSV10w3;Stroomsnelheid laag 3;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+192;Stroomsnelheid loodrecht laag 3 Oppervlaktewater m/s;m/s;meter per seconde;SSV10w3G;Stroomsnelheid loodrecht laag 3;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+261;Stroomrichting Oppervlaktewater t.o.v. ware Noorden in graad;graad;graad;STROOMRTG;Stroomrichting;WARNDN;t.o.v. ware Noorden;NVT;Waarde is niet van toepassing;NA
+442;Stroomsnelheid Oppervlaktewater m/s;m/s;meter per seconde;STROOMSHD;Stroomsnelheid;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+136;Temperatuur Lucht t.o.v. Normaal Amsterdams Peil in oC;oC;graad Celsius;T;Temperatuur;NAP;t.o.v. Normaal Amsterdams Peil;NVT;Waarde is niet van toepassing;temperatuur
+377;Temperatuur Oppervlaktewater oC;oC;graad Celsius;T;Temperatuur;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;temperatuur
+145;Golfperiode die hoort bij H1/3 Oppervlaktewater s;s;seconde;T_H1/3;Golfperiode die hoort bij H1/3;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+319;Golfperiode die hoort bij Hmax Oppervlaktewater s;s;seconde;T_Hmax;Golfperiode die hoort bij Hmax;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+253;Gem. golfperiode langste 1/3 deel v.d. golven (tijdsdomein) Oppervlaktewater s;s;seconde;T1/3;Gem. golfperiode langste 1/3 deel v.d. golven (tijdsdomein);NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+151;Gem. golfperiode langste 1/3 deel v.d. golven (tijdsdomein) verwacht Oppervlaktewater s;s;seconde;T1/3V;Gem. golfperiode langste 1/3 deel v.d. golven (tijdsdomein) verwacht;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+52;Golfenergie in het spectrale domein Oppervlaktewater golffrequentie tussen 100 en 200 mHz in cm2;cm2;vierkante centimeter;TE;Golfenergie in het spectrale domein;F010-020;golffrequentie tussen 100 en 200 mHz;NVT;Waarde is niet van toepassing;NA
+258;Golfenergie in het spectrale domein Oppervlaktewater golffrequentie tussen 500 en 1000 mHz in cm2;cm2;vierkante centimeter;TE;Golfenergie in het spectrale domein;F050-100;golffrequentie tussen 500 en 1000 mHz;NVT;Waarde is niet van toepassing;NA
+320;Golfenergie in het spectrale domein Oppervlaktewater golffrequentie tussen 30 en 500 mHz in cm2;cm2;vierkante centimeter;TE;Golfenergie in het spectrale domein;F003-050;golffrequentie tussen 30 en 500 mHz;NVT;Waarde is niet van toepassing;NA
+386;Golfenergie in het spectrale domein Oppervlaktewater golffrequentie tussen 200 en 1000 mHz in cm2;cm2;vierkante centimeter;TE;Golfenergie in het spectrale domein;F020-100;golffrequentie tussen 200 en 1000 mHz;NVT;Waarde is niet van toepassing;NA
+387;Golfenergie in het spectrale domein Oppervlaktewater golffrequentie tussen 200 en 500 mHz in cm2;cm2;vierkante centimeter;TE;Golfenergie in het spectrale domein;F020-050;golffrequentie tussen 200 en 500 mHz;NVT;Waarde is niet van toepassing;NA
+197;Deiningsenergie in het spectrale domein Oppervlaktewater cm2;cm2;vierkante centimeter;TE3;Deiningsenergie in het spectrale domein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+254;Deiningsenergie in het spectrale domein Oppervlaktewater golffrequentie tussen 30 en 100 mHz in cm2;cm2;vierkante centimeter;TE3;Deiningsenergie in het spectrale domein;F003-010;golffrequentie tussen 30 en 100 mHz;NVT;Waarde is niet van toepassing;NA
+198;Deiningsenergie in het spectrale domein verwacht Oppervlaktewater golffrequentie tussen 30 en 100 mHz in cm2;cm2;vierkante centimeter;TE3V;Deiningsenergie in het spectrale domein verwacht;F003-010;golffrequentie tussen 30 en 100 mHz;NVT;Waarde is niet van toepassing;NA
+50;Gemiddelde golfrichting in het spectrale domein Oppervlaktewater golffrequentie tussen 30 en 500 mHz in graad;graad;graad;Th0;Gemiddelde golfrichting in het spectrale domein;F003-050;golffrequentie tussen 30 en 500 mHz;NVT;Waarde is niet van toepassing;NA
+389;Gemiddelde golfrichting in het spectrale domein Oppervlaktewater t.o.v. ware Noorden in graad;graad;graad;Th0;Gemiddelde golfrichting in het spectrale domein;WARNDN;t.o.v. ware Noorden;NVT;Waarde is niet van toepassing;NA
+317;Gem. golfperiode hoogste 1/3 deel golven Oppervlaktewater s;s;seconde;TH1/3;gem. golfperiode hoogste 1/3 deel golven;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+97;Gem. richting deining tov ware noorden in spectrale domein Oppervlaktewater golffrequentie tussen 30 en 100 mHz in graad;graad;graad;Th3;Gem. richting deining tov ware noorden in spectrale domein;F003-010;golffrequentie tussen 30 en 100 mHz;NVT;Waarde is niet van toepassing;NA
+323;Gem. richting deining tov ware noorden in spectrale domein Oppervlaktewater t.o.v. ware Noorden in graad;graad;graad;Th3;Gem. richting deining tov ware noorden in spectrale domein;WARNDN;t.o.v. ware Noorden;NVT;Waarde is niet van toepassing;NA
+54;Gem. richting deining tov ware noorden in spectrale domein verwacht Oppervlaktewater golffrequentie tussen 30 en 100 mHz in graad;graad;graad;Th3V;Gem. richting deining tov ware noorden in spectrale domein verwacht;F003-010;golffrequentie tussen 30 en 100 mHz;NVT;Waarde is niet van toepassing;NA
+96;Golfperiode bepaald uit de spectrale momenten m0 en m2 Oppervlaktewater golffrequentie tussen 30 en 1000 mHz in s;s;seconde;Tm02;Golfperiode bepaald uit de spectrale momenten m0 en m2;F003-100;golffrequentie tussen 30 en 1000 mHz;NVT;Waarde is niet van toepassing;NA
+318;Golfperiode bepaald uit de spectrale momenten m0 en m2 Oppervlaktewater golffrequentie tussen 30 en 500 mHz in s;s;seconde;Tm02;Golfperiode bepaald uit de spectrale momenten m0 en m2;F003-050;golffrequentie tussen 30 en 500 mHz;NVT;Waarde is niet van toepassing;NA
+390;Golfperiode bepaald uit de spectrale momenten m0 en m2 Oppervlaktewater s;s;seconde;Tm02;Golfperiode bepaald uit de spectrale momenten m0 en m2;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+259;Golfperiode bepaald uit de spectrale momenten m0 en m2 verwacht Oppervlaktewater golffrequentie tussen 30 en 500 mHz in s;s;seconde;Tm02V;Golfperiode bepaald uit de spectrale momenten m0 en m2 verwacht;F003-050;golffrequentie tussen 30 en 500 mHz;NVT;Waarde is niet van toepassing;NA
+257;Maximale golfperiode in het tijdsdomein Oppervlaktewater s;s;seconde;Tmax;Maximale golfperiode in het tijdsdomein;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+363;Verzadigingsgraad zuurstof in Oppervlaktewater %;%;procent;VERZDGGD;Verzadigingsgraad;NVT;Niet van toepassing;O2;zuurstof;eutrophication
+94;Waterhoogte berekend Oppervlaktewater t.o.v. Normaal Amsterdams Peil in cm;cm;centimeter;WATHTBRKD;Waterhoogte berekend;NAP;t.o.v. Normaal Amsterdams Peil;NVT;Waarde is niet van toepassing;NA
+196;Waterhoogte berekend Oppervlaktewater t.o.v. Mean Sea Level in cm;cm;centimeter;WATHTBRKD;Waterhoogte berekend;MSL;t.o.v. Mean Sea Level;NVT;Waarde is niet van toepassing;NA
+152;Waterhoogte Oppervlaktewater t.o.v. Mean Sea Level in cm;cm;centimeter;WATHTE;Waterhoogte;MSL;t.o.v. Mean Sea Level;NVT;Waarde is niet van toepassing;NA
+322;Waterhoogte Oppervlaktewater t.o.v. plaatselijk referentievlak in cm;cm;centimeter;WATHTE;Waterhoogte;PLAATSLR;t.o.v. plaatselijk referentievlak;NVT;Waarde is niet van toepassing;NA
+325;Waterhoogte Oppervlaktewater t.o.v. Tweede Algemene Waterpassing in cm;cm;centimeter;WATHTE;Waterhoogte;TAW;t.o.v. Tweede Algemene Waterpassing;NVT;Waarde is niet van toepassing;NA
+329;Waterhoogte Oppervlaktewater t.o.v. Normaal Amsterdams Peil in cm;cm;centimeter;WATHTE;Waterhoogte;NAP;t.o.v. Normaal Amsterdams Peil;NVT;Waarde is niet van toepassing;NA
+324;Waterhoogte astronomisch Oppervlaktewater t.o.v. Normaal Amsterdams Peil in cm;cm;centimeter;WATHTEASTRO;Waterhoogte astronomisch;NAP;t.o.v. Normaal Amsterdams Peil;NVT;Waarde is niet van toepassing;NA
+199;Waterhoogte verwacht Oppervlaktewater t.o.v. Normaal Amsterdams Peil in cm;cm;centimeter;WATHTEVERWACHT;Waterhoogte verwacht;NAP;t.o.v. Normaal Amsterdams Peil;NVT;Waarde is niet van toepassing;NA
+142;Windrichting Lucht t.o.v. ware Noorden in graad;graad;graad;WINDRTG;Windrichting;WARNDN;t.o.v. ware Noorden;NVT;Waarde is niet van toepassing;NA
+447;Windrichting verwacht Lucht t.o.v. ware Noorden in graad;graad;graad;WINDRTGVERWACHT;Windrichting verwacht;WARNDN;t.o.v. ware Noorden;NVT;Waarde is niet van toepassing;NA
+146;Windsnelheid Lucht t.o.v. Mean Sea Level in m/s;m/s;meter per seconde;WINDSHD;Windsnelheid;MSL;t.o.v. Mean Sea Level;NVT;Waarde is niet van toepassing;NA
+441;Windsnelheid Lucht m/s;m/s;meter per seconde;WINDSHD;Windsnelheid;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+153;Windsnelheid verwacht Lucht m/s;m/s;meter per seconde;WINDSHDVERWACHT;Windsnelheid verwacht;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+200;Windsnelheid verwacht Lucht t.o.v. Mean Sea Level in m/s;m/s;meter per seconde;WINDSHDVERWACHT;Windsnelheid verwacht;MSL;t.o.v. Mean Sea Level;NVT;Waarde is niet van toepassing;NA
+252;"Maximale 3"" windstoot in de afgelopen 10 minuten Lucht t.o.v. Mean Sea Level in m/s";m/s;meter per seconde;WINDSTOOT;"Maximale 3"" windstoot in de afgelopen 10 minuten";MSL;t.o.v. Mean Sea Level;NVT;Waarde is niet van toepassing;NA
+392;"Maximale 3"" windstoot in de afgelopen 10 minuten Lucht m/s";m/s;meter per seconde;WINDSTOOT;"Maximale 3"" windstoot in de afgelopen 10 minuten";NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;NA
+278;Doorzicht Oppervlaktewater dm;dm;decimeter;ZICHT;Doorzicht;NVT;Niet van toepassing;NVT;Waarde is niet van toepassing;light
+135;Meteorologisch zicht Lucht t.o.v. Normaal Amsterdams Peil in m;m;meter;ZICHTMETEO;Meteorologisch zicht;NAP;t.o.v. Normaal Amsterdams Peil;NVT;Waarde is niet van toepassing;NA
