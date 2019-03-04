@@ -21,7 +21,7 @@ library(jsonlite)
 
 rws_metadata <- function(
   path = "/METADATASERVICES_DBO/OphalenCatalogus/",
-  filterList = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T)
+  filterList = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T)
   ) {
   library(httr)
   library(jsonlite)
@@ -57,8 +57,8 @@ rws_metadata <- function(
       content = parsed,
       path = path,
       response = resp
-    ),
-    class = "rws_api"
+    )#,
+    # class = "rws_api"
   )
 }
 
@@ -130,7 +130,7 @@ rws_observations <- function(bodylist) {
 }
 
 
-#' Collects quantities and parameters observed at a number of stations
+#' Collects observed quantities and parameters for stations
 #'
 #' @param parsedMetaData parsed list of metadata generated from rws_metadata()
 #' @param locationlist character vector of selected stations
@@ -204,4 +204,5 @@ makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCom
   }
   return(ll)
 }
+
 

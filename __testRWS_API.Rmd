@@ -1,0 +1,189 @@
+---
+title: "testRWS_api"
+author: "Deltares"
+date: "October 30, 2018"
+output: html_document
+---
+
+## Opvragen waterkwaliteitsdata door middel van RWS DDL API
+
+```{r, message=FALSE, warning=FALSE, echo=F}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=T, fig.height = 3, fig.width = 10)
+require(tidyverse)
+require(httr)
+require(jsonlite)
+require(lubridate)
+# require(magrittr)
+```
+
+Ik gebruik eigen R functies. Als package op github: wstolte/rwsapi. Dit package is nog in ontwikkeling.
+
+```{r}
+if(!require("rwsapi", character.only = TRUE)){
+  devtools::install_github("wstolte/rwsapi")
+  library("rwsapi", character.only = TRUE)
+}
+require(rwsapi)
+```
+
+## Aantal parameters
+
+Opvragen metadata catalogus:
+
+```{r}
+metadata <- rwsapi::rws_metadata()
+```
+Dit zijn metadata van alle datasets in de DDL. 
+Bijvoorbeeld, Nitraat, of Chlorophyll zit er in.
+```{r}
+metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[
+  grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "nitraat", ignore.case = T)]
+metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[
+  grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "chlorofy", ignore.case = T)]
+metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[
+  grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "koolstof", ignore.case = T)]
+which(metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving == "(massa)Concentratie koolstof organisch in Oppervlaktewater mg/l") # = 375
+metadata$content$AquoMetadataLijst$Parameter$Code[375]
+```
+
+Silikaat:
+```{r}
+metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[
+  grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "sili", ignore.case = T)]
+
+```
+
+Zit er nu ook in! Jippie!
+
+
+Even kijken of extinctiecoefficient er al in zit:
+```{r}
+metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[
+  grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "extinct", ignore.case = T)]
+```
+Nee, die helaas nog niet. 
+
+
+### Ophalen van data
+
+R list structure wordt gebruikt als input in de functie hierboven. 
+
+```{r}
+locatiecodes <- metadata$content$LocatieLijst$Code
+grootheidcodes <- metadata$content$AquoMetadataLijst$Grootheid$Code
+parametercodes <- metadata$content$AquoMetadataLijst$Parameter$Code
+omschrijvingcodes <- metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving
+
+myparameter = "O2"
+myquantity = "CONCTTE"
+
+mylocation <- "TERSLG100"
+locindex <- which(metadata$content$LocatieLijst$Code == mylocation)
+x = metadata$content$LocatieLijst$X[locindex]
+y = metadata$content$LocatieLijst$Y[locindex]
+
+# create list for request
+requestlist <- structure(list(
+  AquoPlusWaarnemingMetadata = structure(list(
+    AquoMetadata   = structure(list(
+      Parameter    = structure(list(
+        Code       = myparameter),
+        .Names     = "Code"), 
+      Grootheid    = structure(list(
+        Code       = myquantity), 
+        .Names     = "Code")),
+      .Names       = c("Parameter", "Grootheid"))),
+    .Names         = "AquoMetadata"), 
+  Locatie          = structure(list(
+    X              = x,
+    Y              = y,
+    Code           = mylocation),
+    .Names         = c("X","Y", "Code")), 
+  Periode          = structure(list(
+    Begindatumtijd = "2013-11-27T09:00:00.000+01:00", 
+    Einddatumtijd  = "2018-01-28T09:01:00.000+01:00"),
+    .Names         = c("Begindatumtijd", "Einddatumtijd"))),
+  .Names           = c("AquoPlusWaarnemingMetadata", "Locatie", "Periode"))
+
+```
+
+Het is foutgevoelig (en volgens mij onnodig) dat de locatie x en y ook moeten worden meegegeven. Ook is het nodig in mijn geval (via R) om het aantal significante cijfers voor tekstoutput naar 16 te zetten. Standaard is dat 8.
+
+Als JSON ziet de request er zo uit:
+
+```{r, results='asis'}
+print(toJSON(requestlist, auto_unbox = T, digits = NA))
+```
+
+
+### Uitvoeren request. De response is in dit geval een r list object
+
+```{r}
+response <- rwsapi::rws_observations(bodylist =requestlist)
+```
+
+
+
+Het omzetten van de response naar een dataframe, wat de gebruikelijke structuur is om bijvorbeel figuren te maken, bestaat uit het uitsplitsen van de verschillende onderdelen van het request
+
+
+```{r, results='asis'}
+  for(ii in seq(1:length(response$content$WaarnemingenLijst))) {
+    temp.df = data.frame(
+      locatie.code = response$content$WaarnemingenLijst[[ii]]$Locatie$Code,
+      EPSG = response$content$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
+      X = response$content$WaarnemingenLijst[[ii]]$Locatie$X,
+      Y = response$content$WaarnemingenLijst[[ii]]$Locatie$Y,
+      # locationname = ,
+      tijdstip = lubridate::as_datetime(response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA)),
+      referentievlak = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,3,1), .default = NA),
+      bemonsteringshoogte = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,2,1), .default = NA),
+      kwaliteitswaardecode = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,5,1), .default = NA),
+      bemonsteringsapparaat = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Code,
+      bemonsteringsSoort = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Code,
+      biotaxoncode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Code,
+      biotaxoncompartimentcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Code,
+      compartimentcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Code,
+      eenheidcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Code,
+      grootheidcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Code,
+      hoedanigheidcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Code,
+      meetapparaatcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Code,
+      monsterbewerkingsmethodecode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Code,
+      orgaancode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Code,
+      parametercode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Code,
+      plaatsbepalingsapparaatcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Code,
+      typeringcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Code,
+      waardebepalingstechniekcode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Code,
+      waardebepalingsmethodecode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Code,
+      waardebewerkingsmethodecode = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Code,
+      numeriekewaarde = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_dbl(list("Meetwaarde", "Waarde_Numeriek"), .default = NA)
+    )
+    if(ii != 1){
+      df = rbind(df, temp.df)
+    }else df = temp.df
+  }
+df[df$numeriekewaarde>1e10,] <- NA
+df <- df[!is.na(df$numeriekewaarde),]
+knitr::kable(head(df), digits = 3, align = "r", format.args = list(font.size = 2))
+```
+
+
+
+## Tijdserie
+
+```{r}
+ggplot(df, aes(tijdstip, numeriekewaarde)) + geom_point(aes(color = interaction(referentievlak, bemonsteringshoogte))) +
+  theme(legend.position="bottom")
+```
+
+Dit ziet er goed uit. In Waterbase waren alleen oppervlaktewaarnemingen te zien, hier zijn ook diepere monsters meegenomen. 
+
+
+
+
+
+
+
+
+
+
