@@ -132,40 +132,103 @@ rws_observations <- function(bodylist) {
 
 #' Collects observed quantities and parameters for stations
 #'
-#' @param parsedMetaData parsed list of metadata generated from rws_metadata()
-#' @param locationlist character vector of selected stations
-#' @return dataframe containing observed quantities and parameters
+#' @param metadata parsed list of metadata generated from rws_metadata()
+#' @param grootheidcode character vector of selected grootheid.code according to AQUO
+#' @param parametercode character vector of selected parameter.code according to AQUO
+#' @return dataframe containing locations where grootheidcode and parametercode occur
 #' @examples
 #' metadata <- rws_metadata()
-#' # parse content of response
-#' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
-#' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
-DDLgetParametersForLocations <- function(myMetadata, locationlist) {
+#' getLocations(metadata, 'SALNTT', 'NVT')
+#' getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
+getLocations <- function(metadata, grootheidcode, parametercode) {
   require(tidyverse)
-  data(rwsapidata)
-  temp <- myMetadata$content$LocatieLijst %>%
-    filter(Code %in% locationlist)
 
-  if(nrow(temp)==0){
-    temp <- myMetadata$content$LocatieLijst %>%
-      filter(Naam %in% locationlist)
-  }
+  if(!is.null(metadata$content)) myMetadata <- metadata$content else myMetadata <- metadata
 
-temp %>% left_join(myMetadata$content$AquoMetadataLocatieLijst) %>%
-    left_join(jsonlite::flatten(myMetadata$content$AquoMetadataLijst, recursive = T), by = c(AquoMetaData_MessageID = "AquoMetadata_MessageID")) %>%
-    dplyr::select(Code,
-             X,
-             Y,
-             Naam,
-             Grootheid.Code,
-             Hoedanigheid.Code,
-             Parameter.Code,
-             Parameter.Omschrijving,
-             Parameter_Wat_Omschrijving,
-             Eenheid.Code
-             ) %>%
-    left_join(enrichedMetadata, by = c(Parameter_Wat_Omschrijving = "Parameter_Wat_Omschrijving"))
+  grootheidcode = 'salntt'; parametercode = 'nvt'
+
+  rlist::list.flatten(myMetadata$AquoMetadataLijst) %>%
+    dplyr::bind_cols() %>%
+    `names<-`(tolower(names(.))) %>%
+    dplyr::filter(tolower(grootheid.code) %in% tolower(grootheidcode),
+                  tolower(parameter.code) %in% tolower(parametercode)) %>%
+    dplyr::left_join(as_tibble(rlist::list.flatten(myMetadata$AquoMetadataLocatieLijst)),
+                     by = c(aquometadata_messageid = 'AquoMetaData_MessageID')) %>%
+    dplyr::left_join(as_tibble(rlist::list.flatten(myMetadata$LocatieLijst))) %>%
+    `names<-`(tolower(names(.))) %>%
+  dplyr::select(
+    aquometadata_messageid,
+    locatie_messageid,
+    parameter_wat_omschrijving,
+    compartiment.code,
+    compartiment.omschrijving,
+    eenheid.code,
+    eenheid.omschrijving,
+    grootheid.code,
+    grootheid.omschrijving,
+    hoedanigheid.code,
+    hoedanigheid.omschrijving,
+    parameter.code,
+    parameter.omschrijving,
+    locatie.naam = naam,
+    locatie.code = code,
+    x,
+    y,
+    coordinatenstelsel
+  )
 }
+
+
+#' Collects observed quantities and parameters for stations
+#'
+#' @param metadata parsed list of metadata generated from rws_metadata()
+#' @param locatiecode character vector of selected locatie.code
+#' @return dataframe containing locations where grootheidcode and parametercode occur
+#' @examples
+#' metadata <- rws_metadata()
+#' getLocations(metadata, 'SALNTT', 'NVT')
+#' getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
+getParameters <- function(metadata, locatiecode) {
+  require(tidyverse)
+
+  if(!is.null(metadata$content)) myMetadata <- metadata$content else myMetadata <- metadata
+
+  locatiecode = 'grootgnd'
+
+  as_tibble(rlist::list.flatten(myMetadata$LocatieLijst)) %>%
+    `names<-`(tolower(names(.))) %>%
+    # distinct(code) %>% View()
+    dplyr::filter(tolower(code) %in% tolower(locatiecode)) %>%
+    dplyr::left_join(as_tibble(rlist::list.flatten(myMetadata$AquoMetadataLocatieLijst)),
+                     by = c(locatie_messageid = 'Locatie_MessageID')) %>%
+    dplyr::left_join(bind_cols(rlist::list.flatten(myMetadata$AquoMetadataLijst)),
+                     by = c(AquoMetaData_MessageID = 'AquoMetadata_MessageID')) %>%
+    `names<-`(tolower(names(.))) %>%
+    dplyr::select(
+      aquometadata_messageid,
+      locatie_messageid,
+      parameter_wat_omschrijving,
+      compartiment.code,
+      compartiment.omschrijving,
+      eenheid.code,
+      eenheid.omschrijving,
+      grootheid.code,
+      grootheid.omschrijving,
+      hoedanigheid.code,
+      hoedanigheid.omschrijving,
+      parameter.code,
+      parameter.omschrijving,
+      locatie.naam = naam,
+      locatie.code = code,
+      x,
+      y,
+      coordinatenstelsel
+    )
+}
+
+
+
+
 
 
 #' makes list for requesting observation data from rws api
@@ -187,10 +250,11 @@ makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCom
       AquoPlusWaarnemingMetadata= list(
         AquoMetadata = list(
           # Compartiment = list(Code = mijnCompartiment),
-          Parameter = list(Code = mijnCatalogus$Parameter.Code.x[ii]),
+          Parameter = list(Code = mijnCatalogus$Parameter.Code[ii]),
           # Eenheid = list(Code = mijnEenheid),
           # MeetApparaat = mijnMeetapparaat,
-          Grootheid = list(Code = mijnCatalogus$Grootheid.Code.x[ii])
+          Grootheid = list(Code = mijnCatalogus$Grootheid.Code[ii]),
+          Hoedanigheid = list(Code = mijnCatalogus$Hoedanigheid.Code[ii])
         )
       ),
       Locatie = list(
