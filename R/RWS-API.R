@@ -427,3 +427,38 @@ select_locations_in_waterbody <- function(metadata, myWaterBody, buffer_in_m) {
     left_join(locsTable)
   return(mijnLocaties)
 }
+
+#' selects locations within DDL based on polygon
+#'
+#' @param metadata metadata from DDL. download using rwsapi::rws_metadata()
+#' @param locationlist character vector of selected locations code or name
+#' @param polygon polygon of interest as sf object (?sf)
+#' @param buffer_in_m buffer for finding locations in meters
+#' @return dataframe with selected locations
+#' @examples
+#' metadata <- rws_metadata()
+#' select_locations_in_waterbody(metadata, "westerschelde", 0)
+#' select_locations_in_waterbody(metadata, "westerschelde", 2000) # also retrieves "Schaar van Ouden Doel".
+#' select_locations_by_polygon
+select_locations_by_polygon <- function(metadata, polygon, buffer_in_m) {
+
+  require(sf)
+  require(dplyr)
+  # check if metadata is correct, name is correct
+  # comment: run this first:
+  # > metadata <- rwsapi::rws_metadata() # gets complete catalog
+  locsTable <- metadata$content$LocatieLijst
+  if(locsTable %>% distinct(Coordinatenstelsel) %>% length() == 1){
+    locs_sf <- sf::st_as_sf(locsTable, coords = c("X", "Y"), crs = 25831)
+    locs_sf_rd <- sf::st_transform(locs_sf, crs = 28992)
+  } else print("warning, multiple epsg, sf object not produced")
+
+  mijnShape <- sf::st_transform(polygon, crs = 28992)
+
+  # buffer_in_m <- 2000 # for testing
+  mijnLocaties <- sf::st_intersection(locs_sf_rd, sf::st_buffer(mijnShape, buffer_in_m)) %>%
+    sf::st_drop_geometry() %>% distinct(Code) %>%
+    left_join(locsTable)
+  return(mijnLocaties)
+}
+
