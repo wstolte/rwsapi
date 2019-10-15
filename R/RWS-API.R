@@ -130,6 +130,126 @@ rws_observations <- function(bodylist) {
 }
 
 
+
+#' Collects observation data for long term monitoring observation at Rijkswaterstaat (NL) and parses into dataframe (tibble)
+#'
+#' @param bodylist The message body containing criteria for data selection.
+#' @return A structured list with data, class "rws_api"
+#' @examples
+#' options(digits=22)
+#'
+#' l2 <- list(
+#'   AquoPlusWaarnemingMetadata= list(
+#'     AquoMetadata = list(
+#'       Compartiment = list(Code = "OW"),
+#'       Eenheid = list(Code = "cm"),
+#'       MeetApparaat = list(Code = "109"),
+#'       Grootheid = list(Code = "Hm0"))),
+#'   Locatie = list(
+#'     X = 518882.33332024701,
+#'     Y = 5760829.1172958901,
+#'     Code = "EURPFM"),
+#'   Periode = list(Begindatumtijd = "2012-01-27T09:00:00.000+01:00",
+#'                  Einddatumtijd = "2012-01-28T09:01:00.000+01:00")
+#' )
+#' observation <- rws_observations(l2)
+#' content(observation$response, "text")
+#' parsed <- jsonlite::fromJSON(content(observation$response, "text"), simplifyVector = T )
+#' parsed$WaarnemingenLijst$MetingenLijst[[1]] %>% View()
+#'
+rws_observations2 <- function(bodylist) {
+  path = "/ONLINEWAARNEMINGENSERVICES_DBO/OphalenWaarnemingen/"
+  url <- modify_url("https://waterwebservices.rijkswaterstaat.nl", path = path)
+  library(httr)
+  library(jsonlite)
+  ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
+  resp <- POST(url = url,
+               ua,
+               body=toJSON(bodylist, auto_unbox = T, digits = NA),
+               add_headers(.headers = c("Content-Type"="application/json","Ocp-Apim-Subscription-Key"="my_subscrition_key"))
+  )
+
+  if (http_type(resp) != "application/json") {
+    stop("API did not return application/json", call. = FALSE)
+  }
+
+  response <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = FALSE)
+
+  for(ii in seq(1:length(response$content$WaarnemingenLijst))) {
+    if(purrr::is_empty(response$content$WaarnemingenLijst)) next
+    if(!purrr::is_empty(as.numeric(response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA)))) {
+      temp.l= list(
+        locatie.code = response$content$WaarnemingenLijst[[ii]]$Locatie$Code,
+        epsg = response$content$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
+        x = response$content$WaarnemingenLijst[[ii]]$Locatie$X,
+        y = response$content$WaarnemingenLijst[[ii]]$Locatie$Y,
+        # locationname = ,
+        tijdstip = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA),
+        statuswaarde = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,1,1), .default = NA),
+        bemonsteringshoogte.code = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,2,1), .default = NA),
+        referentievlak.code = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,3,1), .default = NA),
+        OpdrachtgevendeInstantie.code = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,4,1), .default = NA),
+        kwaliteitswaarde.code = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,5,1), .default = NA),
+        bemonsteringsapparaat.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Omschrijving,
+        bemonsteringssoort.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Omschrijving,
+        biotaxon.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Omschrijving,
+        biotaxoncompartiment.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Code,
+        compartiment.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Code,
+        eenheid.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Code,
+        grootheid.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Code,
+        grootheid.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Omschrijving,
+        hoedanigheid.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Code,
+        hoedanigheid.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Omschrijving,
+        meetapparaat.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Code,
+        monsterbewerkingsmethode.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Code,
+        orgaan.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Code,
+        parameter.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Code,
+        plaatsbepalingsapparaat.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Code,
+        typering.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Code,
+        waardebepalingstechniek.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Omschrijving,
+        waardebepalingsmethode.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Omschrijving,
+        waardebewerkingsmethode.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Omschrijving,
+        numeriekewaarde = as.numeric(response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA))
+      )
+      temp.df <- as.data.frame(nullToNA(temp.l))
+    }
+    else temp.df <- data.frame()
+    if(ii != 1){
+      df = rbind(df, temp.df)
+    }else {
+      df = temp.df
+    }
+
+    if (http_error(resp)) {
+      stop(
+        sprintf(
+          "RWS API request failed [%s]\n%s\n<%s>",
+          status_code(resp),
+          parsed$message,
+          parsed$documentation_url
+        ),
+        call. = FALSE
+      )
+    }
+    structure(
+      list(
+        content = df,
+        path = path,
+        response = resp
+      )#,
+      # class = "rws_api"
+    )
+  }
+}
+
+
+
+
+
+
+
+
+
 #' Collects observed quantities and parameters for stations
 #'
 #' @param metadata parsed list of metadata generated from rws_metadata()
@@ -179,7 +299,7 @@ getLocations <- function(metadata, grootheidcode, parametercode) {
 }
 
 
-#' Collects observed quantities and parameters for stations
+#' Collects observed quantities and parameters for stations.
 #'
 #' @param metadata parsed list of metadata generated from rws_metadata()
 #' @param locatiecode character vector of selected locatie.code
@@ -270,3 +390,40 @@ makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCom
 }
 
 
+
+
+#' selects locations within DDL based on WFD water bodies from the Netherlands
+#'
+#' @param metadata metadata from DDL. download using rwsapi::rws_metadata()
+#' @param locationlist character vector of selected locations code or name
+#' @param myWaterBody Name or partial name of the waterbody of interest
+#' @param buffer_in_m buffer for finding locations in meters
+#' @return dataframe with selected locations
+#' @examples
+#' metadata <- rws_metadata()
+#' select_locations_in_waterbody(metadata, "westerschelde", 0)
+#' select_locations_in_waterbody(metadata, "westerschelde", 2000) # also retrieves "Schaar van Ouden Doel".
+select_locations_in_waterbody <- function(metadata, myWaterBody, buffer_in_m) {
+
+  require(sf)
+  # check if metadata is correct, name is correct
+  # comment: run this first:
+  # > metadata <- rwsapi::rws_metadata() # gets complete catalog
+  locsTable <- metadata$content$LocatieLijst
+  if(locsTable %>% distinct(Coordinatenstelsel) %>% length() == 1){
+    locs_sf <- sf::st_as_sf(locsTable, coords = c("X", "Y"), crs = 25831)
+    locs_sf_rd <- sf::st_transform(locs_sf, crs = 28992)
+  } else print("warning, multiple epsg, sf object not produced")
+
+  # download water bodies for 2006 , 2018 returns error for some reason
+  typename='kaderrichtlijnwater:krw_oppervlaktewaterlichamen_vlakken_rws_2006'
+  dsn = 'https://geodata.nationaalgeoregister.nl/kaderrichtlijnwater/wfs?service=WFS&request=getCapabilities'
+  wb <- sf::st_read(dsn, "kaderrichtlijnwater:krw_oppervlaktewaterlichamen_vlakken_rws_2006")
+  # st_crs(wb) # check crs
+  mijnShape <- wb[grepl(x = tolower(wb$OWMNAAM), pattern = tolower(myWaterBody)),]
+  # buffer_in_m <- 2000 # for testing
+  mijnLocaties <- sf::st_intersection(locs_sf_rd, sf::st_buffer(mijnShape, buffer_in_m)) %>%
+    sf::st_drop_geometry() %>% distinct(Code) %>%
+    left_join(locsTable)
+  return(mijnLocaties)
+}
