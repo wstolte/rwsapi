@@ -391,7 +391,6 @@ makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCom
 
 
 
-
 #' selects locations within DDL based on WFD water bodies from the Netherlands
 #'
 #' @param metadata metadata from DDL. download using rwsapi::rws_metadata()
@@ -406,6 +405,7 @@ makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCom
 select_locations_in_waterbody <- function(metadata, myWaterBody, buffer_in_m) {
 
   require(sf)
+  require(dplyr)
   # check if metadata is correct, name is correct
   # comment: run this first:
   # > metadata <- rwsapi::rws_metadata() # gets complete catalog
