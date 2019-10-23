@@ -37,7 +37,7 @@ rws_metadata <- function(
     stop("API did not return application/json", call. = FALSE)
   }
 
-  parsed <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = TRUE )
+  parsed <- jsonlite::fromJSON(content(resp, "text", ), simplifyVector = TRUE )
 
 
   if (http_error(resp)) {
@@ -63,10 +63,18 @@ rws_metadata <- function(
 }
 
 
-#' Collects observation data for long term monitoring observation at Rijkswaterstaat (NL)
+
+nullToNA <- function(x) {
+  x[sapply(x, is.null)] <- NA
+  return(x)
+}
+
+
+
+#' Collects observation data for long term monitoring observation at Rijkswaterstaat (NL) and parses into dataframe (tibble)
 #'
 #' @param bodylist The message body containing criteria for data selection.
-#' @return A structured list with data, class "rws_api"
+#' @return A structured list with a dataframe, path and response
 #' @examples
 #' options(digits=22)
 #'
@@ -105,111 +113,63 @@ rws_observations <- function(bodylist) {
     stop("API did not return application/json", call. = FALSE)
   }
 
-  parsed <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = FALSE)
-
-  if (http_error(resp)) {
-    stop(
-      sprintf(
-        "RWS API request failed [%s]\n%s\n<%s>",
-        status_code(resp),
-        parsed$message,
-        parsed$documentation_url
-      ),
-      call. = FALSE
-    )
-  }
-
-  structure(
-    list(
-      content = parsed,
-      path = path,
-      response = resp
-    )#,
-    # class = "rws_api"
-  )
-}
-
-
-
-#' Collects observation data for long term monitoring observation at Rijkswaterstaat (NL) and parses into dataframe (tibble)
-#'
-#' @param bodylist The message body containing criteria for data selection.
-#' @return A structured list with data, class "rws_api"
-#' @examples
-#' options(digits=22)
-#'
-#' l2 <- list(
-#'   AquoPlusWaarnemingMetadata= list(
-#'     AquoMetadata = list(
-#'       Compartiment = list(Code = "OW"),
-#'       Eenheid = list(Code = "cm"),
-#'       MeetApparaat = list(Code = "109"),
-#'       Grootheid = list(Code = "Hm0"))),
-#'   Locatie = list(
-#'     X = 518882.33332024701,
-#'     Y = 5760829.1172958901,
-#'     Code = "EURPFM"),
-#'   Periode = list(Begindatumtijd = "2012-01-27T09:00:00.000+01:00",
-#'                  Einddatumtijd = "2012-01-28T09:01:00.000+01:00")
-#' )
-#' observation <- rws_observations(l2)
-#' content(observation$response, "text")
-#' parsed <- jsonlite::fromJSON(content(observation$response, "text"), simplifyVector = T )
-#' parsed$WaarnemingenLijst$MetingenLijst[[1]] %>% View()
-#'
-rws_observations2 <- function(bodylist) {
-  path = "/ONLINEWAARNEMINGENSERVICES_DBO/OphalenWaarnemingen/"
-  url <- modify_url("https://waterwebservices.rijkswaterstaat.nl", path = path)
-  library(httr)
-  library(jsonlite)
-  ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
-  resp <- POST(url = url,
-               ua,
-               body=toJSON(bodylist, auto_unbox = T, digits = NA),
-               add_headers(.headers = c("Content-Type"="application/json","Ocp-Apim-Subscription-Key"="my_subscrition_key"))
-  )
-
-  if (http_type(resp) != "application/json") {
-    stop("API did not return application/json", call. = FALSE)
-  }
-
   response <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = FALSE)
 
-  for(ii in seq(1:length(response$content$WaarnemingenLijst))) {
-    if(purrr::is_empty(response$content$WaarnemingenLijst)) next
-    if(!purrr::is_empty(as.numeric(response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA)))) {
+  for(ii in seq(1:length(response$WaarnemingenLijst))) {
+    if(purrr::is_empty(response$WaarnemingenLijst)) next
+    if(!purrr::is_empty(as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA)))) {
+      df <- data.frame()
       temp.l= list(
-        locatie.code = response$content$WaarnemingenLijst[[ii]]$Locatie$Code,
-        epsg = response$content$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
-        x = response$content$WaarnemingenLijst[[ii]]$Locatie$X,
-        y = response$content$WaarnemingenLijst[[ii]]$Locatie$Y,
+        locatie.message.id = response$WaarnemingenLijst[[ii]]$Locatie$Locatie_MessageID,
+        locatie.code = response$WaarnemingenLijst[[ii]]$Locatie$Code,
+        locatie.naam = response$WaarnemingenLijst[[ii]]$Locatie$Naam,
+        coordinatenstelsel = response$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
+        geometriepunt.x = response$WaarnemingenLijst[[ii]]$Locatie$X,
+        geometriepunt.y = response$WaarnemingenLijst[[ii]]$Locatie$Y,
         # locationname = ,
-        tijdstip = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA),
-        statuswaarde = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,1,1), .default = NA),
-        bemonsteringshoogte.code = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,2,1), .default = NA),
-        referentievlak.code = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,3,1), .default = NA),
-        OpdrachtgevendeInstantie.code = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,4,1), .default = NA),
-        kwaliteitswaarde.code = response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,5,1), .default = NA),
-        bemonsteringsapparaat.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Omschrijving,
-        bemonsteringssoort.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Omschrijving,
-        biotaxon.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Omschrijving,
-        biotaxoncompartiment.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Code,
-        compartiment.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Code,
-        eenheid.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Code,
-        grootheid.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Code,
-        grootheid.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Omschrijving,
-        hoedanigheid.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Code,
-        hoedanigheid.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Omschrijving,
-        meetapparaat.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Code,
-        monsterbewerkingsmethode.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Code,
-        orgaan.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Code,
-        parameter.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Code,
-        plaatsbepalingsapparaat.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Code,
-        typering.code = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Code,
-        waardebepalingstechniek.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Omschrijving,
-        waardebepalingsmethode.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Omschrijving,
-        waardebewerkingsmethode.omschrijving = response$content$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Omschrijving,
-        numeriekewaarde = as.numeric(response$content$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA))
+        tijdstip = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA),
+        statuswaarde = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,1,1), .default = NA),
+        bemonsteringshoogte = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,2,1), .default = NA),
+        referentievlak = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,3,1), .default = NA),
+        opdrachtgevendeinstantie = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,4,1), .default = NA),
+        kwaliteitswaarde.code = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,5,1), .default = NA),
+        aquometadata.message.id = response$WaarnemingenLijst[[ii]]$AquoMetadata$AquoMetadata_MessageID,
+        parameter.wat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter_Wat_Omschrijving,
+        bemonsteringsapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Code,
+        bemonsteringsapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Omschrijving,
+        bemonsteringssoort.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Code,
+        bemonsteringssoort.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Omschrijving,
+        biotaxon.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Code,
+        biotaxon.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Omschrijving,
+        biotaxoncompartiment.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Code,
+        biotaxoncompartiment.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Omschrijving,
+        compartiment.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Code,
+        compartiment.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Omschrijving,
+        eenheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Code,
+        eenheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Omschrijving,
+        grootheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Code,
+        grootheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Omschrijving,
+        hoedanigheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Code,
+        hoedanigheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Omschrijving,
+        meetapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Code,
+        meetapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Omschrijving,
+        monsterbewerkingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Code,
+        monsterbewerkingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Omschrijving,
+        orgaan.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Code,
+        orgaan.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Omschrijving,
+        parameter.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Code,
+        parameter.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Omschrijving,
+        plaatsbepalingsapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Code,
+        plaatsbepalingsapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Omschrijving,
+        typering.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Code,
+        typering.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Omschrijving,
+        waardebepalingstechniek.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Code,
+        waardebepalingstechniek.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Omschrijving,
+        waardebepalingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Code,
+        waardebepalingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Omschrijving,
+        waardebewerkingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Code,
+        waardebewerkingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Omschrijving,
+        numeriekewaarde = as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA))
       )
       temp.df <- as.data.frame(nullToNA(temp.l))
     }
@@ -231,13 +191,15 @@ rws_observations2 <- function(bodylist) {
         call. = FALSE
       )
     }
-    structure(
-      list(
-        content = df,
-        path = path,
-        response = resp
-      )#,
-      # class = "rws_api"
+    return(
+      structure(
+        list(
+          content = df,
+          path = path,
+          response = resp
+        )#,
+        # class = "rws_api"
+      )
     )
   }
 }
@@ -260,7 +222,7 @@ rws_observations2 <- function(bodylist) {
 #' metadata <- rws_metadata()
 #' getLocations(metadata, 'SALNTT', 'NVT')
 #' getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
-getLocations <- function(metadata, grootheidcode, parametercode) {
+rws_getLocations <- function(metadata, grootheidcode, parametercode) {
   require(tidyverse)
 
   if(!is.null(metadata$content)) myMetadata <- metadata$content else myMetadata <- metadata
@@ -308,17 +270,16 @@ getLocations <- function(metadata, grootheidcode, parametercode) {
 #' metadata <- rws_metadata()
 #' getLocations(metadata, 'SALNTT', 'NVT')
 #' getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
-getParameters <- function(metadata, locatiecode) {
+rws_getParameters <- function(metadata, locatiecode = NULL, locatiename = NULL) {
   require(tidyverse)
 
   if(!is.null(metadata$content)) myMetadata <- metadata$content else myMetadata <- metadata
 
-  locatiecode = 'grootgnd'
+  # locatiecode = 'grootgnd' # for testing
 
   as_tibble(rlist::list.flatten(myMetadata$LocatieLijst)) %>%
     `names<-`(tolower(names(.))) %>%
-    # distinct(code) %>% View()
-    dplyr::filter(tolower(code) %in% tolower(locatiecode)) %>%
+    {if (is.null(locatiename)) filter(., code %in% locatiecode) else filter(., naam %in% locatiename)} %>%
     dplyr::left_join(as_tibble(rlist::list.flatten(myMetadata$AquoMetadataLocatieLijst)),
                      by = c(locatie_messageid = 'Locatie_MessageID')) %>%
     dplyr::left_join(bind_cols(rlist::list.flatten(myMetadata$AquoMetadataLijst)),
@@ -354,14 +315,13 @@ getParameters <- function(metadata, locatiecode) {
 #' makes list for requesting observation data from rws api
 #'
 #' @param mijnCatalogus catalogue created using rws_metadata
-#' @param locationlist character vector of selected stations code or name
 #' @return dataframe containing observed quantities and parameters
 #' @examples
 #' metadata <- rws_metadata()
 #' # parse content of response
 #' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
-makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCompartiment = NULL){
+rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCompartiment = NULL){
   result <- list()
   for(ii in seq(1:length(mijnCatalogus[,1]))){
     #messageID meegeven waanneer op parameter_wat_omschrijving gezocht wordt.
@@ -369,24 +329,24 @@ makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCom
     l <- list(
       AquoPlusWaarnemingMetadata= list(
         AquoMetadata = list(
-          # Compartiment = list(Code = mijnCompartiment),
-          Parameter = list(Code = mijnCatalogus$Parameter.Code[ii]),
+          Compartiment = list(Code = mijnCompartiment),
+          Parameter = list(Code = mijnCatalogus$parameter.code[ii]),
           # Eenheid = list(Code = mijnEenheid),
           # MeetApparaat = mijnMeetapparaat,
-          Grootheid = list(Code = mijnCatalogus$Grootheid.Code[ii]),
-          Hoedanigheid = list(Code = mijnCatalogus$Hoedanigheid.Code[ii])
+          Grootheid = list(Code = mijnCatalogus$grootheid.code[ii]),
+          Hoedanigheid = list(Code = mijnCatalogus$hoedanigheid.code[ii])
         )
       ),
       Locatie = list(
-        X = as.character(mijnCatalogus["X"][ii,]),
-        Y = as.character(mijnCatalogus["Y"][ii,]),
-        Code = as.character(mijnCatalogus["Code"][ii,])),
+        X = as.character(mijnCatalogus["x"][ii,]),
+        Y = as.character(mijnCatalogus["y"][ii,]),
+        Code = as.character(mijnCatalogus["locatie.code"][ii,])),
       Periode = list(Begindatumtijd = beginDatumTijd,
                      Einddatumtijd = eindDatumTijd)
     )
     ll[[ii]] <- l
   }
-  return(ll)
+  return(ll[[1]])
 }
 
 
