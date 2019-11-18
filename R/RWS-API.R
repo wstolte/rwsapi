@@ -37,7 +37,7 @@ rws_metadata <- function(
     stop("API did not return application/json", call. = FALSE)
   }
 
-  parsed <- jsonlite::fromJSON(content(resp, "text", ), simplifyVector = TRUE )
+  parsed <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = TRUE )
 
 
   if (http_error(resp)) {
@@ -346,7 +346,7 @@ rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mij
     )
     ll[[ii]] <- l
   }
-  return(ll[[1]])
+  return(ll)
 }
 
 
