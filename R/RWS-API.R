@@ -323,7 +323,7 @@ rws_getParameters <- function(metadata, locatiecode = NULL, locatiename = NULL) 
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
 rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCompartiment = NULL){
   result <- list()
-  for(ii in seq(1:length(mijnCatalogus[,1]))){
+  for(ii in seq(1:dim(mijnCatalogus[1]))){
     #messageID meegeven waanneer op parameter_wat_omschrijving gezocht wordt.
     if(ii==1)  ll <- list()
     l <- list(
