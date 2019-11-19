@@ -115,93 +115,88 @@ rws_observations <- function(bodylist) {
 
   response <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = FALSE)
 
-  for(ii in seq(1:length(response$WaarnemingenLijst))) {
-    if(purrr::is_empty(response$WaarnemingenLijst)) next
-    if(!purrr::is_empty(as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA)))) {
-      df <- data.frame()
-      temp.l= list(
-        locatie.message.id = response$WaarnemingenLijst[[ii]]$Locatie$Locatie_MessageID,
-        locatie.code = response$WaarnemingenLijst[[ii]]$Locatie$Code,
-        locatie.naam = response$WaarnemingenLijst[[ii]]$Locatie$Naam,
-        coordinatenstelsel = response$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
-        geometriepunt.x = response$WaarnemingenLijst[[ii]]$Locatie$X,
-        geometriepunt.y = response$WaarnemingenLijst[[ii]]$Locatie$Y,
-        # locationname = ,
-        tijdstip = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA),
-        statuswaarde = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,1,1), .default = NA),
-        bemonsteringshoogte = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,2,1), .default = NA),
-        referentievlak = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,3,1), .default = NA),
-        opdrachtgevendeinstantie = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,4,1), .default = NA),
-        kwaliteitswaarde.code = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3,5,1), .default = NA),
-        aquometadata.message.id = response$WaarnemingenLijst[[ii]]$AquoMetadata$AquoMetadata_MessageID,
-        parameter.wat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter_Wat_Omschrijving,
-        bemonsteringsapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Code,
-        bemonsteringsapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Omschrijving,
-        bemonsteringssoort.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Code,
-        bemonsteringssoort.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Omschrijving,
-        biotaxon.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Code,
-        biotaxon.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Omschrijving,
-        biotaxoncompartiment.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Code,
-        biotaxoncompartiment.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Omschrijving,
-        compartiment.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Code,
-        compartiment.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Omschrijving,
-        eenheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Code,
-        eenheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Omschrijving,
-        grootheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Code,
-        grootheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Omschrijving,
-        hoedanigheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Code,
-        hoedanigheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Omschrijving,
-        meetapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Code,
-        meetapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Omschrijving,
-        monsterbewerkingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Code,
-        monsterbewerkingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Omschrijving,
-        orgaan.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Code,
-        orgaan.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Omschrijving,
-        parameter.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Code,
-        parameter.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Omschrijving,
-        plaatsbepalingsapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Code,
-        plaatsbepalingsapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Omschrijving,
-        typering.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Code,
-        typering.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Omschrijving,
-        waardebepalingstechniek.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Code,
-        waardebepalingstechniek.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Omschrijving,
-        waardebepalingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Code,
-        waardebepalingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Omschrijving,
-        waardebewerkingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Code,
-        waardebewerkingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Omschrijving,
-        numeriekewaarde = as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA))
-      )
+  for (ii in seq(1:length(response$WaarnemingenLijst))) {
+    print(paste("ii in response.waarnemingenlijst: ", ii))
+    # ii= 1
+    if (purrr::is_empty(response$WaarnemingenLijst)) {next}
+    if (!purrr::is_empty(as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>%
+                                    map_chr(list("Meetwaarde", "Waarde_Numeriek"), .default = NA)))) {
+      temp.l = list(locatie.message.id = response$WaarnemingenLijst[[ii]]$Locatie$Locatie_MessageID,
+                    locatie.code = response$WaarnemingenLijst[[ii]]$Locatie$Code,
+                    locatie.naam = response$WaarnemingenLijst[[ii]]$Locatie$Naam,
+                    coordinatenstelsel = response$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
+                    geometriepunt.x = response$WaarnemingenLijst[[ii]]$Locatie$X,
+                    geometriepunt.y = response$WaarnemingenLijst[[ii]]$Locatie$Y,
+                    tijdstip = lubridate::as_datetime(response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA)),
+                    statuswaarde = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 1, 1), .default = NA),
+                    bemonsteringshoogte = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 2, 1), .default = NA),
+                    referentievlak = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 3, 1), .default = NA),
+                    opdrachtgevendeinstantie = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 4, 1), .default = NA),
+                    kwaliteitswaarde.code = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 5, 1), .default = NA),
+                    aquometadata.message.id = response$WaarnemingenLijst[[ii]]$AquoMetadata$AquoMetadata_MessageID,
+                    parameter.wat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter_Wat_Omschrijving,
+                    bemonsteringsapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Code,
+                    bemonsteringsapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Omschrijving,
+                    bemonsteringssoort.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Code,
+                    bemonsteringssoort.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsSoort$Omschrijving,
+                    biotaxon.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Code,
+                    biotaxon.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon$Omschrijving,
+                    biotaxoncompartiment.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Code,
+                    biotaxoncompartiment.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$BioTaxon_Compartiment$Omschrijving,
+                    compartiment.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Code,
+                    compartiment.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Compartiment$Omschrijving,
+                    eenheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Code,
+                    eenheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Omschrijving,
+                    grootheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Code,
+                    grootheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Omschrijving,
+                    hoedanigheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Code,
+                    hoedanigheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Omschrijving,
+                    meetapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Code,
+                    meetapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Omschrijving,
+                    monsterbewerkingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Code,
+                    monsterbewerkingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$MonsterBewerkingsMethode$Omschrijving,
+                    orgaan.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Code,
+                    orgaan.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Orgaan$Omschrijving,
+                    parameter.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Code,
+                    parameter.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter$Omschrijving,
+                    plaatsbepalingsapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Code,
+                    plaatsbepalingsapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Omschrijving,
+                    typering.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Code,
+                    typering.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Omschrijving,
+                    waardebepalingstechniek.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Code,
+                    waardebepalingstechniek.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Omschrijving,
+                    waardebepalingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Code,
+                    waardebepalingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Omschrijving,
+                    waardebewerkingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Code,
+                    waardebewerkingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Omschrijving,
+                    numeriekewaarde = as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>%
+                                                   map_chr(list("Meetwaarde", "Waarde_Numeriek"),
+                                                           .default = NA)))
       temp.df <- as.data.frame(nullToNA(temp.l))
+      print("temp.df")
+      print(paste("number of lines: ", length(temp.df$locatie.naam)))
+      print(paste("location: ", unique(temp.df$locatie.naam)))
+      print(paste("date range", range(temp.df$tijdstip)))
     }
     else temp.df <- data.frame()
-    if(ii != 1){
-      df = rbind(df, temp.df)
-    }else {
+    if (ii != 1) {
+      df = bind_rows(df, temp.df)
+    }
+    else {
       df = temp.df
     }
+    print("df")
+    print(paste("number of lines: ", length(df$locatie.naam)))
+    print(paste("location: ", unique(df$locatie.naam)))
+    print(paste("date range", range(df$tijdstip)))
 
     if (http_error(resp)) {
-      stop(
-        sprintf(
-          "RWS API request failed [%s]\n%s\n<%s>",
-          status_code(resp),
-          parsed$message,
-          parsed$documentation_url
-        ),
-        call. = FALSE
-      )
+      stop(sprintf("RWS API request failed [%s]\n%s\n<%s>",
+                   status_code(resp), parsed$message, parsed$documentation_url),
+           call. = FALSE)
     }
-    return(
-      structure(
-        list(
-          content = df,
-          path = path,
-          response = resp
-        )#,
-        # class = "rws_api"
-      )
-    )
   }
+  return(structure(list(content = df, path = path, response = resp)))
 }
 
 
