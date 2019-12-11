@@ -97,7 +97,10 @@ nullToNA <- function(x) {
 #' parsed <- jsonlite::fromJSON(content(observation$response, "text"), simplifyVector = T )
 #' parsed$WaarnemingenLijst$MetingenLijst[[1]] %>% View()
 #'
-rws_observations <- function(bodylist) {
+rws_observations2 <- function(bodylist) {
+
+  warnings = list()
+
   path = "/ONLINEWAARNEMINGENSERVICES_DBO/OphalenWaarnemingen/"
   url <- modify_url("https://waterwebservices.rijkswaterstaat.nl", path = path)
   library(httr)
@@ -114,6 +117,14 @@ rws_observations <- function(bodylist) {
   }
 
   response <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = FALSE)
+
+  if (!response$Succesvol) {
+    paste("request not succefull", response$Foutmelding)
+  }
+
+
+
+  df <- data.frame()
 
   for (ii in seq(1:length(response$WaarnemingenLijst))) {
     print(paste("ii in response.waarnemingenlijst: ", ii))
@@ -173,10 +184,10 @@ rws_observations <- function(bodylist) {
                                                    map_chr(list("Meetwaarde", "Waarde_Numeriek"),
                                                            .default = NA)))
       temp.df <- as.data.frame(nullToNA(temp.l))
-      print("temp.df")
-      print(paste("number of lines: ", length(temp.df$locatie.naam)))
-      print(paste("location: ", unique(temp.df$locatie.naam)))
-      print(paste("date range", range(temp.df$tijdstip)))
+      # print("temp.df")
+      # print(paste("number of lines: ", length(temp.df$locatie.naam)))
+      # print(paste("location: ", unique(temp.df$locatie.naam)))
+      # print(paste("date range", range(temp.df$tijdstip)))
     }
     else temp.df <- data.frame()
     if (ii != 1) {
@@ -185,10 +196,10 @@ rws_observations <- function(bodylist) {
     else {
       df = temp.df
     }
-    print("df")
-    print(paste("number of lines: ", length(df$locatie.naam)))
-    print(paste("location: ", unique(df$locatie.naam)))
-    print(paste("date range", range(df$tijdstip)))
+    # print("df")
+    # print(paste("number of lines: ", length(df$locatie.naam)))
+    # print(paste("location: ", unique(df$locatie.naam)))
+    # print(paste("date range", range(df$tijdstip)))
 
     if (http_error(resp)) {
       stop(sprintf("RWS API request failed [%s]\n%s\n<%s>",
@@ -198,6 +209,8 @@ rws_observations <- function(bodylist) {
   }
   return(structure(list(content = df, path = path, response = resp)))
 }
+
+
 
 
 
