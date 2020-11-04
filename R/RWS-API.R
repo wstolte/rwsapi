@@ -340,7 +340,7 @@ rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mij
     l <- list(
       AquoPlusWaarnemingMetadata= list(
         AquoMetadata = list(
-          Compartiment = ifelse(!is.null(mijnCompartiment), mijnCompartiment, mijnCatalogus$compartiment.code[ii]),
+          Compartiment = list(Code = ifelse(!is.null(mijnCompartiment), mijnCompartiment, mijnCatalogus$compartiment.code[ii])),
           Parameter = list(Code = mijnCatalogus$parameter.code[ii]),
           # Eenheid = list(Code = mijnEenheid),
           # MeetApparaat = mijnMeetapparaat,
