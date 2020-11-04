@@ -106,6 +106,9 @@ rws_observations2 <- function(bodylist) {
   library(httr)
   library(jsonlite)
   ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
+
+  # result <- try(RJSONIO::fromJSON("http://graph.facebook.com/?ids=this.username.does.not.exist.because.i.made.it.up"), silent=TRUE)`
+
   resp <- POST(url = url,
                ua,
                body=toJSON(bodylist, auto_unbox = T, digits = NA),
@@ -230,18 +233,18 @@ rws_observations2 <- function(bodylist) {
 #' metadata <- rws_metadata()
 #' getLocations(metadata, 'SALNTT', 'NVT')
 #' getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
-rws_getLocations <- function(metadata, grootheidcode, parametercode) {
+rws_getLocations <- function(metadata, grootheidcode, parametercode = NULL) {
   require(tidyverse)
 
   if(!is.null(metadata$content)) myMetadata <- metadata$content else myMetadata <- metadata
 
-  grootheidcode = 'salntt'; parametercode = 'nvt'
+  # grootheidcode = 'salntt'; parametercode = 'nvt'
 
   rlist::list.flatten(myMetadata$AquoMetadataLijst) %>%
     dplyr::bind_cols() %>%
     `names<-`(tolower(names(.))) %>%
-    dplyr::filter(tolower(grootheid.code) %in% tolower(grootheidcode),
-                  tolower(parameter.code) %in% tolower(parametercode)) %>%
+    dplyr::filter(tolower(grootheid.code) %in% tolower(grootheidcode)) %>%
+    dplyr::filter(if(!is.null(parametercode)) tolower(parameter.code) %in% tolower(parametercode) else TRUE) %>%
     dplyr::left_join(as_tibble(rlist::list.flatten(myMetadata$AquoMetadataLocatieLijst)),
                      by = c(aquometadata_messageid = 'AquoMetaData_MessageID')) %>%
     dplyr::left_join(as_tibble(rlist::list.flatten(myMetadata$LocatieLijst))) %>%
@@ -337,7 +340,7 @@ rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mij
     l <- list(
       AquoPlusWaarnemingMetadata= list(
         AquoMetadata = list(
-          Compartiment = list(Code = mijnCompartiment),
+          Compartiment = ifelse(!is.null(mijnCompartiment), mijnCompartiment, mijnCatalogus$compartiment.code[ii]),
           Parameter = list(Code = mijnCatalogus$parameter.code[ii]),
           # Eenheid = list(Code = mijnEenheid),
           # MeetApparaat = mijnMeetapparaat,
