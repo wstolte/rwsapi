@@ -37,7 +37,7 @@ rws_metadata <- function(
     stop("API did not return application/json", call. = FALSE)
   }
 
-  parsed <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = TRUE )
+  parsed <- jsonlite::fromJSON(content(resp, "text", encoding = "UTF-8"), simplifyVector = TRUE)
 
 
   if (http_error(resp)) {
@@ -215,14 +215,6 @@ rws_observations2 <- function(bodylist) {
 
 
 
-
-
-
-
-
-
-
-
 #' Collects observed quantities and parameters for stations
 #'
 #' @param metadata parsed list of metadata generated from rws_metadata()
@@ -281,7 +273,7 @@ rws_getLocations <- function(metadata, grootheidcode, parametercode = NULL) {
 #' metadata <- rws_metadata()
 #' getLocations(metadata, 'SALNTT', 'NVT')
 #' getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
-rws_getParameters <- function(metadata, locatiecode = NULL, locatiename = NULL) {
+rws_getParameters <- function(metadata, locatiecode = NULL, locatienaam = NULL) {
   require(tidyverse)
 
   if(!is.null(metadata$content)) myMetadata <- metadata$content else myMetadata <- metadata
@@ -290,7 +282,7 @@ rws_getParameters <- function(metadata, locatiecode = NULL, locatiename = NULL) 
 
   as_tibble(rlist::list.flatten(myMetadata$LocatieLijst)) %>%
     `names<-`(tolower(names(.))) %>%
-    {if (is.null(locatiename)) filter(., code %in% locatiecode) else filter(., naam %in% locatiename)} %>%
+    {if (is.null(locatienaam)) filter(., code %in% locatiecode) else filter(., naam %in% locatienaam)} %>%
     dplyr::left_join(as_tibble(rlist::list.flatten(myMetadata$AquoMetadataLocatieLijst)),
                      by = c(locatie_messageid = 'Locatie_MessageID')) %>%
     dplyr::left_join(bind_cols(rlist::list.flatten(myMetadata$AquoMetadataLijst)),
@@ -432,4 +424,5 @@ select_locations_by_polygon <- function(metadata, polygon, buffer_in_m) {
     left_join(locsTable)
   return(mijnLocaties)
 }
+
 
