@@ -142,7 +142,7 @@ rws_observations2 <- function(bodylist) {
                     coordinatenstelsel = response$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
                     geometriepunt.x = response$WaarnemingenLijst[[ii]]$Locatie$X,
                     geometriepunt.y = response$WaarnemingenLijst[[ii]]$Locatie$Y,
-                    tijdstip = lubridate::as_datetime(response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA), tz = "CET"),
+                    tijdstip = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA),
                     statuswaarde = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 1, 1), .default = NA),
                     bemonsteringshoogte = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 2, 1), .default = NA),
                     referentievlak = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 3, 1), .default = NA),
