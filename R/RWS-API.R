@@ -108,6 +108,7 @@ rws_observations2 <- function(bodylist) {
   ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
 
   # result <- try(RJSONIO::fromJSON("http://graph.facebook.com/?ids=this.username.does.not.exist.because.i.made.it.up"), silent=TRUE)`
+  # or use RETRY()
 
   resp <- POST(url = url,
                ua,
@@ -141,7 +142,7 @@ rws_observations2 <- function(bodylist) {
                     coordinatenstelsel = response$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
                     geometriepunt.x = response$WaarnemingenLijst[[ii]]$Locatie$X,
                     geometriepunt.y = response$WaarnemingenLijst[[ii]]$Locatie$Y,
-                    tijdstip = lubridate::as_datetime(response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA)),
+                    tijdstip = lubridate::as_datetime(response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(1), .default = NA), tz = "CET"),
                     statuswaarde = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 1, 1), .default = NA),
                     bemonsteringshoogte = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 2, 1), .default = NA),
                     referentievlak = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 3, 1), .default = NA),
@@ -324,7 +325,7 @@ rws_getParameters <- function(metadata, locatiecode = NULL, locatienaam = NULL) 
 #' # parse content of response
 #' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
-rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mijnCompartiment = NULL){
+rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd){
   result <- list()
   for(ii in seq(1:dim(mijnCatalogus[1]))){
     #messageID meegeven waanneer op parameter_wat_omschrijving gezocht wordt.
@@ -332,7 +333,7 @@ rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd, mij
     l <- list(
       AquoPlusWaarnemingMetadata= list(
         AquoMetadata = list(
-          Compartiment = list(Code = ifelse(!is.null(mijnCompartiment), mijnCompartiment, mijnCatalogus$compartiment.code[ii])),
+          Compartiment = list(Code = mijnCatalogus$compartiment.code[ii]),
           Parameter = list(Code = mijnCatalogus$parameter.code[ii]),
           # Eenheid = list(Code = mijnEenheid),
           # MeetApparaat = mijnMeetapparaat,
