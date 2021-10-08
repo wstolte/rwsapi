@@ -105,22 +105,35 @@ rws_observations2 <- function(bodylist) {
   url <- modify_url("https://waterwebservices.rijkswaterstaat.nl", path = path)
   library(httr)
   library(jsonlite)
-  ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
+  ua <- user_agent("https://github.com/wstolte/rwsapi")
 
   # result <- try(RJSONIO::fromJSON("http://graph.facebook.com/?ids=this.username.does.not.exist.because.i.made.it.up"), silent=TRUE)`
   # or use RETRY()
 
-  resp <- POST(url = url,
-               ua,
-               body=toJSON(bodylist, auto_unbox = T, digits = NA),
-               add_headers(.headers = c("Content-Type"="application/json","Ocp-Apim-Subscription-Key"="my_subscrition_key"))
+  # old code without retry
+  # resp <- POST(url = url,
+  #              ua,
+  #              body=toJSON(bodylist, auto_unbox = T, digits = NA),
+  #              add_headers(.headers = c("Content-Type"="application/json","Ocp-Apim-Subscription-Key"="my_subscrition_key"))
+  # )
+  #
+
+  resp <- RETRY(
+    verb = "POST",
+    url = url,
+    ua = ua,
+    body=toJSON(bodylist, auto_unbox = T, digits = NA),
+      add_headers(.headers = c("Content-Type"="application/json","Ocp-Apim-Subscription-Key"="my_subscrition_key")),
+    times = 3
   )
+
+
 
   if (http_type(resp) != "application/json") {
     stop("API did not return application/json", call. = FALSE)
   }
 
-  response <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = FALSE)
+  response <- jsonlite::fromJSON(content(resp, "text", encoding = "UTF-8"), simplifyVector = FALSE)
 
   if (!response$Succesvol) {
     paste("request not succefull", response$Foutmelding)
@@ -326,8 +339,7 @@ rws_getParameters <- function(metadata, locatiecode = NULL, locatienaam = NULL) 
 #' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
 #' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
 rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd){
-  result <- list()
-  for(ii in seq(1:dim(mijnCatalogus[1]))){
+  for(ii in seq(1:dim(mijnCatalogus)[1])){
     #messageID meegeven waanneer op parameter_wat_omschrijving gezocht wordt.
     if(ii==1)  ll <- list()
     l <- list(
