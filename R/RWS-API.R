@@ -97,7 +97,7 @@ nullToNA <- function(x) {
 #' parsed <- jsonlite::fromJSON(content(observation$response, "text"), simplifyVector = T )
 #' parsed$WaarnemingenLijst$MetingenLijst[[1]] %>% View()
 #'
-rws_observations2 <- function(bodylist) {
+rws_observations2 <- function(bodylist, trytimes = 3) {
 
   warnings = list()
 
@@ -124,7 +124,7 @@ rws_observations2 <- function(bodylist) {
     ua = ua,
     body=toJSON(bodylist, auto_unbox = T, digits = NA),
       add_headers(.headers = c("Content-Type"="application/json","Ocp-Apim-Subscription-Key"="my_subscrition_key")),
-    times = 3
+    times = trytimes
   )
 
 
