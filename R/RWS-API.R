@@ -5,6 +5,67 @@
 library(httr)
 library(jsonlite)
 
+
+#' Retrieves observation data from data distribution layer rws
+#'
+#' @param startyear Start year of requested data
+#' @param endyear End year of requested data
+#' @param myCatalogue Dataframe with location and parameter information
+#' @param outDir Directory to save the downloaded information
+#' @return Downloaded information will be saved as csv in \code{outDir}
+#' @examples
+#' metadata <- rwsapi::rws_metadata() # gets complete catalog
+#' subsTable <- metadata$content$AquoMetadataLijst
+#' locsTable <- metadata$content$LocatieLijst
+#' mijnLocaties = c("SOELKKPDOT")
+#' mijnParameters = c("PO4", "NO3")
+#' mijnGrootheden = c("CONCTTE")
+#' mijnHoedanigheden = c("Pnf")
+#' mijnCatalogus <- rwsapi::rws_getParameters(metadata, locatiecode = mijnLocaties) %>%
+#'   filter(parameter.code %in% mijnParameters)
+#' getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
+#' @export
+getDDLdata <- function(startyear = integer(), endyear = integer(), myCatalogue, outDir = tempdir()) {
+
+  if(outDir == tempdir()){
+    print(paste("No output directory given, saving results in", tempdir()))
+    # print("Proceed? y/n")
+  }
+
+  if(!dir.exists(outDir)) dir.create(outDir, recursive = T)
+
+  startdate <- paste0(startyear, "-01-01T09:00:00.000+01:00")
+  enddate <- paste0(endyear, "-12-31T23:00:00.000+01:00")
+
+  getList <- rwsapi::rws_makeDDLapiList(beginDatumTijd = startdate,
+                                eindDatumTijd = enddate,
+                                mijnCatalogus = myCatalogue
+  )
+
+  for(year in seq(startyear, endyear, 1)){
+    startdate <- paste0(year, "-01-01T09:00:00.000+01:00")
+    enddate <- paste0(year + 1, "-12-31T23:00:00.000+01:00")
+    for(jj in c(1:length(getList))){   #
+      print(paste("getting", jj, myCatalogue$locatie.code[jj], year, myCatalogue$compartiment.code[jj], myCatalogue$grootheid.code[jj], myCatalogue$parameter.code[jj]))
+      response <- rwsapi::rws_observations2(bodylist = getList[[jj]])
+      if(!is.null(response) & nrow(response$content)!=0){
+        filename <- paste(
+          myCatalogue$locatie.code[jj],
+          myCatalogue$compartiment.code[jj],
+          stringr::str_replace(myCatalogue$grootheid.code[jj], "[^A-Za-z0-9]+", "_"),
+          myCatalogue$parameter.code[jj],
+          stringr::str_replace(myCatalogue$hoedanigheid.code[jj], "[^A-Za-z0-9]+", "_"),
+          year,
+          "ddl.csv", sep = "_")
+        write_delim(response$content, file = file.path(outDir, filename), delim = ";")} else {
+          print(paste("no data available for", myCatalogue$locatie.code[jj], myCatalogue$compartiment.code[jj], myCatalogue$grootheid.code[jj], myCatalogue$parameter.code[jj], myCatalogue$hoedanigheid.code[jj]))
+        }
+    }
+  }
+}
+
+
+
 #' Collects metadata for long term monitoring observation at Rijkswaterstaat (NL)
 #'
 #' @param path The request path. Default is "/METADATASERVICES_DBO/OphalenCatalogus/".
@@ -18,7 +79,6 @@ library(jsonlite)
 #' locations <- parsed$LocatieLijst
 #' # extract parameters
 #' parameters <- data.frame(parameter = parsed$AquoMetadataLijst)
-
 rws_metadata <- function(
   path = "/METADATASERVICES_DBO/OphalenCatalogus/",
   filterList = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T)
