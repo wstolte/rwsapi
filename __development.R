@@ -1,44 +1,27 @@
 
 # not run
 #
-# require(tidyverse)
-#
-enrichedMetadata_dev <- read.csv2("data/enrichedMetadata.csv")
-## add more groups or change group names if necessary. Careful!!
-# option, not used anymore.
-# devtools::use_data(enrichedMetadata, donarlocations,
-#                    internal = TRUE, overwrite = TRUE)
-
-enrichedMetadata <- enrichedMetadata_dev
-enrichedMetadata$Parameter.Omschrijving <- gsub("\'","___", (enrichedMetadata$Parameter.Omschrijving))
-enrichedMetadata$Parameter_Wat_Omschrijving <- gsub("\'","___", (enrichedMetadata$Parameter_Wat_Omschrijving))
-
-donarlocations
-
-# save("enrichedMetadata", "donarlocations", file = "data/rwsapidata.rdata")
-
-
-
-#
 # #===check functionality=======================
 #
 #
 source("R/RWS-API.R")
-data(rwsapidata)
-
 require(tidyverse)
 
 metadata <- rws_metadata() # gets complete catalog
 
-which(metadata$content$AquoMetadataLijst$Parameter$Omschrijving == "ammonium")
+iNH4 <- which(metadata$content$AquoMetadataLijst$Parameter$Omschrijving == "ammonium")
+metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[iNH4]
 
-grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "chlorofyl")
+# locaties waar ammonium wordt/werd gemeten
+myLocations <- rws_getLocations(metadata, grootheidcode = "CONCTTE", parametercode = "NH4")
 
-metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[298]
+# Stoffen die op Dreischor worden/werden gemeten
+mySubstances <- rws_getParameters(metadata = metadata, locatienaam = c("Dreischor"))
 
-myCatalogue <- DDLgetParametersForLocations(myMetadata = metadata, locationlist = c("Dreischor", "Herkingen", "Scharendijke diepe put")) %>%
-  dplyr::filter(parametergroep == "eutrophication")
-
+myCatalogue <- rwsapi::rws_getParameters(
+  metadata = metadata,
+  locatienaam = c("Dreischor")) %>%
+  dplyr::filter(parameter.omschrijving == "ammonium")
 
 # per parameter,
 
@@ -47,15 +30,14 @@ endyear = 2009
 startdate <- paste0(startyear, "-11-27T09:00:00.000+01:00")
 enddate <- paste0(endyear, "-01-28T09:01:00.000+01:00")
 
-getList <- makeDDLapiList(beginDatumTijd = startdate,
+getList <- rws_makeDDLapiList(beginDatumTijd = startdate,
                         eindDatumTijd = enddate,
-                        mijnCompartiment = "OW",
                         mijnCatalogus = myCatalogue
 )
 
 for(jj in seq(1:length(getList))){
   # jj = 29
-  response <- rws_observations(bodylist = getList[[jj]])
+  response <- rws_observations2(bodylist = getList[[jj]])
   response$content$Foutmelding
 
   # loop over differet WaarnemingsLijst objects
@@ -84,7 +66,106 @@ for(jj in seq(1:length(getList))){
 }
 
 
+#==== test tidyjson package =============================
+
+# install.packages("tidyjson")
+require(tidyjson)
+
+source("R/RWS-API.R")
+require(tidyverse)
+require(rwsapi)
+metadata <- rws_metadata() # gets complete catalog
+
+# test
+metadata$content$AquoMetadataLijst %>% tidyjson::as_tibble()
+names(md)
+
+which(metadata$content$AquoMetadataLijst$Parameter$Omschrijving == "ammonium")
+metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[327]
+
+myCatalogue <- rwsapi::rws_getParameters(
+  metadata = metadata,
+  locatiename = c("Dreischor")) %>%
+  dplyr::filter(parameter.omschrijving == "ammonium")
+
+# per parameter,
+
+startyear = 2005
+endyear = 2009
+startdate <- paste0(startyear, "-11-27T09:00:00.000+01:00")
+enddate <- paste0(endyear, "-01-28T09:01:00.000+01:00")
+
+getList <- rws_makeDDLapiList(beginDatumTijd = startdate,
+                          eindDatumTijd = enddate,
+                          mijnCompartiment = "OW",
+                          mijnCatalogus = myCatalogue
+)
+
+path = "/ONLINEWAARNEMINGENSERVICES_DBO/OphalenWaarnemingen/"
+url <- modify_url("https://waterwebservices.rijkswaterstaat.nl", path = path)
+library(httr)
+library(jsonlite)
+ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
+
+resp <- POST(url = url,
+             ua,
+             body=toJSON(getList[[1]], auto_unbox = T, digits = NA),
+             add_headers(.headers = c("Content-Type"="application/json","Ocp-Apim-Subscription-Key"="my_subscrition_key"))
+)
 
 
+if (http_type(resp) != "application/json") {
+  stop("API did not return application/json", call. = FALSE)
+}
+
+content(resp, "text") %>% View()
+
+response <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = FALSE)
+
+response <- tidyjson::as_tibble(content(resp, "parsed"))
+
+content(resp, "parsed")[[1]][[1]]$Locatie %>% tidyjson::as_tibble() %>% View()
+content(resp, "parsed")[[1]][[1]]$AquoMetadata %>% tidyjson::as_tibble() %>% View()
+content(resp, "parsed")[[1]][[1]]$MetingenLijst[[1]] %>% tidyjson::as_tibble() %>% View()
 
 
+## alternatieve manier om response te parsen using rrapply package
+##
+
+install.packages("rrapply")
+library(rrapply)
+library(tidyverse)
+
+metingen <- rrapply(response$WaarnemingenLijst[[1]]$MetingenLijst, how = "melt") %>% ## melt to long df
+  select(L1, L3, value) %>%
+  pivot_wider(names_from = "L3", values_from = "value")                   ## reshape to wide df
+
+locaties <- rrapply(response$WaarnemingenLijst[[1]]$Locatie, how = "melt") %>% ## melt to long df
+    pivot_wider(names_from = "L1", values_from = "value")                   ## reshape to wide df
+
+aquometadata <- rrapply(response$WaarnemingenLijst[[1]]$AquoMetadata, how = "melt") %>% ## melt to long df
+  unite("name", c(L1, L2), sep = ".", na.rm = T, remove = T) %>%
+  pivot_wider(names_from = "name", values_from = "value")                   ## reshape to wide df
+
+bind_cols(metingen, locaties, aquometadata) %>% View()
+
+## map over lists
+
+result <- map(response$WaarnemingenLijst, function(x){
+
+  metingen <- rrapply(x$MetingenLijst, how = "melt") %>% ## melt to long df
+    select(L1, L3, value) %>%
+    pivot_wider(names_from = "L3", values_from = "value")                   ## reshape to wide df
+
+  locaties <- rrapply(x$Locatie, how = "melt") %>% ## melt to long df
+    pivot_wider(names_from = "L1", values_from = "value")                   ## reshape to wide df
+
+  aquometadata <- rrapply(x$AquoMetadata, how = "melt") %>% ## melt to long df
+    unite("name", c(L1, L2), sep = ".", na.rm = T, remove = T) %>%
+    pivot_wider(names_from = "name", values_from = "value")                   ## reshape to wide df
+
+  bind_cols(locaties, metingen, aquometadata)
+
+}) %>%
+
+  bind_rows()
