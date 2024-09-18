@@ -251,6 +251,8 @@ rws_observations2 <- function(bodylist, trytimes = 3) {
                     plaatsbepalingsapparaat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$PlaatsBepalingsApparaat$Omschrijving,
                     typering.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Code,
                     typering.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Omschrijving,
+                    groepering.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Groepering$Code,
+                    groepering.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Groepering$Omschrijving,
                     waardebepalingstechniek.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Code,
                     waardebepalingstechniek.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingstechniek$Omschrijving,
                     waardebepalingsmethode.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBepalingsmethode$Code,
@@ -498,4 +500,9 @@ select_locations_by_polygon <- function(metadata, polygon, buffer_in_m) {
   return(mijnLocaties)
 }
 
-
+rws_wmsLocations <- function(){
+  url = "https://waterwebservices.rijkswaterstaat.nl/services/ogc/hws/wmdc15/ows?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=wmdc15:locaties"
+  url = "https://waterwebservices.rijkswaterstaat.nl/services/distributielaagWFS/distributielaag_dbo?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=locatiesmetlaatstewaarneming&Maxfeatures=50"
+httr::parse_url(url)
+  df <- st_read(url)
+}
