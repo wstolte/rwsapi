@@ -33,8 +33,9 @@ Opvragen metadata catalogus:
 ```{r}
 metadata <- rwsapi::rws_metadata()
 ```
+
 Dit zijn metadata van alle datasets in de DDL. 
-Bijvoorbeeld, Nitraat, of Chlorophyll zit er in.
+
 ```{r}
 metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[
   grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "nitraat", ignore.case = T)]
@@ -46,22 +47,15 @@ which(metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving == "(massa)C
 metadata$content$AquoMetadataLijst$Parameter$Code[375]
 ```
 
-Silikaat:
+### Ophalen selectie van metadata
+
 ```{r}
-metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[
-  grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "sili", ignore.case = T)]
+get_selected_metadata(grootheid = "Waterhoogte")
+get_selected_metadata(grootheid = "Waterhoogte", locatie = "Den Helder")
 
 ```
 
-Zit er nu ook in! Jippie!
-
-
-Even kijken of extinctiecoefficient er al in zit:
-```{r}
-metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving[
-  grep(x = metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving, pattern = "extinct", ignore.case = T)]
-```
-Nee, die helaas nog niet. 
+Noteer dat voor locatienaam Den Helder twee locatiecodes beschikbaar zijn. Het is wellicht beter om op naam te selecteren dan op code. Dit zou moeten verbeteren bij de invoering van WADAR (gepland voor begin 2025). 
 
 
 ### Ophalen van data
