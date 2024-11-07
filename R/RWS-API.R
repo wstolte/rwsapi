@@ -130,8 +130,7 @@ rws_metadata <- function(
 #' @param grootheid Grootheid (quantity) used for filtering metadata.
 #' @param parameter Parameter (quality) used for filtering metadata.
 #' @param locatie Location used for filtering metadata, expressed as code or name (omschrijving).
-#' @param path The request path. Default is "/METADATASERVICES_DBO/OphalenCatalogus/".
-#' @param filterList List objects in request. Default is "list(Eenheden=T,Grootheden=T,Hoedanigheden=T, Compartimenten = T)". Voor meer informatie, kijk op https://rijkswaterstaat.github.io/wm-ws-dl/?json#tutorial-values voor meer informatie over opvragen van metadata.
+#' @param ... extra arguments to be passed on to rws_metadata(). See ?rws_metadata
 #' @return A structured list with metadata, class "rws_api"
 #' @examples
 #' # Collect all metadata:
@@ -143,17 +142,15 @@ get_selected_metadata <- function(
     grootheid = NULL,
     parameter = NULL,
     locatie = NULL,
-    filterlist = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T),
-    path = "/METADATASERVICES_DBO/OphalenCatalogus/"
+    ...
+    # filterlist = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T),
+    # path = "/METADATASERVICES_DBO/OphalenCatalogus/"
 ) {
 
   require(rwsapi)
   require(tidyverse)
 
-  md <- rwsapi::rws_metadata(
-    path = path,
-    filterList = filterlist
-  )
+  md <- rwsapi::rws_metadata(...)
 
   md$content$AquoMetadataLijst %>%
     unnest(
