@@ -1,0 +1,34 @@
+
+# Package rwsapi
+
+
+## get metadata for your needs
+
+First, retrieve the information that is necessary to build the request. The function get_selected_metadata() will get this information for you. You can specify *grootheid*, *parameter*, *compartiment* and other parameters that can be used in the internally  used function rwsapi::rws_metadata(), such as *location*. Arguments may be given as "code" or "omschrijving", i.e. for Location "Den Helder", there are two location.code values as can be seen in the following code. 
+
+
+```{r}
+source("r/RWS-API.R")
+
+md <- get_selected_metadata(grootheid = "Waterhoogte", locatie = "Den Helder")
+
+print(md$locatie.code)
+
+```
+The two codes refer to the same station (name). The only difference is that they come from different databases (MWTL/DONAR and LMW).
+
+# Get data from DDL organized in files per quantity, parameter, year.
+
+The wrapper function getDDLdata() will gett data for given period, based on the selected metadata *md* as produced above. Data will be saved by year, quantity, parameter, and compartment. 
+
+
+```{r}
+getDDLdata(startyear = 2023, endyear = 2023, myCatalogue = md, outDir = tempdir())
+```
+
+
+Special attention should be paid to the field "groepering.code"and "groepering.omschrijving" for the tested parameter WATHTE (waterhoogte). If groepering equals "NVT", the data are measurments. In any other case they are an aggregated form (e.g. extremes) of the measurements. 
+
+
+
+
