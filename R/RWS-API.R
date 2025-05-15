@@ -97,7 +97,10 @@ rws_metadata <- function(
     stop("API did not return application/json", call. = FALSE)
   }
 
-  parsed <- jsonlite::fromJSON(content(resp, "text", encoding = "UTF-8"), simplifyVector = TRUE)
+  parsed <- jsonlite::fromJSON(
+    content(resp, "text", encoding = "UTF-8"),
+    simplifyVector = TRUE
+    )
 
 
   if (http_error(resp)) {
@@ -122,6 +125,65 @@ rws_metadata <- function(
   )
 }
 
+#' Collects metadata for long term monitoring observation at Rijkswaterstaat (NL)
+#'
+#' @param path The request path. Default is "/METADATASERVICES_DBO/OphalenCatalogus/".
+#' @param filterList List objects in request. Default is "list(Eenheden=T,Grootheden=T,Hoedanigheden=T)"
+#' @return A structured list with metadata, class "rws_api"
+#' @examples
+#' metadata <- rws_metadata()
+#' # parse content of response
+#' parsed <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
+#' # extract unique locations
+#' locations <- parsed$LocatieLijst
+#' # extract parameters
+#' parameters <- data.frame(parameter = parsed$AquoMetadataLijst)
+rws_metadata2 <- function(
+    path = "/METADATASERVICES_DBO/OphalenCatalogus/",
+    filterList = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T)
+) {
+  library(httr)
+  library(jsonlite)
+  ua <- user_agent("https://waterwebservices.rijkswaterstaat.nl")
+  path = path
+  url <- modify_url(ua$options$useragent, path = path)
+
+  l = list(CatalogusFilter=filterList)
+
+  resp <- POST(url, ua, body = l, encode = "json")
+
+  if (http_type(resp) != "application/json") {
+    stop("API did not return application/json", call. = FALSE)
+  }
+
+  parsed <- jsonlite::fromJSON(
+    content(resp, "text", encoding = "UTF-8"),
+    simplifyVector = TRUE,
+    flatten = T
+  )
+
+
+  if (http_error(resp)) {
+    stop(
+      sprintf(
+        "RWS API request failed [%s]\n%s\n<%s>",
+        status_code(resp),
+        parsed$message,
+        parsed$documentation_url
+      ),
+      call. = FALSE
+    )
+  }
+
+  structure(
+    list(
+      content = parsed,
+      path = path,
+      response = resp
+    )#,
+    # class = "rws_api"
+  )
+}
 
 
 #' Collects selection of metadata for long term monitoring observation at Rijkswaterstaat (NL)
@@ -294,6 +356,8 @@ rws_observations2 <- function(bodylist, trytimes = 3) {
                     eenheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Eenheid$Omschrijving,
                     grootheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Code,
                     grootheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Grootheid$Omschrijving,
+                    typering.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Code,
+                    typering.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Typering$Omschrijving,
                     hoedanigheid.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Code,
                     hoedanigheid.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Hoedanigheid$Omschrijving,
                     meetapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$MeetApparaat$Code,
@@ -318,7 +382,11 @@ rws_observations2 <- function(bodylist, trytimes = 3) {
                     waardebewerkingsmethode.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$WaardeBewerkingsmethode$Omschrijving,
                     numeriekewaarde = as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>%
                                                    map_chr(list("Meetwaarde", "Waarde_Numeriek"),
-                                                           .default = NA)))
+                                                           .default = NA)),
+                    alphanumeriekewaarde = as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>%
+                                                   map_chr(list("Meetwaarde", "Waarde_Alphanumeriek"),
+                                                           .default = NA))
+                    )
       temp.df <- as.data.frame(nullToNA(temp.l))
       # print("temp.df")
       # print(paste("number of lines: ", length(temp.df$locatie.naam)))
@@ -473,8 +541,8 @@ rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd){
         )
       ),
       Locatie = list(
-        X = as.character(mijnCatalogus["x"][ii,]),
-        Y = as.character(mijnCatalogus["y"][ii,]),
+        X = str_pad(as.character(mijnCatalogus["x"][ii,]), 16, "right", "0"),
+        Y = str_pad(as.character(mijnCatalogus["y"][ii,]), 16, "right", "0"),
         Code = as.character(mijnCatalogus["locatie.code"][ii,])),
       Periode = list(Begindatumtijd = beginDatumTijd,
                      Einddatumtijd = eindDatumTijd)
@@ -483,7 +551,6 @@ rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd){
   }
   return(ll)
 }
-
 
 
 #' selects locations within DDL based on WFD water bodies from the Netherlands
