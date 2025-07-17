@@ -203,6 +203,7 @@ get_selected_metadata <- function(
     compartiment = NULL,
     grootheid = NULL,
     parameter = NULL,
+    hoedanigheid = NULL,
     locatie = NULL,
     ...
     # filterlist = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T),
@@ -221,6 +222,7 @@ get_selected_metadata <- function(
     filter(
       if(is.null(grootheid)) TRUE else Grootheid.Omschrijving %in% grootheid | Grootheid.Code %in% grootheid,
       if(is.null(parameter)) TRUE else Parameter.Omschrijving %in% parameter | Parameter.Code %in% parameter,
+      if(is.null(hoedanigheid)) TRUE else Hoedanigheid.Code %in% hoedanigheid | Hoedanigheid.Code %in% hoedanigheid,
       if(is.null(compartiment)) TRUE else Compartiment.Code %in% compartiment | Compartiment.Code %in% compartiment
     ) %>%
     left_join(
