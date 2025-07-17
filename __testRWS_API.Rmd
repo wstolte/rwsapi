@@ -53,6 +53,9 @@ metadata$content$AquoMetadataLijst$Parameter$Code[375]
 get_selected_metadata(grootheid = "Waterhoogte")
 get_selected_metadata(grootheid = "Waterhoogte", locatie = "Den Helder")
 
+myMetadata <- get_selected_metadata(parameter = "NO3", locatie = "Terschelling 10 km uit de kust")
+
+
 ```
 
 Noteer dat voor locatienaam Den Helder twee locatiecodes beschikbaar zijn. Het is wellicht beter om op naam te selecteren dan op code. Dit zou moeten verbeteren bij de invoering van WADAR (gepland voor begin 2025). 
@@ -68,10 +71,10 @@ grootheidcodes <- metadata$content$AquoMetadataLijst$Grootheid$Code
 parametercodes <- metadata$content$AquoMetadataLijst$Parameter$Code
 omschrijvingcodes <- metadata$content$AquoMetadataLijst$Parameter_Wat_Omschrijving
 
-myparameter = "O2"
-myquantity = "CONCTTE"
+myparameter = myMetadata$parameter.code
+myquantity = myMetadata$grootheid.code
 
-mylocation <- "TERSLG100"
+mylocation <- myMetadata$locatie.code
 locindex <- which(metadata$content$LocatieLijst$Code == mylocation)
 x = metadata$content$LocatieLijst$X[locindex]
 y = metadata$content$LocatieLijst$Y[locindex]
@@ -113,7 +116,29 @@ print(toJSON(requestlist, auto_unbox = T, digits = NA))
 ### Uitvoeren request. De response is in dit geval een r list object
 
 ```{r}
-response <- rwsapi::rws_observations(bodylist =requestlist)
+response <- rwsapi::rws_observations2(bodylist =requestlist)
+
+ path = "/ONLINEWAARNEMINGENSERVICES_DBO/OphalenWaarnemingen/"
+  url <- modify_url("https://waterwebservices.rijkswaterstaat.nl", path = path)
+  library(httr)
+  library(jsonlite)
+  ua <- user_agent("https://github.com/wstolte/rwsapi")
+  
+resp <- RETRY(
+    verb = "POST",
+    url = url,
+    ua = ua,
+    body=toJSON(requestlist, auto_unbox = T, digits = NA),
+      add_headers(.headers = c("Content-Type"="application/json","Ocp-Apim-Subscription-Key"="my_subscrition_key")),
+    times = 3
+  )
+
+
+
+  response_raw <- jsonlite::fromJSON(content(resp, "text", encoding = "UTF-8"), simplifyVector = FALSE)
+
+
+
 ```
 
 

@@ -336,12 +336,12 @@ rws_observations2 <- function(bodylist, trytimes = 3) {
                     coordinatenstelsel = response$WaarnemingenLijst[[ii]]$Locatie$Coordinatenstelsel,
                     geometriepunt.x = response$WaarnemingenLijst[[ii]]$Locatie$X,
                     geometriepunt.y = response$WaarnemingenLijst[[ii]]$Locatie$Y,
-                    tijdstip = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(as.character(list(1)), .default = NA),
+                    tijdstip = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr((list(1)), .default = NA),
                     statuswaarde = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 1, 1), .default = NA),
-                    bemonsteringshoogte = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(as.character(list(3, 2, 1)), .default = NA_character_),
+                    bemonsteringshoogte = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr((list(3, 2, 1)), .default = NA_character_),
                     referentievlak = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 3, 1), .default = NA),
                     opdrachtgevendeinstantie = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(list(3, 4, 1), .default = NA),
-                    kwaliteitswaarde.code = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr(as.character(list(3, 5, 1)), .default = NA),
+                    kwaliteitswaarde.code = response$WaarnemingenLijst[[ii]]$MetingenLijst %>% map_chr((list(3, 5, 1)), .default = NA),
                     aquometadata.message.id = response$WaarnemingenLijst[[ii]]$AquoMetadata$AquoMetadata_MessageID,
                     parameter.wat.omschrijving = response$WaarnemingenLijst[[ii]]$AquoMetadata$Parameter_Wat_Omschrijving,
                     bemonsteringsapparaat.code = response$WaarnemingenLijst[[ii]]$AquoMetadata$BemonsteringsApparaat$Code,
@@ -386,7 +386,7 @@ rws_observations2 <- function(bodylist, trytimes = 3) {
                                                    purrr::map_dbl(list("Meetwaarde", "Waarde_Numeriek"),
                                                            .default = NA_real_)),
                     alphanumeriekewaarde = as.numeric(response$WaarnemingenLijst[[ii]]$MetingenLijst %>%
-                                                   map_chr(as.character(list("Meetwaarde", "Waarde_Alphanumeriek")),
+                                                   map_chr((list("Meetwaarde", "Waarde_Alphanumeriek")),
                                                            .default = NA_character_))
                     )
       temp.df <- as.data.frame(nullToNA(temp.l))
