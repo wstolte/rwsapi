@@ -107,7 +107,7 @@ getDDLdata <- function(startyear = integer(), endyear = integer(), myCatalogue, 
   )
 
     for(jj in c(1:length(getList))){   #
-      print(paste("getting", jj, myCatalogue$locatie.code[jj], year, myCatalogue$compartiment.code[jj], myCatalogue$grootheid.code[jj], myCatalogue$parameter.code[jj]))
+      print(paste("getting", jj, myCatalogue$locatie.code[jj], paste0(startyear, "- ", endyear), myCatalogue$compartiment.code[jj], myCatalogue$grootheid.code[jj], myCatalogue$parameter.code[jj]))
       response <- rwsapi::rws_observations2(bodylist = getList[[jj]])
       if(!is.null(response) & nrow(response$content)!=0){
         filename <- paste(
