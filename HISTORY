@@ -2,6 +2,31 @@ git repo: https://github.com/wstolte/rwsapi.git
 
 ####################### branch: develop-wadar-adaptation #########################
 2025-01-23: Git clone of this specific branch, which is now copy of the master
-
+2025-01-23: Replacement of old metadata and metadata2 functions by one metadata
+            function. The most important changes are:
+            1. Update of server address and path to only use the new production
+               version of the API.
+            2. All names to small letters for uniformity and normalization if API
+               side changes (easier to maintain).
+            3. Use of require instead of library (require is less verbose) and
+            4. Explicit namespaces (not entire package has to be loaded)
+            5. Adjustment of list of fields to obtain (changed in new API
+               version).
+2025-01-23: Replacement of old observations2 function by a new observations
+            function. The most important changes are:
+            1. Update of server address and path to only use the new production
+               version.
+            2. All names to small letters for uniformity and normalization if API
+               side changes (easier to maintain).
+            3. Use of require instead of library (require is less verbose)
+            4. Explicit use of namespaces (not entire package has to be loaded).
+            5. Variable mapping with names instead of indices (easier to maintain
+               and debug; order changed in new API and some fields are no longer
+               present).
+2025-01-23: Roxygen framework is extended to include a NAMESPACE file construction
+            based on a <packagename>.R file.
+2025-01-24: Package dependencies are cleaned up. The dependency on magrittr is
+            removed by removing all the pipes. Reason: package compilation is
+            cumbersome with magrittr dependencies.
 
 ##################################################################################
