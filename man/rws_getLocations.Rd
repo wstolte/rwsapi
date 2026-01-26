@@ -17,7 +17,8 @@ rws_getLocations(metadata, grootheidcode, parametercode = NULL)
 dataframe containing locations where grootheidcode and parametercode occur
 }
 \description{
-TO BE WORKED OUT
+This function provides a list of parameter-location combinations with metadata that comply
+with the quantity (grootheid)-parameter combination as provided by the function's arguments.
 }
 \examples{
 metadata <- rws_metadata()

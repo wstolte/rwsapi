@@ -273,22 +273,39 @@ rws_metadata <- function(
 #' @title Collects selection of metadata for long term monitoring observation at Rijkswaterstaat (NL)
 #'
 #' @description
-#' TO BE WORKED OUT
+#' This function queries the server for a data catalog and selects metadata from it based on the provided
+#' arguments to the function.
 #'
-#' @param compartiment Compartment (matrix) used for filtering metadata. Compartments can be expressed as codes, or names (omschrijving). Examples are "OW" for surface water, "BS" for Bottom/Sediment.
-#' @param grootheid Grootheid (quantity) used for filtering metadata.
-#' @param parameter Parameter (quality) used for filtering metadata.
-#' @param hoedanigheid Hoedanigheid used for filtering metadata.
-#' @param locatie Location used for filtering metadata, expressed as code or name (omschrijving).
+#' @param compartiment Character vector of compartment descriptions (omschrijving) or codes
+#   that is used to select the compartment (matrix) in which parameters were sampled. Examples
+#'  are "OW" for surface water, "BS" for Bottom/Sediment; see also examples below.
+#' @param grootheid Character vector for selecting the quantity (Grootheid;
+#'  e.g. code:CONCTTE = concentration = omschrijving:(massa)Concentratie; see examples below).
+#' @param parameter Character vector with parameters (quality) to select (e.g. parameter.code=NO3 = nitraat=parameter.omschrijving; see examples below).
+#' @param hoedanigheid Character vector specifying additional information on the sampling or interpretation (e.g. hoedanigheid.omschrijving="uitgedrukt in stikstof / opgeloste fractie")
+#' @param locatie Character vector of location to select (again expressed as code or name (omschrijving); see examples below).
+#' @param catalog Optional local copy (in the R environment) of the catalog. If not given, the catalog is downloaded from the server.
 #'
 #' @return A structured list with metadata, class "rws_api"
 #'
 #' @examples
 #' \dontrun{
-#' # Collect all metadata:
+#  # Download and store local copy of the catalog
+#' catalog <- rws_metadata()
+#'
+#' # Collect all metadata (this is a data.frame, not a copy of the catalog):
 #' metadata <- get_selected_metadata()
-#' #Collect all metadata for quantity "Waterhoogte":
-#' selectedmetadata <- get_selected_metadata(grootheid = "Waterhoogte")
+#'
+#' # Collect all metadata for dissolved nitrate concentration measurements
+#' # in surface waters on the transect off the coast of Walcheren.
+#' selectedmetadata <- get_selected_metadata(
+#'       grootheid = "(massa)Concentratie",
+#'       compartiment = "Oppervlaktewater",
+#'       hoedanigheid = "uitgedrukt in stikstof / opgeloste fractie",
+#'       parameter = "nitraat",
+#'       locatie=c("walcheren.2kmuitdekust","walcheren.20kmuitdekust","walcheren.70kmuitdekust"),
+#'       catalog=catalog
+#' )
 #' }
 #' @importFrom tidyr unnest
 #'
@@ -298,27 +315,29 @@ get_selected_metadata <- function(
     grootheid = NULL,
     parameter = NULL,
     hoedanigheid = NULL,
-    locatie = NULL
+    locatie = NULL,
+    catalog=NULL
     # filterlist = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T),
     # path = "/METADATASERVICES_DBO/OphalenCatalogus/"
 ) {
 
-  md <- rws_metadata()
+  if(is.null(catalog)) md <- rws_metadata()
+  else md <- catalog
 
   #unnested <- tidyr::unnest(md$content$aquometadatalijst,names_sep = ".",c(compartiment, eenheid, grootheid, hoedanigheid, parameter))
   unnested <- md$content$aquometadatalijst
 
-  selectionfilter <- ifelse(is.null(grootheid),    TRUE, unnested$grootheid.omschrijving %in% grootheid | unnested$grootheid.code %in% grootheid) &
-                     ifelse(is.null(parameter),    TRUE, unnested$parameter.omschrijving %in% parameter | unnested$parameter.code %in% parameter) &
-                     ifelse(is.null(hoedanigheid), TRUE, unnested$hoedanigheid.code %in% hoedanigheid | unnested$hoedanigheid.code %in% hoedanigheid) &
-                     ifelse(is.null(compartiment), TRUE, unnested$compartiment.code %in% compartiment | unnested$compartiment.code %in% compartiment)
+  selectionfilter <- ifelse(rep(is.null(grootheid),nrow(unnested)),    TRUE, unnested$grootheid.omschrijving %in% grootheid | unnested$grootheid.code %in% grootheid) &
+                     ifelse(rep(is.null(parameter),nrow(unnested)),    TRUE, unnested$parameter.omschrijving %in% parameter | unnested$parameter.code %in% parameter) &
+                     ifelse(rep(is.null(hoedanigheid),nrow(unnested)), TRUE, unnested$hoedanigheid.omschrijving %in% hoedanigheid | unnested$hoedanigheid.code %in% hoedanigheid) &
+                     ifelse(rep(is.null(compartiment),nrow(unnested)), TRUE, unnested$compartiment.omschrijving %in% compartiment | unnested$compartiment.code %in% compartiment)
 
   filtered <- unnested[selectionfilter,]
 
   merged1 <- dplyr::left_join(filtered,md$content$aquometadatalocatielijst,by = c(aquometadata_messageid = "aquometadata_messageid"))
   merged2 <- dplyr::left_join(merged1,md$content$locatielijst)
 
-  selectionfilter <- ifelse(is.null(locatie), TRUE, merged2$naam %in% locatie |  merged2$code %in% locatie)
+  selectionfilter <- ifelse(rep(is.null(locatie),nrow(merged2)), TRUE, merged2$naam %in% locatie |  merged2$code %in% locatie)
   filtered2 <- merged2[selectionfilter,]
   names(filtered2) <- tolower(names(filtered2))
   names(filtered2)[names(filtered2)%in% c("naam","code")] <- paste0("locatie.",names(filtered2)[names(filtered2)%in% c("naam","code")])
@@ -335,7 +354,10 @@ nullToNA <- function(x) {
 #' @title Collect observational data from long-term monitoring efforts at Rijkswaterstaat (NL)
 #'
 #' @description
-#' TO BE WORKED OUT
+#' This is the core function of the package to retrieve water quality data from Rijkswaterstaat.
+#' It works by supplying a list that can be be interpreted as query in JSON. From the server's
+#' response a list is composed with the actual data, the query that was supplied, and a reponse
+#' object as defined in the \code{\link{jsonlite}} package.
 #'
 #' @param bodylist The message body containing criteria for data selection. See \code{\link{jsonlite}} for more information on how to construct.
 #' @param trytimes The number of trials to contact the data server before returning with failure.
@@ -356,7 +378,6 @@ nullToNA <- function(x) {
 #'     AquoMetadata = list(
 #'       Compartiment = list(Code = "OW"),
 #'       Eenheid = list(Code = "cm"),
-#'       MeetApparaat = list(Code = "109"),
 #'       Grootheid = list(Code = "Hm0"))),
 #'   Locatie = list(
 #'     Code = "europlatform"),
@@ -366,6 +387,7 @@ nullToNA <- function(x) {
 #' observations <- rws_observations(l2)
 #' str(observations)
 #' }
+#'
 #' @export
 rws_observations <- function (bodylist, trytimes = 3) {
 
@@ -412,7 +434,6 @@ rws_observations <- function (bodylist, trytimes = 3) {
     }
     response <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),simplifyVector = FALSE)
 #    parsed   <- jsonlite::fromJSON(content(resp, "text", encoding = "UTF-8"),simplifyVector = TRUE,flatten = T)
-
 
     if (!response$Succesvol) {
         paste("request not successful", response$Foutmelding)
@@ -505,7 +526,8 @@ rws_observations <- function (bodylist, trytimes = 3) {
 #' @title Collects observed quantities and parameters for stations
 #'
 #' @description
-#' TO BE WORKED OUT
+#' This function provides a list of parameter-location combinations with metadata that comply
+#' with the quantity (grootheid)-parameter combination as provided by the function's arguments.
 #'
 #' @param metadata parsed list of metadata generated from rws_metadata()
 #' @param grootheidcode character vector of selected grootheid.code according to AQUO
@@ -552,7 +574,8 @@ rws_getLocations <- function(metadata, grootheidcode, parametercode = NULL) {
 #' @title Collects observed quantities and parameters for stations.
 #'
 #' @description
-#' TO BE WORKED OUT
+#' This function produces a list of parameters that are measured at the locations
+#' provided in the function's arguments.
 #'
 #' @param metadata parsed list of metadata generated from rws_metadata()
 #' @param locatiecode character vector of selected locatie.code

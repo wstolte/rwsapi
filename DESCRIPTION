@@ -8,7 +8,7 @@ Description: The rwsapi package presents a number of functions for accessing wat
   The core functions are rws_metadata() and rws_observations(), that respectively download the data catalog and actual
   observational data, based on queries in json notation. The provided data are collected over the past decades within the
   national monitoring programme for surface waters (fresh and saline) in the Netherlands (a.k.a. the DONAR / WADAR data).
-License: CC BY-NC-SA 4.0
+License: GPLv3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3

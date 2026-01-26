@@ -19,7 +19,10 @@ A structured list with three elements:
 }
 }
 \description{
-TO BE WORKED OUT
+This is the core function of the package to retrieve water quality data from Rijkswaterstaat.
+It works by supplying a list that can be be interpreted as query in JSON. From the server's
+response a list is composed with the actual data, the query that was supplied, and a reponse
+object as defined in the \code{\link{jsonlite}} package.
 }
 \examples{
 \dontrun{
@@ -30,7 +33,6 @@ l2 <- list(
     AquoMetadata = list(
       Compartiment = list(Code = "OW"),
       Eenheid = list(Code = "cm"),
-      MeetApparaat = list(Code = "109"),
       Grootheid = list(Code = "Hm0"))),
   Locatie = list(
     Code = "europlatform"),
@@ -40,4 +42,5 @@ l2 <- list(
 observations <- rws_observations(l2)
 str(observations)
 }
+
 }

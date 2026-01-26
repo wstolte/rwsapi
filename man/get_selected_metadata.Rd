@@ -9,31 +9,48 @@ get_selected_metadata(
   grootheid = NULL,
   parameter = NULL,
   hoedanigheid = NULL,
-  locatie = NULL
+  locatie = NULL,
+  catalog = NULL
 )
 }
 \arguments{
-\item{compartiment}{Compartment (matrix) used for filtering metadata. Compartments can be expressed as codes, or names (omschrijving). Examples are "OW" for surface water, "BS" for Bottom/Sediment.}
+\item{compartiment}{Character vector of compartment descriptions (omschrijving) or codes
+are "OW" for surface water, "BS" for Bottom/Sediment; see also examples below.}
 
-\item{grootheid}{Grootheid (quantity) used for filtering metadata.}
+\item{grootheid}{Character vector for selecting the quantity (Grootheid;
+e.g. code:CONCTTE = concentration = omschrijving:(massa)Concentratie; see examples below).}
 
-\item{parameter}{Parameter (quality) used for filtering metadata.}
+\item{parameter}{Character vector with parameters (quality) to select (e.g. parameter.code=NO3 = nitraat=parameter.omschrijving; see examples below).}
 
-\item{hoedanigheid}{Hoedanigheid used for filtering metadata.}
+\item{hoedanigheid}{Character vector specifying additional information on the sampling or interpretation (e.g. hoedanigheid.omschrijving="uitgedrukt in stikstof / opgeloste fractie")}
 
-\item{locatie}{Location used for filtering metadata, expressed as code or name (omschrijving).}
+\item{locatie}{Character vector of location to select (again expressed as code or name (omschrijving); see examples below).}
+
+\item{catalog}{Optional local copy (in the R environment) of the catalog. If not given, the catalog is downloaded from the server.}
 }
 \value{
 A structured list with metadata, class "rws_api"
 }
 \description{
-TO BE WORKED OUT
+This function queries the server for a data catalog and selects metadata from it based on the provided
+arguments to the function.
 }
 \examples{
 \dontrun{
-# Collect all metadata:
+catalog <- rws_metadata()
+
+# Collect all metadata (this is a data.frame, not a copy of the catalog):
 metadata <- get_selected_metadata()
-#Collect all metadata for quantity "Waterhoogte":
-selectedmetadata <- get_selected_metadata(grootheid = "Waterhoogte")
+
+# Collect all metadata for dissolved nitrate concentration measurements
+# in surface waters on the transect off the coast of Walcheren.
+selectedmetadata <- get_selected_metadata(
+      grootheid = "(massa)Concentratie",
+      compartiment = "Oppervlaktewater",
+      hoedanigheid = "uitgedrukt in stikstof / opgeloste fractie",
+      parameter = "nitraat",
+      locatie=c("walcheren.2kmuitdekust","walcheren.20kmuitdekust","walcheren.70kmuitdekust"),
+      catalog=catalog
+)
 }
 }
