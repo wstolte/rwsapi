@@ -2,7 +2,9 @@
 % Please edit documentation in R/RWS-API.R
 \name{rws_metadata}
 \alias{rws_metadata}
-\title{Collects metadata for long term monitoring observation at Rijkswaterstaat (NL)}
+\alias{catalog}
+\alias{datacatalog}
+\title{Download the data catalog of the long-term monitoring program of Rijkswaterstaat (NL)}
 \usage{
 rws_metadata(
   filterList = list(Compartimenten = T, Grootheden = T, Parameters = T, Eenheden = T,
@@ -10,31 +12,41 @@ rws_metadata(
 )
 }
 \arguments{
-\item{filterList}{List objects in request. Default is "list(Eenheden=T,Grootheden=T,Hoedanigheden=T)"}
+\item{filterList}{Named list of boolean values to select properties that should be
+included in the catalog. Defaults to all TRUE. See details for an
+explanation of the names.}
 }
 \value{
-A structured list with metadata, class "rws_api"
+The return object is a list consisting of 3 named elements:
+\describe{
+ \item{content}{
+   datatypes that come with queries for observations. See details for more explanation.
+ }
+ \item{path}{
+   The API resource or endpoint that was used to obtain the catalog.
+ }
+ \item{response}{
+   An object of the class response as defined in the \code{\link{httr-package}} that
+   represents the response of the server that was given upon the request sent by this
+   function.
+ }
+}
 }
 \description{
-Collects metadata for long term monitoring observation at Rijkswaterstaat (NL)
+Obtain a list with tables containing the metadata and datatypes relevant
+   to query and interpret observational data from the long-term monitoring program of
+   Rijkswaterstaat.
+}
+\details{
+TO BE WORKED OUT
 }
 \examples{
-non.beta.catalog <- rws_metadata(beta = F)
-beta.catalog <- rws_metadata(beta = T)
-non.beta.catalog.flattened <- rws_metadata(beta=F,flatten=T)
-beta.catalog.flattened <- rws_metadata(beta=T,flatten=T)
+\donttest{
+metadata <- rws_metadata()
+names(metadata)
+head(metadata$locatielijst)
+# extract parameter information
+parameters <- metadata$aquometadatalijst
+}
 
-names(non.beta.catalog)
-names(non.beta.catalog.flattened)
-
-names(beta.catalog)
-names(beta.catalog.flattened)
-
-
-# parse content of response
-parsed <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
-# extract unique locations
-locations <- parsed$LocatieLijst
-# extract parameters
-parameters <- data.frame(parameter = parsed$AquoMetadataLijst)
 }

@@ -17,11 +17,11 @@ rws_makeDDLapiList(mijnCatalogus, beginDatumTijd, eindDatumTijd)
 dataframe containing observed quantities and parameters
 }
 \description{
-makes list for requesting observation data from rws api
+TO BE WORKED OUT
 }
 \examples{
 metadata <- rws_metadata()
 # parse content of response
-parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
-catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
+#catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
+
 }

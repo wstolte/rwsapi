@@ -17,10 +17,11 @@ rws_getLocations(metadata, grootheidcode, parametercode = NULL)
 dataframe containing locations where grootheidcode and parametercode occur
 }
 \description{
-Collects observed quantities and parameters for stations
+TO BE WORKED OUT
 }
 \examples{
 metadata <- rws_metadata()
 rws_getLocations(metadata, 'SALNTT', 'NVT')
 rws_getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
+
 }

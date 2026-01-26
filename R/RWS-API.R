@@ -1,24 +1,47 @@
-## based on
-##https://github.com/hadley/httr/blob/master/vignettes/api-packages.Rmd
+# ##################### #################### #################### #################### #################### #################### ####################
+# Copyright (C) 2025  Willem Stolte                                                                                                                  #
+#                                                                                                                                                   #
+#    This program is free software: you can redistribute it and/or modify                                                                           #
+#    it under the terms of the GNU General Public License as published by                                                                           #
+#    the Free Software Foundation, either version 3 of the License, or                                                                              #
+#    (at your option) any later version.                                                                                                            #
+#                                                                                                                                                   #
+#    This program is distributed in the hope that it will be useful,                                                                                #
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of                                                                                 #
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                                                                                  #
+#    GNU General Public License for more details.                                                                                                   #
+#                                                                                                                                                   #
+#    You should have received a copy of the GNU General Public License                                                                              #
+#    along with this program.  If not, see <https://www.gnu.org/licenses/>.                                                                         #
+#                                                                                                                                                   #
+# ##################### #################### #################### #################### #################### #################### ####################
+# This code is based on information provided in https://github.com/hadley/httr/blob/master/vignettes/api-packages.Rmd
 
-#' High level function, retrieves observation data from data distribution layer rws. For each year, a separate file is written.
+
+#' @title High level function, retrieves observation data from data distribution layer rws. For each year, a separate file is written.
+#'
+#' @description
+#' TO BE WORKED OUT
 #'
 #' @param startyear Start year of requested data
 #' @param endyear End year of requested data
 #' @param myCatalogue Dataframe with location and parameter information
 #' @param outDir Directory to save the downloaded information
+#'
 #' @return Downloaded information will be saved as csv in \code{outDir}
+#'
 #' @examples
 #' metadata <- rws_metadata() # gets complete catalog
 #' subsTable <- metadata$content$AquoMetadataLijst
 #' locsTable <- metadata$content$LocatieLijst
-#' mijnLocaties = c("SOELKKPDOT")
+#' mijnLocaties = c("soelekerkepolder.oost")
 #' mijnParameters = c("PO4", "NO3")
 #' mijnGrootheden = c("CONCTTE")
 #' mijnHoedanigheden = c("Pnf")
-#' mijnCatalogus <- rws_getParameters(metadata, locatiecode = mijnLocaties) %>%
-#'   dplyr::filter(parameter.code %in% mijnParameters)
-#' getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
+#' #mijnCatalogus <- rws_getParameters(metadata, locatiecode = mijnLocaties) %>%
+#' #  dplyr::filter(parameter.code %in% mijnParameters)
+#' #getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
+#'
 #' @export
 getDDLdata_by_year <- function(startyear = integer(), endyear = integer(), myCatalogue, outDir = tempdir()) {
 
@@ -65,25 +88,33 @@ getDDLdata_by_year <- function(startyear = integer(), endyear = integer(), myCat
 
 
 
-#' High level function, retrieves observation data from data distribution layer rws
+#' @title High level function, retrieves observation data from data distribution layer rws
+#'
+#' @description
+#' TO BE WORKED OUT
 #'
 #' @param startyear Start year of requested data
 #' @param endyear End year of requested data
 #' @param myCatalogue Dataframe with location and parameter information
 #' @param outDir Directory to save the downloaded information
+#'
 #' @return Downloaded information will be saved as csv in \code{outDir}
+#'
 #' @examples
+#' \dontrun{
 #' require(magrittr)
 #' metadata <- rws_metadata() # gets complete catalog
 #' subsTable <- metadata$content$aquometadatalijst
 #' locsTable <- metadata$content$locatielijst
-#' mijnLocaties = c("SOELKKPDOT")
+#' mijnLocaties = c("soelekerkepolder.oost")
 #' mijnParameters = c("PO4", "NO3")
 #' mijnGrootheden = c("CONCTTE")
 #' mijnHoedanigheden = c("Pnf")
 #' mijnCatalogus <- rws_getParameters(metadata, locatiecode = mijnLocaties) %>%
 #'   dplyr::filter(parameter.code %in% mijnParameters)
 #' getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
+#' }
+#'
 #' @export
 getDDLdata <- function(startyear = integer(), endyear = integer(), myCatalogue, outDir = tempdir()) {
 
@@ -121,34 +152,50 @@ getDDLdata <- function(startyear = integer(), endyear = integer(), myCatalogue, 
 }
 
 
-#' Collects metadata for long term monitoring observation at Rijkswaterstaat (NL)
+#' @title Download the data catalog of the long-term monitoring program of Rijkswaterstaat (NL)
 #'
-#' @param filterList List objects in request. Default is "list(Eenheden=T,Grootheden=T,Hoedanigheden=T)"
+#' @aliases catalog datacatalog
 #'
-#' @return A structured list with metadata, class "rws_api"
+#' @description Obtain a list with tables containing the metadata and datatypes relevant
+#'    to query and interpret observational data from the long-term monitoring program of
+#'    Rijkswaterstaat.
+#'
+#' @param filterList Named list of boolean values to select properties that should be
+#'                   included in the catalog. Defaults to all TRUE. See details for an
+#'                   explanation of the names.
+#'
+#' @return
+#' The return object is a list consisting of 3 named elements:
+#' \describe{
+#'  \item{content}{
+#     A named list containing various vectors and data.frames describing the different
+#'    datatypes that come with queries for observations. See details for more explanation.
+#'  }
+#'  \item{path}{
+#'    The API resource or endpoint that was used to obtain the catalog.
+#'  }
+#'  \item{response}{
+#'    An object of the class response as defined in the \code{\link{httr-package}} that
+#'    represents the response of the server that was given upon the request sent by this
+#'    function.
+#'  }
+#' }
+#' @details
+#' TO BE WORKED OUT
 #'
 #' @examples
-#' non.beta.catalog <- rws_metadata(beta = F)
-#' beta.catalog <- rws_metadata(beta = T)
-#' non.beta.catalog.flattened <- rws_metadata(beta=F,flatten=T)
-#' beta.catalog.flattened <- rws_metadata(beta=T,flatten=T)
+#' \donttest{
+#' metadata <- rws_metadata()
+#' names(metadata)
+#' head(metadata$locatielijst)
+#' # extract parameter information
+#' parameters <- metadata$aquometadatalijst
+#' }
 #'
-#' names(non.beta.catalog)
-#' names(non.beta.catalog.flattened)
-#'
-#' names(beta.catalog)
-#' names(beta.catalog.flattened)
-#'
-#'
-#' # parse content of response
-#' parsed <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
-#' # extract unique locations
-#' locations <- parsed$LocatieLijst
-#' # extract parameters
-#' parameters <- data.frame(parameter = parsed$AquoMetadataLijst)
 #' @importFrom purrr map
 #' @importFrom purrr map_chr
 #' @importFrom purrr map_dbl
+#'
 #' @export
 rws_metadata <- function(
     filterList = list(Compartimenten=T,
@@ -195,7 +242,6 @@ rws_metadata <- function(
     flatten = TRUE
   )
 
-
   if (httr::http_error(resp)) {
     stop(
       sprintf(
@@ -224,56 +270,60 @@ rws_metadata <- function(
   return(res)
 }
 
-#' Collects selection of metadata for long term monitoring observation at Rijkswaterstaat (NL)
+#' @title Collects selection of metadata for long term monitoring observation at Rijkswaterstaat (NL)
+#'
+#' @description
+#' TO BE WORKED OUT
 #'
 #' @param compartiment Compartment (matrix) used for filtering metadata. Compartments can be expressed as codes, or names (omschrijving). Examples are "OW" for surface water, "BS" for Bottom/Sediment.
 #' @param grootheid Grootheid (quantity) used for filtering metadata.
 #' @param parameter Parameter (quality) used for filtering metadata.
 #' @param hoedanigheid Hoedanigheid used for filtering metadata.
 #' @param locatie Location used for filtering metadata, expressed as code or name (omschrijving).
-#' @param ... extra arguments to be passed on to rws_metadata(). See ?rws_metadata
+#'
 #' @return A structured list with metadata, class "rws_api"
+#'
 #' @examples
+#' \dontrun{
 #' # Collect all metadata:
 #' metadata <- get_selected_metadata()
 #' #Collect all metadata for quantity "Waterhoogte":
 #' selectedmetadata <- get_selected_metadata(grootheid = "Waterhoogte")
+#' }
 #' @importFrom tidyr unnest
+#'
 #' @export
 get_selected_metadata <- function(
     compartiment = NULL,
     grootheid = NULL,
     parameter = NULL,
     hoedanigheid = NULL,
-    locatie = NULL,
-    ...
+    locatie = NULL
     # filterlist = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T),
     # path = "/METADATASERVICES_DBO/OphalenCatalogus/"
 ) {
 
-  md <- rws_metadata(...)
+  md <- rws_metadata()
 
-  unnested <- tidyr::unnest(md$content$aquometadatalijst,names_sep = ".",c(Compartiment, Eenheid, Grootheid, Hoedanigheid, Parameter))
+  #unnested <- tidyr::unnest(md$content$aquometadatalijst,names_sep = ".",c(compartiment, eenheid, grootheid, hoedanigheid, parameter))
+  unnested <- md$content$aquometadatalijst
 
-  filtered <- dplyr::filter(unnested,
-      if(is.null(grootheid)) TRUE else Grootheid.Omschrijving %in% grootheid | Grootheid.Code %in% grootheid,
-      if(is.null(parameter)) TRUE else Parameter.Omschrijving %in% parameter | Parameter.Code %in% parameter,
-      if(is.null(hoedanigheid)) TRUE else Hoedanigheid.Code %in% hoedanigheid | Hoedanigheid.Code %in% hoedanigheid,
-      if(is.null(compartiment)) TRUE else Compartiment.Code %in% compartiment | Compartiment.Code %in% compartiment
-    )
+  selectionfilter <- ifelse(is.null(grootheid),    TRUE, unnested$grootheid.omschrijving %in% grootheid | unnested$grootheid.code %in% grootheid) &
+                     ifelse(is.null(parameter),    TRUE, unnested$parameter.omschrijving %in% parameter | unnested$parameter.code %in% parameter) &
+                     ifelse(is.null(hoedanigheid), TRUE, unnested$hoedanigheid.code %in% hoedanigheid | unnested$hoedanigheid.code %in% hoedanigheid) &
+                     ifelse(is.null(compartiment), TRUE, unnested$compartiment.code %in% compartiment | unnested$compartiment.code %in% compartiment)
 
-  merged1 <- dplyr::left_join(filtered,md$content$AquoMetadataLocatieLijst,by = c(AquoMetadata_MessageID = "aquometadata_messageid"))
-  merged2 <- dplyr::left_join(merged1,md$content$LocatieLijst)
-  filtered2 <- dplyr::filter(merged2,if(is.null(locatie)) TRUE else Naam %in% locatie |  Code %in% locatie)
-  lowercase <- dplyr::rename_with(filtered2,tolower)
-  res <- dplyr::rename(lowercase,locatie.naam = naam, locatie.code = code)
-  return(res)
+  filtered <- unnested[selectionfilter,]
+
+  merged1 <- dplyr::left_join(filtered,md$content$aquometadatalocatielijst,by = c(aquometadata_messageid = "aquometadata_messageid"))
+  merged2 <- dplyr::left_join(merged1,md$content$locatielijst)
+
+  selectionfilter <- ifelse(is.null(locatie), TRUE, merged2$naam %in% locatie |  merged2$code %in% locatie)
+  filtered2 <- merged2[selectionfilter,]
+  names(filtered2) <- tolower(names(filtered2))
+  names(filtered2)[names(filtered2)%in% c("naam","code")] <- paste0("locatie.",names(filtered2)[names(filtered2)%in% c("naam","code")])
+  return(filtered2)
 }
-
-
-
-
-
 
 nullToNA <- function(x) {
   x[sapply(x, is.null)] <- NA
@@ -282,19 +332,23 @@ nullToNA <- function(x) {
 
 
 
-#' Collect observation data from long term monitoring efforts at Rijkswaterstaat (NL)
+#' @title Collect observational data from long-term monitoring efforts at Rijkswaterstaat (NL)
 #'
-#' @param bodylist The message body containing criteria for data selection. See \code{\link{jsonlite:toJSON}} for more information on how to construct.
+#' @description
+#' TO BE WORKED OUT
+#'
+#' @param bodylist The message body containing criteria for data selection. See \code{\link{jsonlite}} for more information on how to construct.
 #' @param trytimes The number of trials to contact the data server before returning with failure.
 #'
 #' @return A structured list with three elements:
 #' \enumerate{
 #    \item content   a dataframe containing the actual observations
 #'   \item path      the full server address with argument string
-#'   \item response  a list of class 'response' (see \link{jsonlite-package})
+#'   \item response  a list of class 'response' (see \link{jsonlite})
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' options(digits=22)
 #'
 #' l2 <- list(
@@ -310,10 +364,8 @@ nullToNA <- function(x) {
 #'                  Einddatumtijd = "2012-01-28T09:01:00.000+01:00")
 #' )
 #' observations <- rws_observations(l2)
-#' content(observations$response, "text")
-#' parsed <- jsonlite::fromJSON(content(observation$response, "text"), simplifyVector = T )
-#' parsed$waarnemingenlijst$metingenlijst[[1]] %>% View()
-#'
+#' str(observations)
+#' }
 #' @export
 rws_observations <- function (bodylist, trytimes = 3) {
 
@@ -350,7 +402,7 @@ rws_observations <- function (bodylist, trytimes = 3) {
                                 digits = NA
                                ),
                   httr::add_headers(.headers = c(`Content-Type` = "application/json",
-                                           `Ocp-Apim-Subscription-Key` = "my_subscrition_key"
+                                           `Ocp-Apim-Subscription-Key` = "my_subscription_key"
                                           )
                              ),
                   times = trytimes
@@ -359,6 +411,8 @@ rws_observations <- function (bodylist, trytimes = 3) {
         stop("API did not return application/json", call. = FALSE)
     }
     response <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),simplifyVector = FALSE)
+#    parsed   <- jsonlite::fromJSON(content(resp, "text", encoding = "UTF-8"),simplifyVector = TRUE,flatten = T)
+
 
     if (!response$Succesvol) {
         paste("request not successful", response$Foutmelding)
@@ -441,23 +495,29 @@ rws_observations <- function (bodylist, trytimes = 3) {
         }
         if (httr::http_error(resp)) {
             stop(sprintf("RWS API request failed [%s]\n%s\n<%s>",
-                httr::status_code(resp), parsed$message, parsed$documentation_url),
+                httr::status_code(resp), response$message, response$documentation_url),
                 call. = FALSE)
         }
     }
     return(structure(list(content = df, path = path, response = resp)))
 }
 
-#' Collects observed quantities and parameters for stations
+#' @title Collects observed quantities and parameters for stations
+#'
+#' @description
+#' TO BE WORKED OUT
 #'
 #' @param metadata parsed list of metadata generated from rws_metadata()
 #' @param grootheidcode character vector of selected grootheid.code according to AQUO
 #' @param parametercode character vector of selected parameter.code according to AQUO
+#'
 #' @return dataframe containing locations where grootheidcode and parametercode occur
+#'
 #' @examples
 #' metadata <- rws_metadata()
 #' rws_getLocations(metadata, 'SALNTT', 'NVT')
 #' rws_getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
+#'
 #' @export
 rws_getLocations <- function(metadata, grootheidcode, parametercode = NULL) {
 
@@ -489,16 +549,22 @@ rws_getLocations <- function(metadata, grootheidcode, parametercode = NULL) {
 }
 
 
-#' Collects observed quantities and parameters for stations.
+#' @title Collects observed quantities and parameters for stations.
+#'
+#' @description
+#' TO BE WORKED OUT
 #'
 #' @param metadata parsed list of metadata generated from rws_metadata()
 #' @param locatiecode character vector of selected locatie.code
 #' @param locatienaam character vector of selected locatie.naam
+#'
 #' @return dataframe containing locations where grootheidcode and parametercode occur
+#'
 #' @examples
 #' metadata <- rws_metadata()
 #' rws_getParameters(metadata, locatiecode='4epetroleumhaven')
 #' rws_getParameters(metadata, locatienaam='A12 platform')
+#'
 #' @export
 rws_getParameters <- function(metadata, locatiecode = NULL, locatienaam = NULL) {
 
@@ -529,17 +595,22 @@ rws_getParameters <- function(metadata, locatiecode = NULL, locatienaam = NULL) 
   return(res)
 }
 
-#' makes list for requesting observation data from rws api
+#' @title makes list for requesting observation data from rws api
+#'
+#' @description
+#' TO BE WORKED OUT
 #'
 #' @param mijnCatalogus catalogue created using rws_metadata
 #' @param beginDatumTijd date/time indication of the first observation to select
 #' @param eindDatumTijd date/time indication of the last observation to select
+#'
 #' @return dataframe containing observed quantities and parameters
+#'
 #' @examples
 #' metadata <- rws_metadata()
 #' # parse content of response
-#' parsedmetadata <- jsonlite::fromJSON(content(resp, "text"), simplifyVector = T )
-#' catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
+#' #catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
+#'
 #' @export
 rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd){
   for(ii in seq(1:dim(mijnCatalogus)[1])){

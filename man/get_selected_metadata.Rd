@@ -9,8 +9,7 @@ get_selected_metadata(
   grootheid = NULL,
   parameter = NULL,
   hoedanigheid = NULL,
-  locatie = NULL,
-  ...
+  locatie = NULL
 )
 }
 \arguments{
@@ -23,18 +22,18 @@ get_selected_metadata(
 \item{hoedanigheid}{Hoedanigheid used for filtering metadata.}
 
 \item{locatie}{Location used for filtering metadata, expressed as code or name (omschrijving).}
-
-\item{...}{extra arguments to be passed on to rws_metadata(). See ?rws_metadata}
 }
 \value{
 A structured list with metadata, class "rws_api"
 }
 \description{
-Collects selection of metadata for long term monitoring observation at Rijkswaterstaat (NL)
+TO BE WORKED OUT
 }
 \examples{
+\dontrun{
 # Collect all metadata:
 metadata <- get_selected_metadata()
 #Collect all metadata for quantity "Waterhoogte":
 selectedmetadata <- get_selected_metadata(grootheid = "Waterhoogte")
+}
 }

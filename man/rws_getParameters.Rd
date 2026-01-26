@@ -17,10 +17,11 @@ rws_getParameters(metadata, locatiecode = NULL, locatienaam = NULL)
 dataframe containing locations where grootheidcode and parametercode occur
 }
 \description{
-Collects observed quantities and parameters for stations.
+TO BE WORKED OUT
 }
 \examples{
 metadata <- rws_metadata()
 rws_getParameters(metadata, locatiecode='4epetroleumhaven')
 rws_getParameters(metadata, locatienaam='A12 platform')
+
 }

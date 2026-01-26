@@ -24,18 +24,21 @@ getDDLdata(
 Downloaded information will be saved as csv in \code{outDir}
 }
 \description{
-High level function, retrieves observation data from data distribution layer rws
+TO BE WORKED OUT
 }
 \examples{
+\dontrun{
 require(magrittr)
 metadata <- rws_metadata() # gets complete catalog
 subsTable <- metadata$content$aquometadatalijst
 locsTable <- metadata$content$locatielijst
-mijnLocaties = c("SOELKKPDOT")
+mijnLocaties = c("soelekerkepolder.oost")
 mijnParameters = c("PO4", "NO3")
 mijnGrootheden = c("CONCTTE")
 mijnHoedanigheden = c("Pnf")
 mijnCatalogus <- rws_getParameters(metadata, locatiecode = mijnLocaties) \%>\%
   dplyr::filter(parameter.code \%in\% mijnParameters)
 getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
+}
+
 }

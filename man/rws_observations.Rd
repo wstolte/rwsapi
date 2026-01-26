@@ -2,12 +2,12 @@
 % Please edit documentation in R/RWS-API.R
 \name{rws_observations}
 \alias{rws_observations}
-\title{Collect observation data from long term monitoring efforts at Rijkswaterstaat (NL)}
+\title{Collect observational data from long-term monitoring efforts at Rijkswaterstaat (NL)}
 \usage{
 rws_observations(bodylist, trytimes = 3)
 }
 \arguments{
-\item{bodylist}{The message body containing criteria for data selection. See \code{\link{jsonlite:toJSON}} for more information on how to construct.}
+\item{bodylist}{The message body containing criteria for data selection. See \code{\link{jsonlite}} for more information on how to construct.}
 
 \item{trytimes}{The number of trials to contact the data server before returning with failure.}
 }
@@ -15,13 +15,14 @@ rws_observations(bodylist, trytimes = 3)
 A structured list with three elements:
 \enumerate{
   \item path      the full server address with argument string
-  \item response  a list of class 'response' (see \link{jsonlite-package})
+  \item response  a list of class 'response' (see \link{jsonlite})
 }
 }
 \description{
-Collect observation data from long term monitoring efforts at Rijkswaterstaat (NL)
+TO BE WORKED OUT
 }
 \examples{
+\dontrun{
 options(digits=22)
 
 l2 <- list(
@@ -37,8 +38,6 @@ l2 <- list(
                  Einddatumtijd = "2012-01-28T09:01:00.000+01:00")
 )
 observations <- rws_observations(l2)
-content(observations$response, "text")
-parsed <- jsonlite::fromJSON(content(observation$response, "text"), simplifyVector = T )
-parsed$waarnemingenlijst$metingenlijst[[1]] \%>\% View()
-
+str(observations)
+}
 }
