@@ -41,7 +41,7 @@ Obtain a list with tables containing the metadata and datatypes relevant
 TO BE WORKED OUT
 }
 \examples{
-\donttest{
+\dontrun{
 metadata <- rws_metadata()
 names(metadata)
 head(metadata$locatielijst)

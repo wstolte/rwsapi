@@ -21,8 +21,9 @@ This function provides a list of parameter-location combinations with metadata t
 with the quantity (grootheid)-parameter combination as provided by the function's arguments.
 }
 \examples{
+\dontrun{
 metadata <- rws_metadata()
 rws_getLocations(metadata, 'SALNTT', 'NVT')
 rws_getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
-
+}
 }

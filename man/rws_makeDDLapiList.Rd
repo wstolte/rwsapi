@@ -20,8 +20,9 @@ dataframe containing observed quantities and parameters
 TO BE WORKED OUT
 }
 \examples{
+\dontrun{
 metadata <- rws_metadata()
 # parse content of response
 #catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
-
+}
 }

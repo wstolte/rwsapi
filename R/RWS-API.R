@@ -31,6 +31,7 @@
 #' @return Downloaded information will be saved as csv in \code{outDir}
 #'
 #' @examples
+#' \dontrun{
 #' metadata <- rws_metadata() # gets complete catalog
 #' subsTable <- metadata$content$AquoMetadataLijst
 #' locsTable <- metadata$content$LocatieLijst
@@ -41,7 +42,7 @@
 #' #mijnCatalogus <- rws_getParameters(metadata, locatiecode = mijnLocaties) %>%
 #' #  dplyr::filter(parameter.code %in% mijnParameters)
 #' #getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
-#'
+#' }
 #' @export
 getDDLdata_by_year <- function(startyear = integer(), endyear = integer(), myCatalogue, outDir = tempdir()) {
 
@@ -184,7 +185,7 @@ getDDLdata <- function(startyear = integer(), endyear = integer(), myCatalogue, 
 #' TO BE WORKED OUT
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' metadata <- rws_metadata()
 #' names(metadata)
 #' head(metadata$locatielijst)
@@ -536,10 +537,11 @@ rws_observations <- function (bodylist, trytimes = 3) {
 #' @return dataframe containing locations where grootheidcode and parametercode occur
 #'
 #' @examples
+#' \dontrun{
 #' metadata <- rws_metadata()
 #' rws_getLocations(metadata, 'SALNTT', 'NVT')
 #' rws_getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
-#'
+#' }
 #' @export
 rws_getLocations <- function(metadata, grootheidcode, parametercode = NULL) {
 
@@ -584,10 +586,11 @@ rws_getLocations <- function(metadata, grootheidcode, parametercode = NULL) {
 #' @return dataframe containing locations where grootheidcode and parametercode occur
 #'
 #' @examples
+#' \dontrun{
 #' metadata <- rws_metadata()
 #' rws_getParameters(metadata, locatiecode='4epetroleumhaven')
 #' rws_getParameters(metadata, locatienaam='A12 platform')
-#'
+#' }
 #' @export
 rws_getParameters <- function(metadata, locatiecode = NULL, locatienaam = NULL) {
 
@@ -630,10 +633,11 @@ rws_getParameters <- function(metadata, locatiecode = NULL, locatienaam = NULL) 
 #' @return dataframe containing observed quantities and parameters
 #'
 #' @examples
+#' \dontrun{
 #' metadata <- rws_metadata()
 #' # parse content of response
 #' #catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
-#'
+#' }
 #' @export
 rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd){
   for(ii in seq(1:dim(mijnCatalogus)[1])){

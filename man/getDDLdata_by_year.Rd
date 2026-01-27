@@ -27,6 +27,7 @@ Downloaded information will be saved as csv in \code{outDir}
 TO BE WORKED OUT
 }
 \examples{
+\dontrun{
 metadata <- rws_metadata() # gets complete catalog
 subsTable <- metadata$content$AquoMetadataLijst
 locsTable <- metadata$content$LocatieLijst
@@ -37,5 +38,5 @@ mijnHoedanigheden = c("Pnf")
 #mijnCatalogus <- rws_getParameters(metadata, locatiecode = mijnLocaties) \%>\%
 #  dplyr::filter(parameter.code \%in\% mijnParameters)
 #getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
-
+}
 }

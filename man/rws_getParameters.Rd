@@ -21,8 +21,9 @@ This function produces a list of parameters that are measured at the locations
 provided in the function's arguments.
 }
 \examples{
+\dontrun{
 metadata <- rws_metadata()
 rws_getParameters(metadata, locatiecode='4epetroleumhaven')
 rws_getParameters(metadata, locatienaam='A12 platform')
-
+}
 }
