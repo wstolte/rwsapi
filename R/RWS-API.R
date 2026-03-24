@@ -433,8 +433,29 @@ rws_observations <- function (bodylist, trytimes = 3) {
     if (httr::http_type(resp) != "application/json") {
         stop("API did not return application/json", call. = FALSE)
     }
-    response <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),simplifyVector = FALSE)
+
+    if(resp$status_code != 204) {
+      response <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"),simplifyVector = FALSE)
 #    parsed   <- jsonlite::fromJSON(content(resp, "text", encoding = "UTF-8"),simplifyVector = TRUE,flatten = T)
+    } else {
+    empty_content <- data.frame(
+                locatie.message.id                   = c(), locatie.code                 = c(), locatie.naam                        = c(), coordinatenstelsel           = c(),
+                geometriepunt.x                      = c(), geometriepunt.y              = c(), tijdstip                            = c(), statuswaarde                 = c(),
+                bemonsteringshoogte                  = c(), referentievlak               = c(), opdrachtgevendeinstantie            = c(), kwaliteitswaarde.code        = c(),
+                parameter.wat.omschrijving           = c(), bemonsteringsapparaat.code   = c(), bemonsteringsapparaat.omschrijving  = c(), bemonsteringssoort.code      = c(),
+                bemonsteringssoort.omschrijving      = c(), biotaxon.code                = c(), biotaxon.omschrijving               = c(), biotaxontype.code            = c(),
+                biotaxontype.omschrijving            = c(), compartiment.code            = c(), compartiment.omschrijving           = c(), eenheid.code                 = c(),
+                eenheid.omschrijving                 = c(), grootheid.code               = c(), grootheid.omschrijving              = c(), typering.code                = c(),
+                typering.omschrijving                = c(), hoedanigheid.code            = c(), hoedanigheid.omschrijving           = c(), meetapparaat.code            = c(),
+                meetapparaat.omschrijving            = c(), orgaan.code                  = c(), orgaan.omschrijving                 = c(), parameter.code               = c(),
+                parameter.omschrijving               = c(), groepering.code              = c(), groepering.omschrijving             = c(), waardebepalingstechniek.code = c(),
+                waardebepalingstechniek.omschrijving = c(), waardebepalingsmethode.code  = c(), waardebepalingsmethode.omschrijving = c(), waardebewerkingsmethode.code = c(),
+                waardebewerkingsmethode.omschrijving = c(), numeriekewaarde              = c(), alphanumeriekewaarde                = c()
+    )
+
+
+      return(structure(list(content = empty_content, path = path, response = resp)))
+    }
 
     if (!response$Succesvol) {
         paste("request not successful", response$Foutmelding)
@@ -493,8 +514,6 @@ rws_observations <- function (bodylist, trytimes = 3) {
                 parameter.omschrijving                = response$waarnemingenlijst[[ii]]$aquometadata$parameter$omschrijving,
 #                plaatsbepalingsapparaat.code = response$waarnemingenlijst[[ii]]$aquometadata$PlaatsbepalingsApparaat$code,                             # no longer present in API response
 #                plaatsbepalingsapparaat.omschrijving = response$waarnemingenlijst[[ii]]$aquometadata$PlaatsbepalingsApparaat$omschrijving,             # no longer present in API response
-                typering.code                         = response$waarnemingenlijst[[ii]]$aquometadata$typering$code,
-                typering.omschrijving                 = response$waarnemingenlijst[[ii]]$aquometadata$typering$omschrijving,
                 groepering.code                       = response$waarnemingenlijst[[ii]]$aquometadata$Groepering$code,
                 groepering.omschrijving               = response$waarnemingenlijst[[ii]]$aquometadata$Groepering$omschrijving,
                 waardebepalingstechniek.code          = response$waarnemingenlijst[[ii]]$aquometadata$waardebepalingsTechniek$code,
