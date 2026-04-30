@@ -18,140 +18,6 @@
 # This code is based on information provided in https://github.com/hadley/httr/blob/master/vignettes/api-packages.Rmd
 
 
-#' @title High level function, retrieves observation data from data distribution layer rws. For each year, a separate file is written.
-#'
-#' @description
-#' TO BE WORKED OUT
-#'
-#' @param startyear Start year of requested data
-#' @param endyear End year of requested data
-#' @param myCatalogue Dataframe with location and parameter information
-#' @param outDir Directory to save the downloaded information
-#'
-#' @return Downloaded information will be saved as csv in \code{outDir}
-#'
-#' @examples
-#' \dontrun{
-#' metadata <- rws_metadata() # gets complete catalog
-#' subsTable <- metadata$content$AquoMetadataLijst
-#' locsTable <- metadata$content$LocatieLijst
-#' mijnLocaties = c("soelekerkepolder.oost")
-#' mijnParameters = c("PO4", "NO3")
-#' mijnGrootheden = c("CONCTTE")
-#' mijnHoedanigheden = c("Pnf")
-#' #mijnCatalogus <- rws_getParameters(metadata, locatiecode = mijnLocaties) %>%
-#' #  dplyr::filter(parameter.code %in% mijnParameters)
-#' #getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
-#' }
-#' @export
-getDDLdata_by_year <- function(startyear = integer(), endyear = integer(), myCatalogue, outDir = tempdir()) {
-
-  if(outDir == tempdir()){
-    print(paste("No output directory given, saving results in", tempdir()))
-    # print("Proceed? y/n")
-  }
-
-  if(!dir.exists(outDir)) dir.create(outDir, recursive = T)
-
-  # startdate <- paste0(startyear, "-01-01T09:00:00.000+01:00")
-  # enddate <- paste0(endyear, "-12-31T23:00:00.000+01:00")
-
-  # getList <- rws_makeDDLapiList(beginDatumTijd = startdate,
-  #                               eindDatumTijd = enddate,
-  #                               mijnCatalogus = myCatalogue
-  # )
-
-  for(year in seq(startyear, endyear, 1)){
-    startdate <- paste0(year, "-01-01T09:00:00.000+01:00")
-    enddate <- paste0(year + 1, "-12-31T23:00:00.000+01:00")
-    getList <- rws_makeDDLapiList(beginDatumTijd = startdate,
-                                          eindDatumTijd = enddate,
-                                          mijnCatalogus = myCatalogue
-    )
-    for(jj in c(1:length(getList))){   #
-      print(paste("getting", jj, myCatalogue$locatie.code[jj], year, myCatalogue$compartiment.code[jj], myCatalogue$grootheid.code[jj], myCatalogue$parameter.code[jj]))
-      response <- rws_observations(bodylist = getList[[jj]])
-      if(!is.null(response) & nrow(response$content)!=0){
-        filename <- paste(
-          myCatalogue$locatie.code[jj],
-          myCatalogue$compartiment.code[jj],
-          stringr::str_replace(myCatalogue$grootheid.code[jj], "[^A-Za-z0-9]+", "_"),
-          myCatalogue$parameter.code[jj],
-          stringr::str_replace(myCatalogue$hoedanigheid.code[jj], "[^A-Za-z0-9]+", "_"),
-          year,
-          "ddl.csv", sep = "_")
-        readr::write_delim(response$content, file = file.path(outDir, filename), delim = ";")} else {
-          print(paste("no data available for", myCatalogue$locatie.code[jj], myCatalogue$compartiment.code[jj], myCatalogue$grootheid.code[jj], myCatalogue$parameter.code[jj], myCatalogue$hoedanigheid.code[jj]))
-        }
-    }
-  }
-}
-
-
-
-#' @title High level function, retrieves observation data from data distribution layer rws
-#'
-#' @description
-#' TO BE WORKED OUT
-#'
-#' @param startyear Start year of requested data
-#' @param endyear End year of requested data
-#' @param myCatalogue Dataframe with location and parameter information
-#' @param outDir Directory to save the downloaded information
-#'
-#' @return Downloaded information will be saved as csv in \code{outDir}
-#'
-#' @examples
-#' \dontrun{
-#' require(magrittr)
-#' metadata <- rws_metadata() # gets complete catalog
-#' subsTable <- metadata$content$aquometadatalijst
-#' locsTable <- metadata$content$locatielijst
-#' mijnLocaties = c("soelekerkepolder.oost")
-#' mijnParameters = c("PO4", "NO3")
-#' mijnGrootheden = c("CONCTTE")
-#' mijnHoedanigheden = c("Pnf")
-#' mijnCatalogus <- rws_getParameters(metadata, locatiecode = mijnLocaties) %>%
-#'   dplyr::filter(parameter.code %in% mijnParameters)
-#' getDDLdata(startyear = 2015, endyear = 2020, myCatalogue = mijnCatalogus, outDir = "testData")
-#' }
-#'
-#' @export
-getDDLdata <- function(startyear = integer(), endyear = integer(), myCatalogue, outDir = tempdir()) {
-
-  if(outDir == tempdir()){
-    print(paste("No output directory given, saving results in", tempdir()))
-    # print("Proceed? y/n")
-  }
-
-  if(!dir.exists(outDir)) dir.create(outDir, recursive = T)
-
-  startdate <- paste0(startyear, "-01-01T09:00:00.000+01:00")
-  enddate <- paste0(endyear, "-12-31T23:00:00.000+01:00")
-
-  getList <- rws_makeDDLapiList(beginDatumTijd = startdate,
-                                eindDatumTijd = enddate,
-                                mijnCatalogus = myCatalogue
-  )
-
-    for(jj in c(1:length(getList))){   #
-      print(paste("getting", jj, myCatalogue$locatie.code[jj], paste0(startyear, "- ", endyear), myCatalogue$compartiment.code[jj], myCatalogue$grootheid.code[jj], myCatalogue$parameter.code[jj]))
-      response <- rws_observations(bodylist = getList[[jj]])
-      if(!is.null(response) & nrow(response$content)!=0){
-        filename <- paste(
-          myCatalogue$locatie.code[jj],
-          myCatalogue$compartiment.code[jj],
-          stringr::str_replace(myCatalogue$grootheid.code[jj], "[^A-Za-z0-9]+", "_"),
-          myCatalogue$parameter.code[jj],
-          stringr::str_replace(myCatalogue$hoedanigheid.code[jj], "[^A-Za-z0-9]+", "_"),
-          startyear, endyear,
-          "ddl.csv", sep = "_")
-        readr::write_delim(response$content, file = file.path(outDir, filename), delim = ";")} else {
-          print(paste("no data available for", myCatalogue$locatie.code[jj], myCatalogue$compartiment.code[jj], myCatalogue$grootheid.code[jj], myCatalogue$parameter.code[jj], myCatalogue$hoedanigheid.code[jj]))
-    }
-  }
-}
-
 
 #' @title Download the data catalog of the long-term monitoring program of Rijkswaterstaat (NL)
 #'
@@ -270,86 +136,6 @@ rws_metadata <- function(
 
   return(res)
 }
-
-#' @title Collects selection of metadata for long term monitoring observation at Rijkswaterstaat (NL)
-#'
-#' @description
-#' This function queries the server for a data catalog and selects metadata from it based on the provided
-#' arguments to the function.
-#'
-#' @param compartiment Character vector of compartment descriptions (omschrijving) or codes
-#   that is used to select the compartment (matrix) in which parameters were sampled. Examples
-#'  are "OW" for surface water, "BS" for Bottom/Sediment; see also examples below.
-#' @param grootheid Character vector for selecting the quantity (Grootheid;
-#'  e.g. code:CONCTTE = concentration = omschrijving:(massa)Concentratie; see examples below).
-#' @param parameter Character vector with parameters (quality) to select (e.g. parameter.code=NO3 = nitraat=parameter.omschrijving; see examples below).
-#' @param hoedanigheid Character vector specifying additional information on the sampling or interpretation (e.g. hoedanigheid.omschrijving="uitgedrukt in stikstof / opgeloste fractie")
-#' @param locatie Character vector of location to select (again expressed as code or name (omschrijving); see examples below).
-#' @param catalog Optional local copy (in the R environment) of the catalog. If not given, the catalog is downloaded from the server.
-#'
-#' @return A structured list with metadata, class "rws_api"
-#'
-#' @examples
-#' \dontrun{
-#  # Download and store local copy of the catalog
-#' catalog <- rws_metadata()
-#'
-#' # Collect all metadata (this is a data.frame, not a copy of the catalog):
-#' metadata <- get_selected_metadata()
-#'
-#' # Collect all metadata for dissolved nitrate concentration measurements
-#' # in surface waters on the transect off the coast of Walcheren.
-#' selectedmetadata <- get_selected_metadata(
-#'       grootheid = "(massa)Concentratie",
-#'       compartiment = "Oppervlaktewater",
-#'       hoedanigheid = "uitgedrukt in stikstof / opgeloste fractie",
-#'       parameter = "nitraat",
-#'       locatie=c("walcheren.2kmuitdekust","walcheren.20kmuitdekust","walcheren.70kmuitdekust"),
-#'       catalog=catalog
-#' )
-#' }
-#' @importFrom tidyr unnest
-#'
-#' @export
-get_selected_metadata <- function(
-    compartiment = NULL,
-    grootheid = NULL,
-    parameter = NULL,
-    hoedanigheid = NULL,
-    locatie = NULL,
-    catalog=NULL
-    # filterlist = list(Eenheden=T, Grootheden=T, Parameters=T, Hoedanigheden=T, Compartimenten = T),
-    # path = "/METADATASERVICES_DBO/OphalenCatalogus/"
-) {
-
-  if(is.null(catalog)) md <- rws_metadata()
-  else md <- catalog
-
-  #unnested <- tidyr::unnest(md$content$aquometadatalijst,names_sep = ".",c(compartiment, eenheid, grootheid, hoedanigheid, parameter))
-  unnested <- md$content$aquometadatalijst
-
-  selectionfilter <- ifelse(rep(is.null(grootheid),nrow(unnested)),    TRUE, unnested$grootheid.omschrijving %in% grootheid | unnested$grootheid.code %in% grootheid) &
-                     ifelse(rep(is.null(parameter),nrow(unnested)),    TRUE, unnested$parameter.omschrijving %in% parameter | unnested$parameter.code %in% parameter) &
-                     ifelse(rep(is.null(hoedanigheid),nrow(unnested)), TRUE, unnested$hoedanigheid.omschrijving %in% hoedanigheid | unnested$hoedanigheid.code %in% hoedanigheid) &
-                     ifelse(rep(is.null(compartiment),nrow(unnested)), TRUE, unnested$compartiment.omschrijving %in% compartiment | unnested$compartiment.code %in% compartiment)
-
-  filtered <- unnested[selectionfilter,]
-
-  merged1 <- dplyr::left_join(filtered,md$content$aquometadatalocatielijst,by = c(aquometadata_messageid = "aquometadata_messageid"))
-  merged2 <- dplyr::left_join(merged1,md$content$locatielijst)
-
-  selectionfilter <- ifelse(rep(is.null(locatie),nrow(merged2)), TRUE, merged2$naam %in% locatie |  merged2$code %in% locatie)
-  filtered2 <- merged2[selectionfilter,]
-  names(filtered2) <- tolower(names(filtered2))
-  names(filtered2)[names(filtered2)%in% c("naam","code")] <- paste0("locatie.",names(filtered2)[names(filtered2)%in% c("naam","code")])
-  return(filtered2)
-}
-
-nullToNA <- function(x) {
-  x[sapply(x, is.null)] <- NA
-  return(x)
-}
-
 
 
 #' @title Collect observational data from long-term monitoring efforts at Rijkswaterstaat (NL)
@@ -543,222 +329,73 @@ rws_observations <- function (bodylist, trytimes = 3) {
     return(structure(list(content = df, path = path, response = resp)))
 }
 
-#' @title Collects observed quantities and parameters for stations
+#' @title Get locations as Web Feature Service
 #'
 #' @description
-#' This function provides a list of parameter-location combinations with metadata that comply
-#' with the quantity (grootheid)-parameter combination as provided by the function's arguments.
+#' Query for all locations from all monitoring networks available in WADAR (Rijkswaterstaat).
 #'
-#' @param metadata parsed list of metadata generated from rws_metadata()
-#' @param grootheidcode character vector of selected grootheid.code according to AQUO
-#' @param parametercode character vector of selected parameter.code according to AQUO
-#'
-#' @return dataframe containing locations where grootheidcode and parametercode occur
+#' @return spatial dataframe containing all monitoring locations
 #'
 #' @examples
 #' \dontrun{
-#' metadata <- rws_metadata()
-#' rws_getLocations(metadata, 'SALNTT', 'NVT')
-#' rws_getLocations(metadata, 'salntt', 'nvt') # no case-sensitivity
+#' allLocations <- rws_wfsLocations()
 #' }
 #' @export
-rws_getLocations <- function(metadata, grootheidcode, parametercode = NULL) {
+rws_wfsLocations <- function(){
 
-  if(!is.null(metadata$content)) myMetadata <- metadata$content else myMetadata <- metadata
+  locationsurl = "https://geo.rijkswaterstaat.nl/services/ogc/hws/DDAPI20/ows?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=locaties&outputFormat=application/json"
+  locs = sf::st_read(locationsurl)
+  return(locs)
 
-  # grootheidcode = 'salntt'; parametercode = 'nvt'
-
-  flattened <- dplyr::bind_cols(rlist::list.flatten(myMetadata$aquometadatalijst))
-  names(flattened) <- tolower(names(flattened))
-
-  filtered <- flattened[tolower(flattened$grootheid.code) %in% tolower(grootheidcode),]
-
-  if(!is.null(parametercode)) filtered <- filtered[tolower(filtered$parameter.code) %in% tolower(parametercode),]
-
-  merged1 <- dplyr::left_join(filtered,dplyr::as_tibble(rlist::list.flatten(myMetadata$aquometadatalocatielijst)), by = c(aquometadata_messageid = 'aquometadata_messageid'))
-  merged2 <- dplyr::left_join(merged1,dplyr::as_tibble(rlist::list.flatten(myMetadata$locatielijst)))
-  names(merged2) <- tolower(names(merged2))
-  res <- merged2[,c("aquometadata_messageid",
-                    "locatie_messageid",
-                    "parameter_wat_omschrijving",
-                    "compartiment.code","compartiment.omschrijving",
-                    "eenheid.code","eenheid.omschrijving",
-                    "grootheid.code","grootheid.omschrijving",
-                    "hoedanigheid.code","hoedanigheid.omschrijving",
-                    "parameter.code","parameter.omschrijving",
-                    "naam","code","lon","lat","coordinatenstelsel"
-                   )]
-  return(res)
 }
 
 
-#' @title Collects observed quantities and parameters for stations.
+
+#' @title Get locations with latest observations from Web Feature Service
 #'
 #' @description
-#' This function produces a list of parameters that are measured at the locations
-#' provided in the function's arguments.
+#' Fetches spatial object with all monitoring locations and their latest observation for all parameter/quantities combinations. This is a VERY large file. Consider caching it, or apply a filter ()
 #'
-#' @param metadata parsed list of metadata generated from rws_metadata()
-#' @param locatiecode character vector of selected locatie.code
-#' @param locatienaam character vector of selected locatie.naam
-#'
-#' @return dataframe containing locations where grootheidcode and parametercode occur
+#' @return spatial dataframe containing locations with latest observations
 #'
 #' @examples
 #' \dontrun{
-#' metadata <- rws_metadata()
-#' rws_getParameters(metadata, locatiecode='4epetroleumhaven')
-#' rws_getParameters(metadata, locatienaam='A12 platform')
+#' latestObservations <- rws_wfsLatestObs(parFilter = "Waterhoogte", outputFormat = "application/json")
+#' plot(latestObservations[,"id"])
+#' latestObservations <- rws_wfsLatestObs(parFilter = "Waterhoogte", outputFormat = "csv")
+#' plot(latestObservations$TIJDSTIP_LAATSTE_METING, latestObservations$WAARDE_LAATSTE_METING)
 #' }
 #' @export
-rws_getParameters <- function(metadata, locatiecode = NULL, locatienaam = NULL) {
+rws_wfsLatestObs <- function(parFilter = "Waterhoogte", outputFormat = "application/json"){
 
-  if(!is.null(metadata$content)) myMetadata <- metadata$content else myMetadata <- metadata
+  url_list <- structure(
+    list(
+      scheme = "https",
+      hostname = "geo.rijkswaterstaat.nl",
+      port = NULL,
+      path = "services/ogc/hws/DDAPI20/ows",
+      query = list(
+        SERVICE = "WFS",
+        VERSION = "1.1.0",
+        REQUEST = "GetFeature",
+        TYPENAME = "locatiesmetlaatstewaarneming",
+        FILTER = paste0(" <Filter> <PropertyIsLike escape=\"!\" singleChar=\".\" wildCard=\"*\"> <PropertyName>PARAMETER_WAT_OMSCHRIJVING</PropertyName> <Literal>*", parFilter, "*</Literal> </PropertyIsLike> </Filter> "),
+        outputFormat = outputFormat),
+      params = NULL,
+      fragment = NULL,
+      username = NULL,
+      password = NULL),
+    class = "url"
+  )
 
-  dat <- dplyr::as_tibble(rlist::list.flatten(myMetadata$locatielijst))
-  names(dat) <- tolower(names(dat))
+  url <- httr::build_url(url_list)
 
-  if (is.null(locatienaam)) {
-     filtered1 <- dplyr::filter(dat, dat$code %in% locatiecode)
+  if(outputFormat == 'csv') {
+    locs_with_latest_obs = readr::read_csv(url)
   } else {
-     filtered1 <- dplyr::filter(dat, dat$naam %in% locatienaam)
+    locs_with_latest_obs = sf::st_read(url)
   }
 
-  merged1 <- dplyr::left_join(filtered1,dplyr::as_tibble(rlist::list.flatten(myMetadata$aquometadatalocatielijst)),by = c(locatie_messageid = 'locatie_messageid'))
-  merged2 <- dplyr::left_join(merged1,dplyr::bind_cols(rlist::list.flatten(myMetadata$aquometadatalijst)), by = c(aquometadata_messageid = 'aquometadata_messageid'))
-  names(merged2) <- tolower(names(merged2))
-  res <- merged2[,c("aquometadata_messageid",
-                    "locatie_messageid","parameter_wat_omschrijving",
-                    "compartiment.code","compartiment.omschrijving",
-                    "eenheid.code","eenheid.omschrijving",
-                    "grootheid.code","grootheid.omschrijving",
-                    "hoedanigheid.code","hoedanigheid.omschrijving",
-                    "parameter.code","parameter.omschrijving",
-                    "naam","code","lon","lat","coordinatenstelsel"
-                   )]
-  names(res)[names(res)%in% c("naam","code")] <- paste0("locatie.",names(res)[names(res)%in% c("naam","code")])
-  return(res)
-}
+  return(locs_with_latest_obs)
 
-#' @title makes list for requesting observation data from rws api
-#'
-#' @description
-#' TO BE WORKED OUT
-#'
-#' @param mijnCatalogus catalogue created using rws_metadata
-#' @param beginDatumTijd date/time indication of the first observation to select
-#' @param eindDatumTijd date/time indication of the last observation to select
-#'
-#' @return dataframe containing observed quantities and parameters
-#'
-#' @examples
-#' \dontrun{
-#' metadata <- rws_metadata()
-#' # parse content of response
-#' #catalogue <- DDLgetParametersForLocations(parsedmetadata, c("Dreischor", "Herkingen", "Scharendijke diepe put"))
-#' }
-#' @export
-rws_makeDDLapiList <- function(mijnCatalogus, beginDatumTijd, eindDatumTijd){
-  for(ii in seq(1:dim(mijnCatalogus)[1])){
-    #messageID meegeven waanneer op parameter_wat_omschrijving gezocht wordt.
-    if(ii==1)  ll <- list()
-    l <- list(
-      AquoPlusWaarnemingMetadata= list(
-        AquoMetadata = list(
-          Compartiment = list(Code = mijnCatalogus$compartiment.code[ii]),
-          Parameter = list(Code = mijnCatalogus$parameter.code[ii]),
-          # Eenheid = list(Code = mijnEenheid),
-          # MeetApparaat = mijnMeetapparaat,
-          Grootheid = list(Code = mijnCatalogus$grootheid.code[ii]),
-          Hoedanigheid = list(Code = mijnCatalogus$hoedanigheid.code[ii])
-        )
-      ),
-      Locatie = list(
-        Lon = stringr::str_pad(as.character(mijnCatalogus["lon"][ii,]), 16, "right", "0"),
-        Lat = stringr::str_pad(as.character(mijnCatalogus["lat"][ii,]), 16, "right", "0"),
-        Code = as.character(mijnCatalogus["locatie.code"][ii,])),
-      Periode = list(Begindatumtijd = beginDatumTijd,
-                     Einddatumtijd = eindDatumTijd)
-    )
-    ll[[ii]] <- l
-  }
-  return(ll)
-}
-
-
-#                  # selects locations within DDL based on WFD water bodies from the Netherlands
-#                  #
-#                  # @param metadata metadata from DDL. download using rws_metadata()
-#                  # @param myWaterBody Name or partial name of the waterbody of interest
-#                  # @param buffer_in_m buffer for finding locations in meters
-#                  # @return dataframe with selected locations
-#                  # @examples
-#                  # metadata <- rws_metadata()
-#                  # select_locations_in_waterbody(metadata, "westerschelde", 0)
-#                  # select_locations_in_waterbody(metadata, "westerschelde", 2000) # also retrieves "Schaar van Ouden Doel".
-#                  # @export
-#                  select_locations_in_waterbody <- function(metadata, myWaterBody, buffer_in_m) {
-#
-#                    # check if metadata is correct, name is correct
-#                    # comment: run this first:
-#                    # > metadata <- rws_metadata() # gets complete catalog
-#                    locsTable <- metadata$content$locatielijst
-#
-#                    if(length(dplyr::distinct(locsTable, coordinatenstelsel) == 1)) {
-#                      locs_sf <- sf::st_as_sf(locsTable, coords = c("lon", "lat"), crs = 25831)
-#                      locs_sf_rd <- sf::st_transform(locs_sf, crs = 28992)
-#                    } else print("warning, multiple epsg, sf object not produced")
-#
-#                    # download water bodies for 2006 , 2018 returns error for some reason
-#                    typename='kaderrichtlijnwater:krw_oppervlaktewaterlichamen_vlakken_rws_2006'
-#                    dsn = 'https://geodata.nationaalgeoregister.nl/kaderrichtlijnwater/wfs?service=WFS&request=getCapabilities'
-#                    wb <- sf::st_read(dsn, "kaderrichtlijnwater:krw_oppervlaktewaterlichamen_vlakken_rws_2006")
-#                    # st_crs(wb) # check crs
-#                    mijnShape <- wb[grepl(x = tolower(wb$OWMNAAM), pattern = tolower(myWaterBody)),]
-#                    # buffer_in_m <- 2000 # for testing
-#
-#                    selected <- sf::st_drop_geometry(sf::st_intersection(locs_sf_rd, sf::st_buffer(mijnShape, buffer_in_m)))
-#                    codes <- dplyr::distinct(selected,code)
-#                    mijnLocaties <- dplyr::left_join(codes,locsTable)
-#                    return(mijnLocaties)
-#                  }
-#
-#                  # selects locations within DDL based on polygon
-#                  #
-#                  # @param metadata metadata from DDL. download using rws_metadata()
-#                  # @param polygon polygon of interest as sf object (?sf)
-#                  # @param buffer_in_m buffer for finding locations in meters
-#                  # @return dataframe with selected locations
-#                  # @examples
-#                  # metadata <- rws_metadata()
-#                  # select_locations_in_waterbody(metadata, "westerschelde", 0)
-#                  # select_locations_in_waterbody(metadata, "westerschelde", 2000) # also retrieves "Schaar van Ouden Doel".
-#                  # select_locations_by_polygon
-#                  # @export
-#                  select_locations_by_polygon <- function(metadata, polygon, buffer_in_m) {
-#
-#                    # check if metadata is correct, name is correct
-#                    # comment: run this first:
-#                    # > metadata <- rws_metadata() # gets complete catalog
-#                    locsTable <- metadata$content$locatielijst
-#
-#                    if(length(dplyr::distinct(locsTable, coordinatenstelsel) == 1)) {
-#                      locs_sf <- sf::st_as_sf(locsTable, coords = c("lon", "lat"), crs = 25831)
-#                      locs_sf_rd <- sf::st_transform(locs_sf, crs = 28992)
-#                    } else print("warning, multiple epsg, sf object not produced")
-#
-#                    mijnShape <- sf::st_transform(polygon, crs = 28992)
-#
-#                    # buffer_in_m <- 2000 # for testing
-#                    selected <- sf::st_drop_geometry(sf::st_intersection(locs_sf_rd, sf::st_buffer(mijnShape, buffer_in_m)))
-#                    codes <- dplyr::distinct(selected,code)
-#                    mijnLocaties <- dplyr::left_join(codes,locsTable)
-#                    return(mijnLocaties)
-#                  }
-#
-rws_wmsLocations <- function(){
-  url = "https://waterwebservices.rijkswaterstaat.nl/services/ogc/hws/wmdc15/ows?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=wmdc15:locaties"
-  url = "https://waterwebservices.rijkswaterstaat.nl/services/distributielaagWFS/distributielaag_dbo?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=locatiesmetlaatstewaarneming&Maxfeatures=50"
-httr::parse_url(url)
-  df <- sf::st_read(url)
 }
