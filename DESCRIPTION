@@ -2,10 +2,23 @@ Package: rwsapi
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Willem Stolte, Tom Van Engeland
+Maintainer: Willem Stolte <email@somewhere.net>
+Description: The rwsapi package presents a number of functions for accessing water quality data from Rijkswaterstaat (NL).
+  The core functions are rws_metadata() and rws_observations(), that respectively download the data catalog and actual
+  observational data, based on queries in json notation. The provided data are collected over the past decades within the
+  national monitoring programme for surface waters (fresh and saline) in the Netherlands (a.k.a. the DONAR / WADAR data).
+License: GPL
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.3.3
+Imports:
+    jsonlite,
+    httr,
+    purrr,
+    dplyr,
+    readr,
+    rlist,
+    sf,
+    tidyr,
+    stringr
