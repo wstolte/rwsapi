@@ -2,7 +2,7 @@
 #' @title Reduce dataframe columns by nesting single-value columns.
 #'
 #' @description
-#' TO BE WORKED OUT
+#' DDL dataframe objects typically contain many columns with only one distinct value. This function simplifies such a dataframe.
 #'
 #' @param df Dataframe
 #' @param outputFormat Single-value column reduction in attributes ("attributed") or nested ("nested")

@@ -337,6 +337,9 @@ rws_observations <- function (bodylist, trytimes = 3) {
 #' @return spatial dataframe containing all monitoring locations
 #'
 #' @examples
+#'
+#' @importFrom sf st_read
+#'
 #' \dontrun{
 #' allLocations <- rws_wfsLocations()
 #' }
@@ -356,7 +359,14 @@ rws_wfsLocations <- function(){
 #' @description
 #' Fetches spatial object with all monitoring locations and their latest observation for all parameter/quantities combinations. This is a VERY large file. Consider caching it, or apply a filter ()
 #'
+#' @param parFilter Filter term based on which the column parameter_wat_omschrijving is filtered. The filter is partly and not case-sensitive.
+#' @param outputFormat choose wfs output format. Typically "csv" or (default) "application/json".
+#'
 #' @return spatial dataframe containing locations with latest observations
+#'
+#' @importFrom httr build_url
+#' @importFrom readr read_csv
+#' @importFrom sf st_read
 #'
 #' @examples
 #' \dontrun{
