@@ -336,9 +336,9 @@ rws_observations <- function (bodylist, trytimes = 3) {
 #'
 #' @return spatial dataframe containing all monitoring locations
 #'
-#' @examples
-#'
 #' @importFrom sf st_read
+#'
+#' @examples
 #'
 #' \dontrun{
 #' allLocations <- rws_wfsLocations()

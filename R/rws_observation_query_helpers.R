@@ -7,12 +7,13 @@
 #' TO BE WORKED OUT
 #'
 #' @param df metadata dataframe with exactly one row containing both metadata and locations
-#' @param start_date
-#' @param end_date
+#' @param start_date start date for data download
+#' @param end_date end date for data download
 #' @param filters column headers to be used for query
 #' @param tz time zone
 #'
 #' @return DDL query list
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -38,7 +39,6 @@
 #' df <- observations$content
 #' }
 #'
-#' @export
 rws_observation_query <- function(
     metadata,
     start_date,
@@ -151,12 +151,13 @@ rws_observation_query <- function(
 #' TO BE WORKED OUT
 #'
 #' @param metadata DDL metadata and location, can be multiple lines
-#' @param start_date
-#' @param end_date
+#' @param start_date start date for data download
+#' @param end_date end date for data download
 #' @param filters column headers to be used for query
 #' @param tz time zone
 #'
 #' @return dataframe
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -186,7 +187,6 @@ rws_observation_query <- function(
 #'          )
 #' }
 #'
-#' @export
 rws_observation_queries <- function(
     metadata,
     start_date,
