@@ -1,7 +1,7 @@
 Package: rwsapi
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.1.0
+Version: 0.3.0
 Author: Willem Stolte, Tom Van Engeland
 Maintainer: Willem Stolte <email@somewhere.net>
 Description: The rwsapi package presents a number of functions for accessing water quality data from Rijkswaterstaat (NL).
