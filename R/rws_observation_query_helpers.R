@@ -43,7 +43,7 @@ rws_observation_query <- function(
     metadata,
     start_date,
     end_date,
-    filters = c("compartiment", "grootheid", "parameter"),
+    filters = c("compartiment", "grootheid", "parameter", "hoedanigheid", "eenheid", "orgaan", "typering", "biotaxon", "groepering", "procestype"),
     tz = "Europe/Amsterdam"
 ) {
 
@@ -72,7 +72,9 @@ rws_observation_query <- function(
     eenheid      = "eenheid.code",
     orgaan       = "orgaan.code",
     typering     = "typering.code",
-    biotaxon     = "biotaxon.code"
+    biotaxon     = "biotaxon.code",
+    groepering   = "groepering.code",
+    procestype   = "procestype"
   )
 
   if (identical(filters, "all")) {

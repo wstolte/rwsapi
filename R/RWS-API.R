@@ -65,15 +65,19 @@
 #'
 #' @export
 rws_metadata <- function(
-    filterList = list(Compartimenten=T,
-                      Grootheden=T,
-                      Parameters=T,
-                      Eenheden=T,
-                      Hoedanigheden=T,
-                      Typeringen=T,
-                      BioTaxon=T,
-                      Organen=T
-                     )
+    filterList = list(
+      Compartimenten = T,
+      Grootheden = T,
+      Parameters = T,
+      Eenheden = T,
+      Hoedanigheden = T,
+      Typeringen = T,
+      BioTaxon = T,
+      Organen = T,
+      WaardeBewerkingsMethoden = T,
+      ProcesTypes = T,
+      Groeperingen = T
+    )
 ) {
 
   # Helper function to translate list names to lower case when names are present
@@ -270,6 +274,7 @@ rws_observations <- function (bodylist, trytimes = 3) {
                 kwaliteitswaarde.code                 = purrr::map_chr(response$waarnemingenlijst[[ii]]$metingenlijst, list("waarnemingmetadata","kwaliteitswaardecode"), .default = NA),
 #                aquometadata.message.id = response$waarnemingenlijst[[ii]]$aquometadata$aquometadata_MessageID,
                 parameter.wat.omschrijving            = response$waarnemingenlijst[[ii]]$aquometadata$parameter_wat_omschrijving,
+                procestype                            = response$waarnemingenlijst[[ii]]$aquometadata$procestype,
                 bemonsteringsapparaat.code            = response$waarnemingenlijst[[ii]]$aquometadata$bemonsteringsapparaat$code,
                 bemonsteringsapparaat.omschrijving    = response$waarnemingenlijst[[ii]]$aquometadata$bemonsteringsapparaat$omschrijving,
                 bemonsteringssoort.code               = response$waarnemingenlijst[[ii]]$aquometadata$bemonsteringssoort$code,
