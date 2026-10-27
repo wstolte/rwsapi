@@ -1,33 +1,106 @@
+---
+output:
+  github_document: default
+---
+
+
+
 
 # Package rwsapi
 
 
-## get metadata for your needs
+## get metadata 
 
-First, retrieve the information that is necessary to build the request. The function get_selected_metadata() will get this information for you. You can specify *grootheid*, *parameter*, *compartiment* and other parameters that can be used in the internally  used function rwsapi::rws_metadata(), such as *location*. Arguments may be given as "code" or "omschrijving", i.e. for Location "Den Helder", there are two location.code values as can be seen in the following code. 
+First, retrieve the information that is necessary to build the request. The function metadata() will get the complete catalogue. You can specify *grootheid*, *parameter*, *compartiment* and other parameters that can be used in the internally  used function rwsapi::rws_metadata(). 
 
 
 ```{r}
 source("r/RWS-API.R")
 
-md <- get_selected_metadata(grootheid = "Waterhoogte", locatie = "Den Helder")
+# remotes::install_github("wstolte/rwsapi")
+# require(rwsapi)
+require(tidyverse)
 
-print(md$locatie.code)
+md <- rws_metadata(
+  filterList = list(
+      Compartimenten = T,
+      Grootheden = T,
+      Parameters = T,
+      Eenheden = T,
+      Hoedanigheden = T,
+      Typeringen = T,
+      BioTaxon = T,
+      Organen = T,
+      WaardeBewerkingsMethoden = T,
+      ProcesTypes = T,
+      Groeperingen = T
+    )
+)
+
+catalogue <- md$content$locatielijst %>%
+  full_join(md$content$aquometadatalocatielijst) %>%
+  full_join(md$content$aquometadatalijst)
+```
+
+
+## Select the metadata for your needs
+
+We are interested in light extinction data for the stations along the Terschelling transect. Let's see which station contain such data.
+
+```{r}
+mycatalogue <- catalogue %>% 
+  filter(parameter_wat_omschrijving == "Extinctie in Oppervlaktewater in /m") %>%
+  filter(grepl("Terschelling", naam, ignore.case = T))
+
+mycatalogue$naam
 
 ```
-The two codes refer to the same station (name). The only difference is that they come from different databases (MWTL/DONAR and LMW).
 
-# Get data from DDL organized in files per quantity, parameter, year.
-
-The wrapper function getDDLdata() will gett data for given period, based on the selected metadata *md* as produced above. Data will be saved by year, quantity, parameter, and compartment. 
+## Prepare list for request
 
 
 ```{r}
-getDDLdata(startyear = 2023, endyear = 2023, myCatalogue = md, outDir = tempdir())
+l <- rwsapi::rws_observation_queries(
+  mycatalogue,
+  start_date = as.Date("2000-01-01"),
+  end_date = as.Date("2025-12-31"))
+```
+
+## Get results for one row of metadata
+
+```{r}
+# Get data for one combination of location and parameter 
+result_1 <- rwsapi::rws_observations(l[[1]])
+data_1 <- result_1$content
+```
+
+## Get results for all rows
+
+```{r}
+# Get multiple data
+result <- map(l, rwsapi::rws_observations)
+
+data <- map(result, list("content")) %>% bind_rows()
 ```
 
 
-Special attention should be paid to the field "groepering.code"and "groepering.omschrijving" for the tested parameter WATHTE (waterhoogte). If groepering equals "NVT", the data are measurments. In any other case they are an aggregated form (e.g. extremes) of the measurements. 
+## Visualize the observations
+
+```{r}
+data %>%
+  mutate(tijdstip =as.POSIXct(tijdstip)) %>%
+  filter(numeriekewaarde < 20) %>%
+  ggplot(aes(tijdstip, numeriekewaarde)) +
+  geom_line(aes(color = locatie.naam)) +
+  scale_y_sqrt()
+
+
+```
+
+
+Special attention should be paid to the field "groepering.code"and "groepering.omschrijving" for the tested parameter WATHTE (waterhoogte). If groepering equals "NVT", the data are raw measurements or caculations. In any other case they are an aggregated form (e.g. extremes) of the measurements. 
+
+Another tricky one is procestype. For most variables, this is "meting" (measurement), but it can also be "berekend" (calculated) or "verwachting" (expected), for example for water level (grootheid.code == "WATHTE").
 
 
 
