@@ -193,7 +193,18 @@ rws_observation_queries <- function(
     metadata,
     start_date,
     end_date,
-    filters = c("compartiment", "grootheid", "parameter"),
+    filters = c(
+      "compartiment",
+      "grootheid",
+      "parameter",
+      "hoedanigheid",
+      "eenheid",
+      "orgaan",
+      "typering",
+      "biotaxon",
+      "groepering",
+      "procestype"
+    ),
     tz = "Europe/Amsterdam"
 ) {
 
