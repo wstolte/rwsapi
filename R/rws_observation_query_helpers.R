@@ -1,3 +1,5 @@
+
+
 # rwsapi helper functions -------------------------------------------------
 
 # Build a single observation query from one catalogue row
@@ -64,19 +66,19 @@ rws_observation_query <- function(
     stop("end_date must be a Date object")
   }
 
-  field_map <- c(
-    compartiment = "compartiment.code",
-    grootheid    = "grootheid.code",
-    parameter    = "parameter.code",
-    hoedanigheid = "hoedanigheid.code",
-    eenheid      = "eenheid.code",
-    orgaan       = "orgaan.code",
-    typering     = "typering.code",
-    biotaxon     = "biotaxon.code",
-    groepering   = "groepering.code",
-    procestype   = "procestype"
+  field_map <- list(
+    compartiment = list(column = "compartiment.code", api_name = "Compartiment", value_name = "Code"),
+    grootheid    = list(column = "grootheid.code",    api_name = "Grootheid",    value_name = "Code"),
+    parameter    = list(column = "parameter.code",    api_name = "Parameter",    value_name = "Code"),
+    hoedanigheid = list(column = "hoedanigheid.code", api_name = "Hoedanigheid", value_name = "Code"),
+    eenheid      = list(column = "eenheid.code",      api_name = "Eenheid",      value_name = "Code"),
+    orgaan       = list(column = "orgaan.code",       api_name = "Orgaan",       value_name = "Code"),
+    typering     = list(column = "typering.code",     api_name = "Typering",     value_name = "Code"),
+    biotaxon     = list(column = "biotaxon.code",     api_name = "Biotaxon",     value_name = "Code"),
+    groepering   = list(column = "groepering.code",   api_name = "Groepering",   value_name = "Code"),
+    procestype   = list(column = "procestype",        api_name = "ProcesType",   value_name = NULL)
   )
-
+  
   if (identical(filters, "all")) {
     filters <- names(field_map)
   }
@@ -84,53 +86,62 @@ rws_observation_query <- function(
   aquo_metadata <- list()
 
   for (field in filters) {
-
+    
     if (!field %in% names(field_map)) {
       warning(sprintf("Unknown filter ignored: %s", field))
       next
     }
-
-    col_name <- field_map[[field]]
-
+    
+    mapping <- field_map[[field]]
+    
+    col_name <- mapping$column
+    
     if (!col_name %in% names(metadata)) {
       next
     }
-
+    
     value <- metadata[[col_name]][1]
-
+    
     if (is.na(value) || value %in% c("", "NVT")) {
       next
     }
-
-    api_name <- tools::toTitleCase(field)
-
-    aquo_metadata[[api_name]] <- list(
-      Code = value
-    )
+    
+    if (is.null(mapping$value_name)) {
+      
+      aquo_metadata[[mapping$api_name]] <- value
+      
+    } else {
+      
+      aquo_metadata[[mapping$api_name]] <- setNames(
+        list(value),
+        mapping$value_name
+      )
+      
+    }
   }
-
+  
   start_datetime <- format(
     as.POSIXct(start_date, tz = tz),
     "%Y-%m-%dT00:00:00.000%z"
   )
-
+  
   end_datetime <- format(
     as.POSIXct(end_date, tz = tz),
     "%Y-%m-%dT23:59:59.999%z"
   )
-
+  
   start_datetime <- sub(
     "([+-][0-9]{2})([0-9]{2})$",
     "\\1:\\2",
     start_datetime
   )
-
+  
   end_datetime <- sub(
     "([+-][0-9]{2})([0-9]{2})$",
     "\\1:\\2",
     end_datetime
   )
-
+  
   list(
     AquoPlusWaarnemingMetadata = list(
       AquoMetadata = aquo_metadata
@@ -144,8 +155,8 @@ rws_observation_query <- function(
     )
   )
 }
-
-
+  
+  
 # Build one or more observation queries from a catalogue
 #' @title Reduce dataframe columns by nesting single-value columns.
 #'
