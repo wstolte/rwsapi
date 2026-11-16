@@ -1,6 +1,6 @@
 Package: rwsapi
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Rijkswaterstaat Water Data Viewer
 Version: 0.4.0
 Author: Willem Stolte, Tom Van Engeland
 Maintainer: Willem Stolte <email@somewhere.net>
